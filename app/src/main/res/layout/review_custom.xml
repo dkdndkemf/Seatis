@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:textSize="20sp"
+        android:text="이름"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/name_tv"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"></TextView>
+
+    <TextView
+        android:id="@+id/see_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:text="시야: "
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_tv"></TextView>
+
+    <RatingBar
+        android:id="@+id/see_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/gray"
+        android:progressTint="@color/star"
+        android:stepSize="1"
+        app:layout_constraintLeft_toRightOf="@id/see_tv"
+        app:layout_constraintTop_toBottomOf="@id/name_tv" />
+
+    <TextView
+        android:id="@+id/listen_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:text="음향: "
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/see_tv"></TextView>
+
+    <RatingBar
+        android:id="@+id/listen_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/gray"
+        android:progressTint="@color/star"
+        android:stepSize="1"
+        app:layout_constraintLeft_toRightOf="@id/listen_tv"
+        app:layout_constraintTop_toBottomOf="@id/see_tv" />
+
+    <TextView
+        android:id="@+id/etc_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:text="기타: "
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/listen_tv"></TextView>
+
+    <RatingBar
+        android:id="@+id/etc_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressBackgroundTint="@color/gray"
+        android:progressTint="@color/star"
+        android:stepSize="1"
+        app:layout_constraintLeft_toRightOf="@id/etc_tv"
+        app:layout_constraintTop_toBottomOf="@id/listen_tv" />
+
+    <TextView
+        android:id="@+id/review_tv"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nanumgothic_extrabold"
+        android:textSize="15sp"
+        android:text="리뷰작성"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etc_tv"></TextView>
+
+    <Button
+        android:id="@+id/agree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/purple"
+        android:drawableLeft="@drawable/thumb_up_icon"
+        android:text="12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/review_tv"></Button>
+
+    <Button
+        android:id="@+id/disagree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/purple"
+        android:drawableLeft="@drawable/thumb_up_icon"
+        android:text="12"
+        app:layout_constraintLeft_toRightOf="@id/agree"
+        app:layout_constraintBottom_toBottomOf="parent"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
