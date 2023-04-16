@@ -33,7 +33,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="마이 페이지"
+        android:text="마이페이지"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="@id/layout"
         app:layout_constraintLeft_toLeftOf="@id/layout"
