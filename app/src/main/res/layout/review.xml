@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:numStars="5"
         android:rating="4.8"
-        android:stepSize="5"
+        android:stepSize="0.5"
         android:isIndicator="false"
         android:layout_margin="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -85,7 +85,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/review_viewr"
+        android:id="@+id/review_viewer"
         app:layout_constraintTop_toBottomOf="@id/score_star"
         android:layout_marginTop="10dp"
         ></ListView>
