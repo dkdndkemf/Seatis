@@ -17,6 +17,19 @@
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintTop_toTopOf="@+id/layout"></ImageButton>
 
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:text="로그인"
+        android:textColor="@color/purple"
+        android:textSize="15dp"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="@id/layout"
+        app:layout_constraintTop_toTopOf="@+id/layout"></Button>
+
     <TextView
         android:id="@+id/theater_name_tv"
         android:layout_width="match_parent"
@@ -25,9 +38,9 @@
         android:layout_marginLeft="112dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bottom_border"
+        android:fontFamily="@font/nanumgothic_bold"
         android:padding="5dp"
         android:text="CGV 신촌아트레온 1관"
-        android:fontFamily="@font/nanumgothic_bold"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/back_Btn"></TextView>
 
@@ -430,6 +443,64 @@
         <!-- E열 끝-->
     </GridLayout>
 
-    <!-- 좌석 클릭시 나탈날 좌성 정보 창-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/simple_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@+id/seat_layout">
 
+        <TextView
+            android:id="@+id/seat_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nanumgothic_extrabold"
+            android:text="1관 A열 3열"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toLeftOf="@id/simple_review"
+            app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:text="4.8"
+            android:textColor="@color/star"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@id/simple_review"
+            app:layout_constraintTop_toBottomOf="@id/seat_name"></TextView>
+
+        <RatingBar
+            android:id="@+id/score_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/gray"
+            android:progressTint="@color/star"
+            android:rating="4.8"
+            android:stepSize="0.5"
+            app:layout_constraintLeft_toLeftOf="@id/simple_review"
+            app:layout_constraintRight_toRightOf="@id/simple_review"
+            app:layout_constraintTop_toBottomOf="@id/seat_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="+ 리뷰보기"
+            android:textColor="@color/blue"
+            app:layout_constraintLeft_toLeftOf="@+id/simple_review"
+            app:layout_constraintTop_toBottomOf="@+id/score"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
