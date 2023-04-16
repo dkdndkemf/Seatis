@@ -34,7 +34,6 @@ public class Login extends AppCompatActivity {
         back_btn = findViewById(R.id.back_btn_login);
         kakao_login = findViewById(R.id.kakao_login);
         google_login = findViewById(R.id.google_login);
-        KakaoSdk.init(this, "0ee0994026f39146afc8e662ce6faab8");
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,23 +41,33 @@ public class Login extends AppCompatActivity {
                 finish();
             }
         });
+        Function2<OAuthToken, Throwable, Unit> callback = new  Function2<OAuthToken, Throwable, Unit>() {
+            @Override
+            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
+                // 이때 토큰이 전달이 되면 로그인이 성공한 것이고 토큰이 전달되지 않았다면 로그인 실패
+                if(oAuthToken != null) {
+                    Toast.makeText(Login.this, ("로그인 성공(토큰) : " + oAuthToken.getAccessToken()), Toast.LENGTH_SHORT).show();
+                    ((MainActivity)MainActivity.context_main).main_login_textview.setVisibility(View.GONE);
+                    ((MainActivity)MainActivity.context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                    finish();
+                }
+                if (throwable != null) {
+                    Toast.makeText(Login.this,"로그인 에러", Toast.LENGTH_LONG).show();
+                }
+                return null;
+            }
+        };
         kakao_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)){
-                    UserApiClient.getInstance().loginWithKakaoTalk(Login.this,(oAuthToken, error) -> {
-                        if (error != null) {
-                            Log.e(TAG, "로그인 실패", error);
-                        } else if (oAuthToken != null) {
-                            Toast.makeText(Login.this, ("로그인 성공(토큰) : " + oAuthToken.getAccessToken()), Toast.LENGTH_SHORT).show();
-                            Intent login_to_main = new Intent(Login.this,MainActivity.class);
-                            ((MainActivity)MainActivity.context_main).main_login_textview.setVisibility(View.GONE);
-                            ((MainActivity)MainActivity.context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                            finish();
-                        }
-                        return null;
-                    });
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(Login.this, callback);
+                }else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(Login.this, callback);
                 }
+
+            }
+        });
 
                 /*
                 UserApiClient.getInstance().me((user, meError) -> {
@@ -71,9 +80,7 @@ public class Login extends AppCompatActivity {
                 });
                 */
             }
-        });
-
-    }
-
-
 }
+
+
+
