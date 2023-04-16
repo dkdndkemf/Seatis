@@ -27,10 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Detailed_Review"></activity>
-        <activity
-            android:name=".Login"></activity>
+        <activity android:name=".Login" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>

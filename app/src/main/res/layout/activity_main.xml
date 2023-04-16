@@ -10,6 +10,7 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
+
     <ImageView
         android:id="@+id/logo_image"
         android:layout_width="250dp"
@@ -61,18 +62,6 @@
         app:layout_constraintTop_toBottomOf="@id/search_button"
         android:layout_marginTop="120dp"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomMenu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        app:itemBackground="@color/purple"
-        app:itemIconTint="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
-
     <TextView
         android:id="@+id/main_logout_textview"
         android:layout_width="wrap_content"
@@ -86,6 +75,27 @@
         app:layout_constraintTop_toBottomOf="@id/search_button"
         android:layout_marginTop="120dp"
         android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/containers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1"
+        />
+    
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/purple"
+        app:itemIconTint="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
