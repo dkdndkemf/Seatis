@@ -96,9 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:layout_marginTop="35dp"
             android:fontFamily="@font/nanumgothic_extrabold"
             android:text="별점"
-            android:layout_marginTop="35dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
@@ -177,27 +177,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bottom_border"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@+id/score_score_star">
+
         <TextView
+            android:id="@+id/detailed_review_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="상세 후기"
-            android:id="@+id/detailed_review_tv"
             android:fontFamily="@font/nanumgothic_extrabold"
-            ></TextView>
+            android:text="상세 후기"></TextView>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="후기를 작성해주세요"
-            android:maxLines="4"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:scrollHorizontally="false"
             android:layout_marginLeft="30dp"
-            ></EditText>
+            android:ems="10"
+            android:hint="후기를 작성해주세요"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:scrollHorizontally="false"></EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -206,27 +206,37 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bottom_border"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@+id/detailed_review">
+
         <TextView
+            android:id="@+id/photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="리뷰 이미지"
-            android:id="@+id/photo"
             android:layout_marginRight="40dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            ></TextView>
+            android:text="리뷰 이미지"></TextView>
+
         <Button
+            android:id="@+id/photo_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사진 선택"
-            android:id="@+id/photo_select"
-            ></Button>
+            android:text="사진 선택"></Button>
     </LinearLayout>
 
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/purple"
+        app:itemIconTint="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:menu="@menu/bottom_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
