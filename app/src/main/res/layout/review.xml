@@ -24,6 +24,19 @@
             app:layout_constraintLeft_toLeftOf="@id/layout"
             app:layout_constraintTop_toTopOf="@+id/layout"></ImageButton>
 
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:text="로그인"
+            android:textColor="@color/purple"
+            android:textSize="15dp"
+            android:visibility="visible"
+            app:layout_constraintRight_toRightOf="@id/layout"
+            app:layout_constraintTop_toTopOf="@+id/layout"></Button>
+
         <TextView
             android:id="@+id/theater_name_tv"
             android:layout_width="match_parent"
