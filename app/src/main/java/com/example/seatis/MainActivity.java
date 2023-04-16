@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        context_main=this;
         search = new Search();
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 main_logout_textview.setVisibility(View.GONE);
             }
         });
+
 
     }
 

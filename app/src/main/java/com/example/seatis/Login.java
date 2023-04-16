@@ -1,4 +1,6 @@
 package com.example.seatis;
+import static com.example.seatis.MainActivity.context_main;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,8 +49,8 @@ public class Login extends AppCompatActivity {
                 // 이때 토큰이 전달이 되면 로그인이 성공한 것이고 토큰이 전달되지 않았다면 로그인 실패
                 if(oAuthToken != null) {
                     Toast.makeText(Login.this, ("로그인 성공(토큰) : " + oAuthToken.getAccessToken()), Toast.LENGTH_SHORT).show();
-                    ((MainActivity)MainActivity.context_main).main_login_textview.setVisibility(View.GONE);
-                    ((MainActivity)MainActivity.context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                     finish();
                 }
                 if (throwable != null) {
