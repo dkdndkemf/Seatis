@@ -18,7 +18,7 @@
         android:lineSpacingExtra="8sp"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:fontFamily="@fonts/"
+        android:fontFamily="@font/nanumgothic_extrabold"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/auth_layout"
