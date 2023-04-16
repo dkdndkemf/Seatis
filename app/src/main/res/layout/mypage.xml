@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="15dp" />
+        app:layout_constraintGuide_begin="30dp" />
 
     <View
         android:layout_width="410dp"
@@ -58,6 +58,7 @@
         app:layout_constraintTop_toTopOf="@+id/layout" />
 
     <Button
+        android:id="@+id/btnedit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -90,6 +91,7 @@
         android:fontFamily="@font/nanumgothic"
         android:gravity="left|center_vertical"
         android:text="내가 쓴 후기"
+        android:paddingLeft="30dp"
         android:textColor="@color/bold_purple"
         android:textSize="15sp"
         app:layout_constraintRight_toRightOf="@id/layout"
@@ -115,6 +117,7 @@
         android:fontFamily="@font/nanumgothic"
         android:gravity="left|center_vertical"
         android:text="좋아요 한 후기"
+        android:paddingLeft="30dp"
         android:textColor="@color/bold_purple"
         android:textSize="15sp"
         app:layout_constraintRight_toRightOf="@id/layout"
@@ -151,6 +154,7 @@
         android:fontFamily="@font/nanumgothic"
         android:gravity="left|center_vertical"
         android:text="로그아웃"
+        android:paddingLeft="30dp"
         android:textColor="@color/bold_purple"
         android:textSize="15sp"
         app:layout_constraintRight_toRightOf="@id/layout"
