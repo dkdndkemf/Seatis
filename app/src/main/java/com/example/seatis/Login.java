@@ -20,12 +20,13 @@ import kotlin.jvm.functions.Function2;
 public class Login extends AppCompatActivity {
     private static final String TAG = "Login";
     private ImageButton back_btn, kakao_login, google_login;
-    Intent intent=new Intent(Login.this,MainActivity.class);
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+        Intent intent=new Intent(Login.this,MainActivity.class);
         back_btn = findViewById(R.id.back_btn_login);
         kakao_login = findViewById(R.id.kakao_login);
         google_login = findViewById(R.id.google_login);
@@ -50,6 +51,7 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)) {
                     UserApiClient.getInstance().loginWithKakaoTalk(Login.this, callback);
+                    startActivity(intent);
                 } else {
                     UserApiClient.getInstance().loginWithKakaoAccount(Login.this, callback);
                 }
@@ -67,7 +69,7 @@ public class Login extends AppCompatActivity {
                     Log.d(TAG, "invoke: id" + user.getId());
                     // 유저의 어카운트정보에 이메일
                     Log.d(TAG, "invoke: nickname" + user.getKakaoAccount().getEmail());
-                    startActivity(intent);
+
                 }
                 return null;
             }
