@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_layout">
+    android:id="@+id/main_layout"
+    android:background="@color/white">
     <TextView
         android:id="@+id/auth_textview"
         app:layout_constraintLeft_toLeftOf="@+id/main_layout"
@@ -18,17 +19,29 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         />
-    <View
-        android:id="@+id/auth_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/auth_layout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:layout_constraintTop_toBottomOf="@+id/auth_textview"
         app:layout_constraintLeft_toLeftOf="@+id/main_layout"
         app:layout_constraintRight_toRightOf="@+id/main_layout"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/view_stroke"
+        >
+        <Button
+            android:id="@+id/auth_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/auth_layout"
+            app:layout_constraintRight_toRightOf="@+id/auth_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/auth_layout"
+            android:text="확인"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
