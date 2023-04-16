@@ -1,41 +1,424 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout">
+    android:background="@color/white">
 
     <ImageButton
+        android:id="@+id/back_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/back_Btn"
-        android:src="@drawable/back_icon"
         android:background="@color/white"
-        app:layout_constraintTop_toTopOf="@+id/layout"
-        app:layout_constraintLeft_toLeftOf="@id/layout"
         android:padding="10dp"
-        ></ImageButton>
+        android:src="@drawable/back_icon"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintTop_toTopOf="@+id/layout"></ImageButton>
 
     <TextView
         android:id="@+id/theater_name_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:padding="5dp"
         android:layout_marginLeft="112dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bottom_border"
+        android:padding="5dp"
         android:text="CGV 신촌아트레온 1관"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/back_Btn"></TextView>
+
     <ImageView
+        android:id="@+id/dislike"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/dislike"
-        android:id="@+id/dislike"
-        app:layout_constraintTop_toBottomOf="@+id/theater_name_tv"
         android:layout_margin="20dp"
-       ></ImageView>
+        android:src="@drawable/dislike"
+        app:layout_constraintTop_toBottomOf="@+id/theater_name_tv"></ImageView>
 
+    <TextView
+        android:id="@+id/screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="SCREEN"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/dislike"></TextView>
+
+    <GridLayout
+        android:id="@+id/seat_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="9"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:rowCount="5"
+        app:layout_constraintTop_toBottomOf="@id/screen"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="0.5"
+            android:text="A"
+            android:textSize="20sp"></TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="1"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="2"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:visibility="invisible"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="3"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="4"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="5"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="6"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="7"
+            android:textAlignment="center"></Button>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="0.5"
+            android:text="B"
+            android:textSize="20sp"></TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="1"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="2"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:visibility="invisible"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="3"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="4"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="5"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="6"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="7"
+            android:textAlignment="center"></Button>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="0.5"
+            android:text="C"
+            android:textSize="20sp"></TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="1"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="2"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:visibility="invisible"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="3"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="4"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="5"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="6"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="7"
+            android:textAlignment="center"></Button>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="0.5"
+            android:text="D"
+            android:textSize="20sp"></TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="1"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="2"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:visibility="invisible"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="3"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="4"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="5"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="6"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="7"
+            android:textAlignment="center"></Button>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_columnWeight="0.5"
+            android:text="E"
+            android:textSize="20sp"></TextView>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="1"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="2"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:visibility="invisible"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="3"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="4"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="5"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="6"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="7"
+            android:textAlignment="center"></Button>
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
