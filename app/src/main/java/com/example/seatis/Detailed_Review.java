@@ -26,8 +26,6 @@ public class Detailed_Review extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
-
-        data.add(new Review("아아아", "2023.11.22", 5, 5, 4, "좋아요", 1, 123));
         data.add(new Review("안강현", "2023.12.22", 2, 3, 4, "여기서는 잘보이지 않고 소리도 별로에요", 12, 2));
         data.add(new Review("아아아", "2023.11.22", 5, 5, 4, "좋아요", 1, 123));
 
