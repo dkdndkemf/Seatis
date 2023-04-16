@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageButton
+        android:id="@+id/back_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintTop_toTopOf="@+id/layout"></ImageButton>
+
+    <TextView
+        android:id="@+id/theater_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bottom_border"
+        android:padding="5dp"
+        android:text="CGV 신촌아트레온 1관"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/back_Btn"></TextView>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumgothic_extrabold"
+        android:text="1관 A열 3열"
+        android:textSize="25dp"
+        android:id="@+id/seat_name"
+        app:layout_constraintTop_toBottomOf="@+id/theater_name_tv"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.8"
+        android:textSize="30sp"
+        android:textColor="@color/star"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:id="@+id/score"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@id/seat_name"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="30dp"
+        ></TextView>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="4.8"
+        android:stepSize="5"
+        android:isIndicator="false"
+        android:layout_margin="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:progressTint="@color/star"
+        android:id="@+id/score_star"
+        android:progressBackgroundTint="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/seat_name"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sort_btn"
+        app:layout_constraintTop_toBottomOf="@+id/theater_name_tv"
+        app:layout_constraintRight_toRightOf="@id/layout"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:padding="0dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        android:text="최신순 ↑↓"></Button>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/review_viewr"
+        app:layout_constraintTop_toBottomOf="@id/score_star"
+        android:layout_marginTop="10dp"
+        ></ListView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
