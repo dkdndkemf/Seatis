@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/search_button"
+        android:id="@+id/search_textview"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:text="극장을 선택해주세요"
@@ -43,9 +43,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/search_icon"
-        app:layout_constraintTop_toTopOf="@+id/search_button"
-        app:layout_constraintBottom_toBottomOf="@+id/search_button"
-        app:layout_constraintRight_toRightOf="@+id/search_button"
+        app:layout_constraintTop_toTopOf="@+id/search_textview"
+        app:layout_constraintBottom_toBottomOf="@+id/search_textview"
+        app:layout_constraintRight_toRightOf="@+id/search_textview"
         android:translationZ="2dp"
         android:layout_marginRight="13dp"/>
 
@@ -59,7 +59,7 @@
         android:fontFamily="@font/nanumgothic_extrabold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_button"
+        app:layout_constraintTop_toBottomOf="@id/search_textview"
         android:layout_marginTop="120dp"/>
 
     <TextView
@@ -72,7 +72,7 @@
         android:fontFamily="@font/nanumgothic_extrabold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_button"
+        app:layout_constraintTop_toBottomOf="@id/search_textview"
         android:layout_marginTop="120dp"
         android:visibility="gone"/>
 

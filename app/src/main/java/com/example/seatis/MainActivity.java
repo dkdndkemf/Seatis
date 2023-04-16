@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationBarView;
@@ -19,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
-    Intent main_to_login = new Intent(MainActivity.this, Login.class);
-    private Button search_button;
 
     public static Context context_main;
-    public TextView main_login_textview, main_logout_textview, search_textView;
+    public TextView main_login_textview, main_logout_textview, search_textview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,13 +29,10 @@ public class MainActivity extends AppCompatActivity {
         search = new Search();
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
-
-        search_button = findViewById(R.id.search_button);
-        context_main = this;
         Intent main_to_login = new Intent(MainActivity.this, Login.class);
-        search_textView = findViewById(R.id.search_button);
+        search_textview = findViewById(R.id.search_textview);
         main_login_textview = findViewById(R.id.main_login_textview);
-        main_logout_textview = findViewById(R.id.main_login_textview);
+        main_logout_textview = findViewById(R.id.main_logout_textview);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
