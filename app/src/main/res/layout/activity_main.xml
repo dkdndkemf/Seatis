@@ -2,17 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/seatis_logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/search_button"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="극장을 선택해주세요"
+        android:textSize="18sp"
+        android:textColor="@color/bold_gray"
+        android:padding="15dp"
+        android:fontFamily="@font/nanumgothic_bold"
+        app:layout_constraintTop_toBottomOf="@id/logo_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_button"
+        />
+
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="시디즈"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/search_icon"
+        app:layout_constraintTop_toTopOf="@+id/search_button"
+        app:layout_constraintBottom_toBottomOf="@+id/search_button"
+        app:layout_constraintRight_toRightOf="@+id/search_button"
+        android:translationZ="2dp"
+        android:layout_marginRight="13dp"/>
+
+    <TextView
+        android:id="@+id/main_login_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인 하기"
+        android:textSize="20sp"
+        android:textColor="@color/purple"
+        android:fontFamily="@font/nanumgothic_extrabold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_button"
+        android:layout_marginTop="120dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
