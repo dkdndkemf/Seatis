@@ -46,7 +46,7 @@
         android:numStars="5"
         android:progressBackgroundTint="@color/gray"
         android:progressTint="@color/star"
-        android:stepSize="1"
+        android:stepSize="0.5"
         app:layout_constraintLeft_toRightOf="@id/see_tv"
         app:layout_constraintTop_toBottomOf="@id/name_tv" />
 
@@ -71,7 +71,7 @@
         android:numStars="5"
         android:progressBackgroundTint="@color/gray"
         android:progressTint="@color/star"
-        android:stepSize="1"
+        android:stepSize="0.5"
         app:layout_constraintLeft_toRightOf="@id/listen_tv"
         app:layout_constraintTop_toBottomOf="@id/see_tv" />
 
@@ -96,7 +96,7 @@
         android:numStars="5"
         android:progressBackgroundTint="@color/gray"
         android:progressTint="@color/star"
-        android:stepSize="1"
+        android:stepSize="0.5"
         app:layout_constraintLeft_toRightOf="@id/etc_tv"
         app:layout_constraintTop_toBottomOf="@id/listen_tv" />
 
