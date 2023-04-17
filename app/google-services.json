@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "677168184917",
-    "project_id": "seatis-17a42",
-    "storage_bucket": "seatis-17a42.appspot.com"
+    "project_number": "566009082784",
+    "project_id": "seatis-bf8df",
+    "storage_bucket": "seatis-bf8df.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:677168184917:android:f219a4ed5256e1dd901edc",
+        "mobilesdk_app_id": "1:566009082784:android:0a448e21838ac7ed1d2ac5",
         "android_client_info": {
           "package_name": "com.example.seatis"
         }
       },
       "oauth_client": [
         {
-          "client_id": "677168184917-i1oq49g1do54mp1fcjkma5s5oekseq1p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.seatis",
-            "certificate_hash": "deffd9fd9ae695ee43108598c9efb27b2d88f598"
-          }
-        },
-        {
-          "client_id": "677168184917-2pulvin09p5b9eseru1i680auhq0j5ed.apps.googleusercontent.com",
+          "client_id": "566009082784-7u3c4dho3l01upg996e0o9ret5td084g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC-uBSu_YmfohIYPqM1Io8YbGTBI879aEM"
+          "current_key": "AIzaSyC6aknLD-zhhbKr6SLnzmDChojBYxpR-Sw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "677168184917-2pulvin09p5b9eseru1i680auhq0j5ed.apps.googleusercontent.com",
+              "client_id": "566009082784-1otr39k7cbn7qq66uo60hso9kmtrb4tj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
