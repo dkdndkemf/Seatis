@@ -101,6 +101,7 @@
 
         <Button
             android:layout_width="0dp"
+            android:id="@+id/A_emtpy"
             android:layout_columnWeight="1"
             android:visibility="invisible"></Button>
 
@@ -183,6 +184,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/B_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -264,6 +266,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/C_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -345,6 +348,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/D_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -426,6 +430,7 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/E_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -495,34 +500,33 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="1관 A열 3열"
+            android:text="1관 A열 3번"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/avg_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/nanumgothic_bold"
-            android:text="4.8"
+            android:text="2.5"
             android:textColor="@color/star"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toBottomOf="@id/seat_name"></TextView>
 
         <RatingBar
-            android:id="@+id/score_star"
+            android:id="@+id/avg_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:isIndicator="false"
+            android:isIndicator="true"
             android:numStars="5"
             android:progressBackgroundTint="@color/gray"
             android:progressTint="@color/star"
-            android:rating="4.8"
             android:stepSize="0.5"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintRight_toRightOf="@id/simple_review"
@@ -536,8 +540,9 @@
             android:paddingBottom="10dp"
             android:text="+ 리뷰보기"
             android:textColor="@color/blue"
+            android:id="@+id/see_review"
             app:layout_constraintLeft_toLeftOf="@+id/simple_review"
-            app:layout_constraintTop_toBottomOf="@+id/score"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/avg_score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
