@@ -24,13 +24,24 @@
             app:layout_constraintLeft_toLeftOf="@id/layout"
             app:layout_constraintTop_toTopOf="@+id/layout"></ImageButton>
 
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/nanumgothic_bold"
+            android:text="로그인"
+            android:textColor="@color/purple"
+            android:textSize="15dp"
+            android:visibility="visible"
+            app:layout_constraintRight_toRightOf="@id/layout"
+            app:layout_constraintTop_toTopOf="@+id/layout"></Button>
+
         <TextView
             android:id="@+id/theater_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:layout_marginLeft="112dp"
-            android:layout_marginTop="32dp"
             android:background="@drawable/bottom_border"
             android:fontFamily="@font/nanumgothic_bold"
             android:padding="5dp"
@@ -103,16 +114,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
         </FrameLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/purple"
+        app:itemIconTint="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/edit_icon"
         app:backgroundTint="@color/purple"
         app:elevation="6dp"
