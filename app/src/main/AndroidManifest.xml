@@ -40,6 +40,8 @@
                     android:scheme="kakao0ee0994026f39146afc8e662ce6faab8" />
             </intent-filter>
         </activity>
+        <activity android:name=".theater_activity" />
+        <activity android:name=".Detailed_Review" />
     </application>
 
 </manifest>
