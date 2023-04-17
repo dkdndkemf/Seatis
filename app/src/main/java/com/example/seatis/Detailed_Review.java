@@ -3,9 +3,11 @@ package com.example.seatis;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,15 +17,18 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Detailed_Review extends Activity {
+public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
     ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
@@ -38,6 +43,9 @@ public class Detailed_Review extends Activity {
 
     Intent detailed_review;
 
+    Search search;
+    MyPage myPage;
+    FavoriteTheater favoriteTheater;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,9 +68,32 @@ public class Detailed_Review extends Activity {
         seat_name=findViewById(R.id.seat_name);
         avg_score=findViewById(R.id.avg_score);
         avg_rating=findViewById(R.id.avg_rating);
-
+        NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         seat_name.setText(detailed_review.getStringExtra("seat_name"));
+
+        search = new Search();
+        myPage = new MyPage();
+        favoriteTheater = new FavoriteTheater();
+
+        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.search) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    return true;
+                } else if (itemId == R.id.mypage) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                    return true;
+                } else if (itemId == R.id.favorite) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         /* 이 부분 값이 안넘어 옴 확인해야함

@@ -3,6 +3,7 @@ package com.example.seatis;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -11,9 +12,12 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 public class theater_activity extends AppCompatActivity {
     Button seat[][]; //좌석 배열
@@ -23,6 +27,10 @@ public class theater_activity extends AppCompatActivity {
     RatingBar avg_rating;
 
     TextView avg_score;
+
+    MyPage myPage;
+    Search search;
+    FavoriteTheater favoriteTheater;
 
     int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
             {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
@@ -51,13 +59,34 @@ public class theater_activity extends AppCompatActivity {
         seat_name = findViewById(R.id.seat_name);
         avg_rating = findViewById(R.id.avg_rating);
         avg_score=findViewById(R.id.avg_score);
+        NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         get_avg_score=Float.parseFloat(avg_score.getText().toString());
         avg_rating.setRating(get_avg_score);
 
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
 
+        search = new Search();
+        myPage = new MyPage();
+        favoriteTheater = new FavoriteTheater();
 
+        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.search) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    return true;
+                } else if (itemId == R.id.mypage) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                    return true;
+                } else if (itemId == R.id.favorite) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         seat = new Button[seat_layout.getRowCount()][seat_layout.getColumnCount()];
 

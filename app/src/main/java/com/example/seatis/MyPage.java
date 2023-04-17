@@ -1,5 +1,8 @@
 package com.example.seatis;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -64,7 +67,13 @@ public class MyPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_page, container, false);
+        Intent myPage_to_editProfie = new Intent(getActivity(), EditProfile.class);
+        Intent myPage_to_main = new Intent(getActivity(), MainActivity.class);
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
+        Button editProfile = (Button)view.findViewById(R.id.btnedit);
+        Button logout = (Button)view.findViewById(R.id.btn5);
+        //ImageButton logout2 = (ImageButton)view.findViewById(R.id.btn6);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +81,36 @@ public class MyPage extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(MyPage.this).commit();
                 fragmentManager.popBackStack();
+            }
+        });
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(MyPage.this).commit();
+                fragmentManager.popBackStack();
+                startActivity(myPage_to_editProfie);
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("로그아웃");
+                dlg.setMessage("로그아웃 하시겠습니까?");
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().remove(MyPage.this).commit();
+                        fragmentManager.popBackStack();
+                        startActivity(myPage_to_main);
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
             }
         });
         return view;
