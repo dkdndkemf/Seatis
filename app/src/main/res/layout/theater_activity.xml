@@ -495,7 +495,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="1관 A열 3열"
+            android:text="1관 A열 3번"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
