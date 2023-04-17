@@ -40,5 +40,6 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:2.6.0" // 카카오 로그인
     // 오픈소스 이미지 핸들링할 때 많이 사용되는 글라이드
     implementation "com.github.bumptech.glide:glide:4.11.0"
-    implementation 'com.google.android.material:material:1.4.0' //bottom navigation
+    implementation 'com.google.android.material:material:1.8.0' //bottom navigation
+
 }
