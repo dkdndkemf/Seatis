@@ -24,11 +24,11 @@ public class theater_activity extends AppCompatActivity {
 
     TextView avg_score;
 
-    int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A3, R.id.A4, R.id.A5, R.id.A6, R.id.A7},
-            {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B3, R.id.B4, R.id.B5, R.id.B6, R.id.B7},
-            {R.id.C1, R.id.C2, R.id.C_emtpy, R.id.C3, R.id.C4, R.id.C5, R.id.C6, R.id.C7},
-            {R.id.D1, R.id.D2, R.id.D_emtpy, R.id.D3, R.id.D4, R.id.D5, R.id.D6, R.id.D7},
-            {R.id.E1, R.id.E2, R.id.E_emtpy, R.id.E3, R.id.E4, R.id.E5, R.id.E6, R.id.E7}};
+    int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
+            {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
+            {R.id.C1, R.id.C2, R.id.C_emtpy, R.id.C4, R.id.C5, R.id.C6, R.id.C7, R.id.C8},
+            {R.id.D1, R.id.D2, R.id.D_emtpy, R.id.D4, R.id.D5, R.id.D6, R.id.D7, R.id.D8},
+            {R.id.E1, R.id.E2, R.id.E_emtpy, R.id.E4, R.id.E5, R.id.E6, R.id.E7, R.id.E8}};
     //좌석 아이디
 
     TextView see_review; //리뷰보기 텍스트뷰
@@ -56,7 +56,7 @@ public class theater_activity extends AppCompatActivity {
         avg_rating.setRating(get_avg_score);
 
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
-        theater_activity_to_review.putExtra("avg_rating", get_avg_score);
+
 
 
         seat = new Button[seat_layout.getRowCount()][seat_layout.getColumnCount()];
@@ -83,6 +83,7 @@ public class theater_activity extends AppCompatActivity {
         see_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                theater_activity_to_review.putExtra("avg_rating", get_avg_score);
                 startActivity(theater_activity_to_review);
             }
         });
