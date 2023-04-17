@@ -61,9 +61,13 @@ public class Detailed_Review extends Activity {
         avg_score=findViewById(R.id.avg_score);
         avg_rating=findViewById(R.id.avg_rating);
 
+
+        seat_name.setText(detailed_review.getStringExtra("seat_name"));
+
+
         /* 이 부분 값이 안넘어 옴 확인해야함
         avg_score_string=detailed_review.getStringExtra("avg_rating");
-        seat_name.setText(detailed_review.getStringExtra("seat_name"));
+        Log.d("123",avg_score_string);
         Log.d("123",avg_score_string);
         avg_score.setText(avg_score_string);
         avg_rating.setRating(Float.parseFloat(avg_score_string));*/

@@ -106,19 +106,9 @@
             android:visibility="invisible"></Button>
 
         <Button
-            android:id="@+id/A3"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
             android:id="@+id/A4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
@@ -152,6 +142,16 @@
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/A8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- A열 끝-->
 
@@ -188,19 +188,9 @@
             android:visibility="invisible"></Button>
 
         <Button
-            android:id="@+id/B3"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
             android:id="@+id/B4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
@@ -234,6 +224,16 @@
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/B8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- B열 끝-->
 
@@ -270,19 +270,9 @@
             android:visibility="invisible"></Button>
 
         <Button
-            android:id="@+id/C3"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
             android:id="@+id/C4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
@@ -316,6 +306,16 @@
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/C8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- C열 끝-->
 
@@ -352,19 +352,9 @@
             android:visibility="invisible"></Button>
 
         <Button
-            android:id="@+id/D3"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
             android:id="@+id/D4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
@@ -398,6 +388,16 @@
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/D8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- D열 끝-->
 
@@ -434,19 +434,9 @@
             android:visibility="invisible"></Button>
 
         <Button
-            android:id="@+id/E3"
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
             android:id="@+id/E4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
@@ -480,6 +470,16 @@
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/E8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- E열 끝-->
     </GridLayout>
