@@ -81,6 +81,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/A1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -89,6 +90,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -99,10 +101,12 @@
 
         <Button
             android:layout_width="0dp"
+            android:id="@+id/A_emtpy"
             android:layout_columnWeight="1"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/A3"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -111,6 +115,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -120,6 +125,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -129,6 +135,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -138,6 +145,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -155,6 +163,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/B1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -163,6 +172,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -174,9 +184,11 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/B_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/B3"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -185,6 +197,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -194,6 +207,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -203,6 +217,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -212,6 +227,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -220,6 +236,7 @@
             android:text="7"
             android:textAlignment="center"></Button>
         <!-- B열 끝-->
+
         <!-- C열 시작-->
         <TextView
             android:layout_width="0dp"
@@ -228,6 +245,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/C1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -236,6 +254,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -247,9 +266,11 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/C_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/C3"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -258,6 +279,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -267,6 +289,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -276,6 +299,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -285,6 +309,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -302,6 +327,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/D1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -310,6 +336,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -321,9 +348,11 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/D_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/D3"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -332,6 +361,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -341,6 +371,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -350,6 +381,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -359,6 +391,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -376,6 +409,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/E1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -384,6 +418,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -395,9 +430,11 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/E_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/E3"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -406,6 +443,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -415,6 +453,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -424,6 +463,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -433,6 +473,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -459,7 +500,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="1관 A열 3열"
+            android:text="1관 A열 3번"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
@@ -500,6 +541,7 @@
             android:paddingBottom="10dp"
             android:text="+ 리뷰보기"
             android:textColor="@color/blue"
+            android:id="@+id/see_review"
             app:layout_constraintLeft_toLeftOf="@+id/simple_review"
             app:layout_constraintTop_toBottomOf="@+id/score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
