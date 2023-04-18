@@ -70,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 main_logout_textview.setVisibility(View.GONE);
             }
         });
+        search_textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+            }
+        });
 
     }
 
