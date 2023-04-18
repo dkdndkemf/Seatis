@@ -30,13 +30,14 @@
             app:layout_constraintLeft_toLeftOf="@id/layout"
             app:layout_constraintTop_toTopOf="@+id/layout" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <EditText
             android:id="@+id/search_button"
             android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:text="극장을 선택해주세요"
+            android:hint="극장을 입력해주세요"
+            android:textAlignment="center"
             android:textSize="18sp"
-            android:textColor="@color/bold_gray"
+            android:textColorHint="@color/bold_gray"
             android:padding="15dp"
             android:fontFamily="@font/nanumgothic_bold"
             app:layout_constraintTop_toBottomOf="@id/guideline"

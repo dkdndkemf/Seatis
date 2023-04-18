@@ -123,17 +123,18 @@
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/fab_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="70dp"
         android:layout_marginRight="10dp"
         android:src="@drawable/edit_icon"
-        app:backgroundTint="@color/purple"
+        android:background="@drawable/button_round_review"
+        android:backgroundTint="@color/purple"
         app:elevation="6dp"
-        app:fabSize="normal"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        app:fabSize="normal" />
 
     <FrameLayout
         android:id="@+id/containers"

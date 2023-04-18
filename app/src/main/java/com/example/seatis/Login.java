@@ -3,6 +3,8 @@ package com.example.seatis;
 import static com.example.seatis.MainActivity.context_main;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,8 +38,6 @@ public class Login extends AppCompatActivity {
         back_btn = findViewById(R.id.back_btn_login);
         kakao_login = findViewById(R.id.kakao_login);
         google_login = findViewById(R.id.google_login);
-
-
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +74,8 @@ public class Login extends AppCompatActivity {
 
             }
         });
+
+
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
