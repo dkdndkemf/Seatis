@@ -30,18 +30,18 @@ import java.util.List;
 
 public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
-    ListView listView;
+    static ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
     FloatingActionButton fab_btn;
     ImageButton back_btn;
 
     TextView seat_name;
     TextView avg_score;
+
+    static TextView no_review;
     RatingBar avg_rating;
 
-    String avg_score_string;
-
-    Intent detailed_review;
+    float avg_score_string;
 
     Search search;
     MyPage myPage;
@@ -57,7 +57,6 @@ public class Detailed_Review extends AppCompatActivity {
         /*data.add(new Review("안강현", "2023.12.22", 2, 3, 4, "여기서는 잘보이지 않고 소리도 별로에요", 12, 2));
         data.add(new Review("아아아", "2023.11.22", 5, 5, 4, "좋아요", 1, 123));*/
 
-        detailed_review =getIntent();//자기 인탠트
 
 
         listView = findViewById(R.id.review_viewer);
@@ -68,9 +67,20 @@ public class Detailed_Review extends AppCompatActivity {
         seat_name=findViewById(R.id.seat_name);
         avg_score=findViewById(R.id.avg_score);
         avg_rating=findViewById(R.id.avg_rating);
+        no_review=findViewById(R.id.no_review);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        seat_name.setText(detailed_review.getStringExtra("seat_name"));
+        if(data.isEmpty())
+        {
+            listView.setVisibility(View.INVISIBLE);
+            no_review.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            listView.setVisibility(View.VISIBLE);
+            no_review.setVisibility(View.GONE);
+        }
+        seat_name.setText(getIntent().getStringExtra("seat_name"));
 
         search = new Search();
         myPage = new MyPage();
@@ -96,12 +106,10 @@ public class Detailed_Review extends AppCompatActivity {
         });
 
 
-        /* 이 부분 값이 안넘어 옴 확인해야함
-        avg_score_string=detailed_review.getStringExtra("avg_rating");
-        Log.d("123",avg_score_string);
-        Log.d("123",avg_score_string);
-        avg_score.setText(avg_score_string);
-        avg_rating.setRating(Float.parseFloat(avg_score_string));*/
+
+        avg_score_string=getIntent().getFloatExtra("avg_rating",0.0f);
+        avg_score.setText(String.valueOf(avg_score_string));
+        avg_rating.setRating(avg_score_string);
 
 
         Intent review_to_review_write = new Intent(Detailed_Review.this, review_write.class);

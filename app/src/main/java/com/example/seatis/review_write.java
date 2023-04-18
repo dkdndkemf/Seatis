@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +21,14 @@ import java.util.ArrayList;
 
 public class review_write extends AppCompatActivity {
 
+    ListView listView;
     ArrayList<Review> data;
     Detailed_Review_Adapter detailed_review_adapter;
     ImageButton back_btn;
     Button write_btn;
     EditText write_review;
 
+    TextView no_review;
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
@@ -46,6 +50,8 @@ public class review_write extends AppCompatActivity {
         etc_score=findViewById(R.id.etc_score);
         data=((Detailed_Review)Detailed_Review.context_Detailed_Review).data;
         detailed_review_adapter=((Detailed_Review)Detailed_Review.context_Detailed_Review).detailed_review_adapter;
+        listView=((Detailed_Review)Detailed_Review.context_Detailed_Review).listView;
+        no_review=((Detailed_Review)Detailed_Review.context_Detailed_Review).no_review;
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         search = new Search();
@@ -79,7 +85,18 @@ public class review_write extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                data.add(new Review("테스트","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
-               detailed_review_adapter.notifyDataSetChanged();
+               if(data.isEmpty())
+               {
+                   listView.setVisibility(View.INVISIBLE);
+                   no_review.setVisibility(View.VISIBLE);
+                   detailed_review_adapter.notifyDataSetChanged();
+               }
+               else
+               {
+                   listView.setVisibility(View.VISIBLE);
+                   no_review.setVisibility(View.GONE);
+                   detailed_review_adapter.notifyDataSetChanged();
+               }
                finish();
            }
        });
