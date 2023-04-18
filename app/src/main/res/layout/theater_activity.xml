@@ -81,6 +81,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/A1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -89,6 +90,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -99,27 +101,21 @@
 
         <Button
             android:layout_width="0dp"
+            android:id="@+id/A_emtpy"
             android:layout_columnWeight="1"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/A4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -129,6 +125,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -138,12 +135,23 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/A7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/A8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- A열 끝-->
 
@@ -155,6 +163,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/B1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -163,6 +172,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -174,26 +184,20 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/B_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/B4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -203,6 +207,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -212,6 +217,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -219,7 +225,18 @@
             android:padding="0dp"
             android:text="7"
             android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/B8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
+            android:textAlignment="center"></Button>
         <!-- B열 끝-->
+
         <!-- C열 시작-->
         <TextView
             android:layout_width="0dp"
@@ -228,6 +245,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/C1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -236,6 +254,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -247,26 +266,20 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/C_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/C4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -276,6 +289,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -285,12 +299,23 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/C8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- C열 끝-->
 
@@ -302,6 +327,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/D1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -310,6 +336,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -321,26 +348,20 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/D_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/D4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -350,6 +371,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -359,12 +381,23 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/D8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- D열 끝-->
 
@@ -376,6 +409,7 @@
             android:textSize="20sp"></TextView>
 
         <Button
+            android:id="@+id/E1"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/gray"
@@ -384,6 +418,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E2"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -395,26 +430,20 @@
         <Button
             android:layout_width="0dp"
             android:layout_columnWeight="1"
+            android:id="@+id/E_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
+            android:id="@+id/E4"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:backgroundTint="@color/gray"
-            android:padding="0dp"
-            android:text="3"
-            android:textAlignment="center"></Button>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_columnWeight="1"
-            android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="4"
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E5"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -424,6 +453,7 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E6"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
@@ -433,12 +463,23 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E7"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:layout_marginLeft="5dp"
             android:backgroundTint="@color/gray"
             android:padding="0dp"
             android:text="7"
+            android:textAlignment="center"></Button>
+
+        <Button
+            android:id="@+id/E8"
+            android:layout_width="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/gray"
+            android:padding="0dp"
+            android:text="8"
             android:textAlignment="center"></Button>
         <!-- E열 끝-->
     </GridLayout>
@@ -459,34 +500,33 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="1관 A열 3열"
+            android:text="1관 A열 3번"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/avg_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/nanumgothic_bold"
-            android:text="4.8"
+            android:text="2.5"
             android:textColor="@color/star"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toBottomOf="@id/seat_name"></TextView>
 
         <RatingBar
-            android:id="@+id/score_star"
+            android:id="@+id/avg_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:isIndicator="false"
+            android:isIndicator="true"
             android:numStars="5"
             android:progressBackgroundTint="@color/gray"
             android:progressTint="@color/star"
-            android:rating="4.8"
             android:stepSize="0.5"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintRight_toRightOf="@id/simple_review"
@@ -500,19 +540,32 @@
             android:paddingBottom="10dp"
             android:text="+ 리뷰보기"
             android:textColor="@color/blue"
+            android:id="@+id/see_review"
             app:layout_constraintLeft_toLeftOf="@+id/simple_review"
-            app:layout_constraintTop_toBottomOf="@+id/score"></TextView>
+            app:layout_constraintTop_toBottomOf="@+id/avg_score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/containers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_weight="1"
+        android:layout_marginBottom="50dp"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
+        app:itemActiveIndicatorStyle="@color/white"
         app:itemBackground="@color/purple"
         app:itemIconTint="@color/white"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:menu="@menu/bottom_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

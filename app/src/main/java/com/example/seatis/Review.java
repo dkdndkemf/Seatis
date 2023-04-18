@@ -48,7 +48,7 @@ public class Review {
     }
 
     public float getListen_rating() {
-        return see_rating;
+        return listen_rating;
     }
 
     public void setListen_rating(float listen_rating) {

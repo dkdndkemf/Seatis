@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566009082784",
+    "project_id": "seatis-bf8df",
+    "storage_bucket": "seatis-bf8df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566009082784:android:0a448e21838ac7ed1d2ac5",
+        "android_client_info": {
+          "package_name": "com.example.seatis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566009082784-7u3c4dho3l01upg996e0o9ret5td084g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6aknLD-zhhbKr6SLnzmDChojBYxpR-Sw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566009082784-1otr39k7cbn7qq66uo60hso9kmtrb4tj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,9 +15,9 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Search search;
-    MyPage myPage;
-    FavoriteTheater favoriteTheater;
+    public Search search;
+    public MyPage myPage;
+    public FavoriteTheater favoriteTheater;
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 main_logout_textview.setVisibility(View.GONE);
             }
         });
-
 
     }
 
