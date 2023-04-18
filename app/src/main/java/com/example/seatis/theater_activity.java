@@ -92,7 +92,12 @@ public class theater_activity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                    if(MainActivity.isLogin) {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                    }
+                    else {
+                        startActivity(theater_activity_to_login);
+                    }
                     return true;
                 } else if (itemId == R.id.favorite) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
