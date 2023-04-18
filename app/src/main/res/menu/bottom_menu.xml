@@ -9,7 +9,6 @@
         app:showAsAction="always"
         android:iconTintMode="screen"
         android:iconTint="@color/purple"
-
          />
     <item
         android:id="@+id/favorite"
