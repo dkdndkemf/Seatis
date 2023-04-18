@@ -32,53 +32,56 @@ public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
     static ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
-    FloatingActionButton fab_btn;
+    FloatingActionButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
 
-    TextView seat_name;
+    TextView seat_name; //좌석 이름
     TextView avg_score;
 
-    static TextView no_review;
+    static TextView no_review; //리뷰가 없으면 나타나는 텍스트뷰
     RatingBar avg_rating;
 
-    float avg_score_string;
-
+    float avg_score_string; //리뷰 평점
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
+
+    Button login_btn;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
 
-        context_Detailed_Review=this;
-
-        /*data.add(new Review("안강현", "2023.12.22", 2, 3, 4, "여기서는 잘보이지 않고 소리도 별로에요", 12, 2));
-        data.add(new Review("아아아", "2023.11.22", 5, 5, 4, "좋아요", 1, 123));*/
-
-
+        context_Detailed_Review = this;
 
         listView = findViewById(R.id.review_viewer);
         listView.setAdapter(detailed_review_adapter);
 
-        fab_btn=findViewById(R.id.fab_btn);
-        back_btn=findViewById(R.id.back_Btn);
-        seat_name=findViewById(R.id.seat_name);
-        avg_score=findViewById(R.id.avg_score);
-        avg_rating=findViewById(R.id.avg_rating);
-        no_review=findViewById(R.id.no_review);
+        fab_btn = findViewById(R.id.fab_btn);
+        back_btn = findViewById(R.id.back_Btn);
+        seat_name = findViewById(R.id.seat_name);
+        avg_score = findViewById(R.id.avg_score);
+        avg_rating = findViewById(R.id.avg_rating);
+        no_review = findViewById(R.id.no_review);
+        login_btn = findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        if(data.isEmpty())
-        {
+        if (data.isEmpty()) { //리뷰 데이터가 비어있다면...
             listView.setVisibility(View.INVISIBLE);
             no_review.setVisibility(View.VISIBLE);
-        }
-        else
-        {
+        } else {
             listView.setVisibility(View.VISIBLE);
             no_review.setVisibility(View.GONE);
+        }
+
+        if (MainActivity.isLogin) { //로그인을 했다면...
+            login_btn.setVisibility(View.INVISIBLE);
+            fab_btn.setVisibility(View.VISIBLE);
+        } else {
+            login_btn.setVisibility(View.VISIBLE);
+            fab_btn.setVisibility(View.INVISIBLE);
         }
         seat_name.setText(getIntent().getStringExtra("seat_name"));
 
@@ -106,13 +109,13 @@ public class Detailed_Review extends AppCompatActivity {
         });
 
 
-
-        avg_score_string=getIntent().getFloatExtra("avg_rating",0.0f);
+        avg_score_string = getIntent().getFloatExtra("avg_rating", 0.0f);
         avg_score.setText(String.valueOf(avg_score_string));
         avg_rating.setRating(avg_score_string);
 
 
-        Intent review_to_review_write = new Intent(Detailed_Review.this, review_write.class);
+        Intent review_to_review_write = new Intent(Detailed_Review.this, review_write.class);//리뷰페이지 -> 리뷰작성페이지
+        Intent review_to_login = new Intent(Detailed_Review.this, Login.class);// 리뷰페이지 -> 로그인
 
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +128,12 @@ public class Detailed_Review extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(review_to_login);
             }
         });
 
