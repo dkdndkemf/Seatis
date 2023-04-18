@@ -46,6 +46,8 @@ public class Detailed_Review extends AppCompatActivity {
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
+
+    Button login_btn;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class Detailed_Review extends AppCompatActivity {
         avg_score=findViewById(R.id.avg_score);
         avg_rating=findViewById(R.id.avg_rating);
         no_review=findViewById(R.id.no_review);
+        login_btn=findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         if(data.isEmpty())
@@ -79,6 +82,17 @@ public class Detailed_Review extends AppCompatActivity {
         {
             listView.setVisibility(View.VISIBLE);
             no_review.setVisibility(View.GONE);
+        }
+
+        if(MainActivity.isLogin)
+        {
+            login_btn.setVisibility(View.INVISIBLE);
+            fab_btn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            login_btn.setVisibility(View.VISIBLE);
+            fab_btn.setVisibility(View.INVISIBLE);
         }
         seat_name.setText(getIntent().getStringExtra("seat_name"));
 
