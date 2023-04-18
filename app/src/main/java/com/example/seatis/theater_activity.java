@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class theater_activity extends AppCompatActivity {
     public static Activity _theater_activity;
     Button seat[][]; //좌석 배열
-    Button login_btn;
+    Button login_btn, logout_btn;
     ConstraintLayout simple_review; //간단한 리뷰 레이아웃
     TextView seat_name;
     ImageButton back_btn;
@@ -54,7 +54,8 @@ public class theater_activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theater_activity);
-        _theater_activity=theater_activity.this;
+        _theater_activity = theater_activity.this;
+
 
         simple_review = findViewById(R.id.simple_review);
         simple_review.setVisibility(View.INVISIBLE);
@@ -63,25 +64,24 @@ public class theater_activity extends AppCompatActivity {
         back_btn = findViewById(R.id.back_Btn);
         seat_name = findViewById(R.id.seat_name);
         avg_rating = findViewById(R.id.avg_rating);
-        avg_score=findViewById(R.id.avg_score);
-        login_btn=findViewById(R.id.login_btn);
+        avg_score = findViewById(R.id.avg_score);
+        login_btn = findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        get_avg_score=Float.parseFloat(avg_score.getText().toString());
+        get_avg_score = Float.parseFloat(avg_score.getText().toString());
         avg_rating.setRating(get_avg_score);
 
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
-        Intent theater_activity_to_login=new Intent(theater_activity.this,Login.class);
+        Intent theater_activity_to_login = new Intent(theater_activity.this, Login.class);
 
         search = new Search();
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
 
-        if(MainActivity.isLogin)
-        {
+
+        if (MainActivity.isLogin) {
             login_btn.setVisibility(View.INVISIBLE);
-        }
-        else
+        } else
             login_btn.setVisibility(View.VISIBLE);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
