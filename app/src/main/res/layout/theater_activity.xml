@@ -42,6 +42,7 @@
         android:padding="5dp"
         android:text="CGV 신촌아트레온 1관"
         android:textAlignment="center"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/back_Btn"></TextView>
 
     <ImageView
@@ -59,6 +60,7 @@
         android:paddingTop="20dp"
         android:text="SCREEN"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/dislike"></TextView>
 
@@ -78,6 +80,7 @@
             android:layout_width="0dp"
             android:layout_columnWeight="0.5"
             android:text="A"
+            android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 
         <Button
@@ -100,8 +103,8 @@
             android:textAlignment="center"></Button>
 
         <Button
-            android:layout_width="0dp"
             android:id="@+id/A_emtpy"
+            android:layout_width="0dp"
             android:layout_columnWeight="1"
             android:visibility="invisible"></Button>
 
@@ -160,6 +163,7 @@
             android:layout_width="0dp"
             android:layout_columnWeight="0.5"
             android:text="B"
+            android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 
         <Button
@@ -182,9 +186,9 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/B_emtpy"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:id="@+id/B_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -242,6 +246,7 @@
             android:layout_width="0dp"
             android:layout_columnWeight="0.5"
             android:text="C"
+            android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 
         <Button
@@ -264,9 +269,9 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/C_emtpy"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:id="@+id/C_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -324,6 +329,7 @@
             android:layout_width="0dp"
             android:layout_columnWeight="0.5"
             android:text="D"
+            android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 
         <Button
@@ -346,9 +352,9 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/D_emtpy"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:id="@+id/D_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -406,6 +412,7 @@
             android:layout_width="0dp"
             android:layout_columnWeight="0.5"
             android:text="E"
+            android:textColor="@color/black"
             android:textSize="20sp"></TextView>
 
         <Button
@@ -428,9 +435,9 @@
             android:textAlignment="center"></Button>
 
         <Button
+            android:id="@+id/E_emtpy"
             android:layout_width="0dp"
             android:layout_columnWeight="1"
-            android:id="@+id/E_emtpy"
             android:visibility="invisible"></Button>
 
         <Button
@@ -501,6 +508,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/nanumgothic_extrabold"
             android:text="1관 A열 3번"
+            android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constraintLeft_toLeftOf="@id/simple_review"
             app:layout_constraintTop_toTopOf="@+id/simple_review"></TextView>
@@ -533,6 +541,7 @@
             app:layout_constraintTop_toBottomOf="@id/seat_name" />
 
         <TextView
+            android:id="@+id/see_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -540,7 +549,7 @@
             android:paddingBottom="10dp"
             android:text="+ 리뷰보기"
             android:textColor="@color/blue"
-            android:id="@+id/see_review"
+            android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="@+id/simple_review"
             app:layout_constraintTop_toBottomOf="@+id/avg_score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -549,11 +558,10 @@
         android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_weight="1"
         android:layout_marginBottom="50dp"
-        />
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"
