@@ -64,7 +64,6 @@ public class MyPage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,6 +107,7 @@ public class MyPage extends Fragment {
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().remove(MyPage.this).commit();
                         fragmentManager.popBackStack();
+                        MainActivity.isLogin = false;
                         myPage_to_main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(myPage_to_main);
                     }

@@ -75,7 +75,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
