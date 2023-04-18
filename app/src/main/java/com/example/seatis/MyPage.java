@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MyPage#newInstance} factory method to
@@ -75,7 +77,14 @@ public class MyPage extends Fragment {
         Button editProfile = (Button)view.findViewById(R.id.btnedit);
         Button logout = (Button)view.findViewById(R.id.btn5);
         //ImageButton logout2 = (ImageButton)view.findViewById(R.id.btn6);
+        /*
+        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        try {
+            picture.setImageURI(EditProfile.uri);
+        }catch(NullPointerException e) {
 
+        }
+         */
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
