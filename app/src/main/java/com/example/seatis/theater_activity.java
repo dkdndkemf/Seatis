@@ -67,6 +67,7 @@ public class theater_activity extends AppCompatActivity {
         avg_rating.setRating(get_avg_score);
 
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
+        Intent theater_activity_to_login=new Intent(theater_activity.this,Login.class);
 
         search = new Search();
         myPage = new MyPage();
@@ -133,6 +134,12 @@ public class theater_activity extends AppCompatActivity {
             }
         });
 
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(theater_activity_to_login);
+            }
+        });
 
     }
 
