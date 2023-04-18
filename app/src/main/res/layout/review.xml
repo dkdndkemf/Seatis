@@ -86,8 +86,7 @@
             android:progressBackgroundTint="@color/gray"
             android:progressTint="@color/star"
             android:stepSize="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/avg_score"
             app:layout_constraintTop_toBottomOf="@id/seat_name" />
 
         <Button

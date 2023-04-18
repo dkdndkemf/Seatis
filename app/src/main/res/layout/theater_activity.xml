@@ -536,8 +536,7 @@
             android:progressBackgroundTint="@color/gray"
             android:progressTint="@color/star"
             android:stepSize="0.5"
-            app:layout_constraintLeft_toLeftOf="@id/simple_review"
-            app:layout_constraintRight_toRightOf="@id/simple_review"
+            app:layout_constraintLeft_toRightOf="@+id/avg_score"
             app:layout_constraintTop_toBottomOf="@id/seat_name" />
 
         <TextView
