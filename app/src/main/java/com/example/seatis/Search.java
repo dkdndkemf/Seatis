@@ -1,5 +1,6 @@
 package com.example.seatis;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 /**
@@ -55,6 +57,7 @@ public class Search extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -63,6 +66,23 @@ public class Search extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
+        Button favorite1 = (Button)view.findViewById(R.id.favorite1);
+        favorite1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(Search.this).commit();
+                fragmentManager.popBackStack();
+                try {
+                    theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                    theater_instance.finish();
+                } catch (NullPointerException e){
+                    System.out.println("처음 누름");
+                }
+                Intent search_to_theater = new Intent(getActivity(),theater_activity.class);
+                startActivity(search_to_theater);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -86,6 +86,12 @@ public class FavoriteTheater extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(FavoriteTheater.this).commit();
                 fragmentManager.popBackStack();
+                try {
+                    theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                    theater_instance.finish();
+                } catch (NullPointerException e){
+                    System.out.println("처음 누름");
+                }
                 startActivity(favoriteTheater_to_theater);
             }
         });
@@ -96,6 +102,12 @@ public class FavoriteTheater extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction().remove(FavoriteTheater.this).commit();
                 fragmentManager.popBackStack();
+                try {
+                    theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                    theater_instance.finish();
+                } catch (NullPointerException e){
+                    System.out.println("처음 누름");
+                }
                 startActivity(favoriteTheater_to_theater);
             }
         });
