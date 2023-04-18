@@ -68,7 +68,7 @@ public class Detailed_Review extends AppCompatActivity {
         login_btn = findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        if (data.isEmpty()) { //리뷰 데이터가 비어져있다면...
+        if (data.isEmpty()) { //리뷰 데이터가 비어있다면...
             listView.setVisibility(View.INVISIBLE);
             no_review.setVisibility(View.VISIBLE);
         } else {
