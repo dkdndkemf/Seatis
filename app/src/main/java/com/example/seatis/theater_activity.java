@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class theater_activity extends AppCompatActivity {
     Button seat[][]; //좌석 배열
+    Button login_btn;
     ConstraintLayout simple_review; //간단한 리뷰 레이아웃
     TextView seat_name;
     ImageButton back_btn;
@@ -59,16 +60,25 @@ public class theater_activity extends AppCompatActivity {
         seat_name = findViewById(R.id.seat_name);
         avg_rating = findViewById(R.id.avg_rating);
         avg_score=findViewById(R.id.avg_score);
+        login_btn=findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         get_avg_score=Float.parseFloat(avg_score.getText().toString());
         avg_rating.setRating(get_avg_score);
 
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
+        Intent theater_activity_to_login=new Intent(theater_activity.this,Login.class);
 
         search = new Search();
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
+
+        if(MainActivity.isLogin)
+        {
+            login_btn.setVisibility(View.INVISIBLE);
+        }
+        else
+            login_btn.setVisibility(View.VISIBLE);
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -124,6 +134,12 @@ public class theater_activity extends AppCompatActivity {
             }
         });
 
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(theater_activity_to_login);
+            }
+        });
 
     }
 
