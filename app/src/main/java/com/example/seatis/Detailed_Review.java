@@ -32,7 +32,7 @@ public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
     static ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
-    FloatingActionButton fab_btn; //리뷰작성을 위한 플로팅 버튼
+    ImageButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
 
     TextView seat_name; //좌석 이름
@@ -76,13 +76,7 @@ public class Detailed_Review extends AppCompatActivity {
             no_review.setVisibility(View.GONE);
         }
 
-        if (MainActivity.isLogin) { //로그인을 했다면...
-            login_btn.setVisibility(View.INVISIBLE);
-            fab_btn.setVisibility(View.VISIBLE);
-        } else {
-            login_btn.setVisibility(View.VISIBLE);
-            fab_btn.setVisibility(View.INVISIBLE);
-        }
+
         seat_name.setText(getIntent().getStringExtra("seat_name"));
 
         search = new Search();

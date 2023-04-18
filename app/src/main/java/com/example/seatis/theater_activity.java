@@ -43,15 +43,15 @@ public class theater_activity extends AppCompatActivity {
             {R.id.E1, R.id.E2, R.id.E_emtpy, R.id.E4, R.id.E5, R.id.E6, R.id.E7, R.id.E8}};
     //좌석 아이디
 
+
     TextView see_review; //리뷰보기 텍스트뷰
     GridLayout seat_layout; //좌석 그리드 레이아웃
     String seat_string; //좌석 이름 문자열
     float get_avg_score; //별점
-
     Intent theater_activity_to_review;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theater_activity);
         _theater_activity=theater_activity.this;
