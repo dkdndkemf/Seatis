@@ -107,7 +107,15 @@
             android:layout_height="400dp"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/avg_rating">
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="등록된 리뷰가 없습니다."
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/no_review"
+                android:fontFamily="@font/nanumgothic_extrabold"
+                ></TextView>
             <ListView
                 android:id="@+id/review_viewer"
                 android:layout_width="match_parent"
