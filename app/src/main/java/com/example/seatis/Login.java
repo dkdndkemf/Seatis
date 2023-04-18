@@ -91,15 +91,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-                /*UserApiClient.getInstance().me((user, meError) -> {
-                    if (meError != null) {
-                        Log.e(TAG, "사용자 정보 요청 실패", meError);
-                    } else {
-                        Log.i(TAG, "사용자 정보 요청 성공" + "\n이메일: "+user.getKakaoAccount().getEmail());
-                    }
-                    return null;
-                });*/
-
     }
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
