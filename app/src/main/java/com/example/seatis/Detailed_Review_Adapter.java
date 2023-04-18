@@ -60,18 +60,18 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         agree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //좋아요 증가 구현해야함
                 String cnt=String.valueOf((Integer.parseInt(agree.getText().toString())+1));
                 agree.setText(cnt);
+                review.setAgree(Integer.parseInt(cnt));
             }
         });
 
         disagree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //싫어요 증가 구현해야함
                 String cnt=String.valueOf((Integer.parseInt(disagree.getText().toString())+1));
                 disagree.setText(cnt);
+                review.setDisagree(Integer.parseInt(cnt));
             }
         });
 
