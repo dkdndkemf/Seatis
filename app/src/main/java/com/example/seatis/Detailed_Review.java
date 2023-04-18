@@ -134,7 +134,7 @@ public class Detailed_Review extends AppCompatActivity {
     }
     protected void onResume() {
         super.onResume();
-        if(MainActivity.isLogin)
+        if(MainActivity.isLogin) //로그인 여부 판단....
         {
             login_btn.setVisibility(View.GONE);
             fab_btn.setVisibility(View.VISIBLE);
@@ -144,6 +144,7 @@ public class Detailed_Review extends AppCompatActivity {
             login_btn.setVisibility(View.VISIBLE);
             fab_btn.setVisibility(View.GONE);
         }
+
     }
 }
 

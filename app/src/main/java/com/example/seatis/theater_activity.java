@@ -78,13 +78,6 @@ public class theater_activity extends AppCompatActivity {
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
 
-        if(MainActivity.isLogin)
-        {
-            login_btn.setVisibility(View.INVISIBLE);
-        }
-        else
-            login_btn.setVisibility(View.VISIBLE);
-
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -149,7 +142,7 @@ public class theater_activity extends AppCompatActivity {
     }
     protected void onResume() {
         super.onResume();
-        if(MainActivity.isLogin)
+        if(MainActivity.isLogin) //로그인 여부 판단...
         {
             login_btn.setVisibility(View.GONE);
         }
@@ -157,6 +150,7 @@ public class theater_activity extends AppCompatActivity {
         {
             login_btn.setVisibility(View.VISIBLE);
         }
+
     }
 
 }

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO 로그아웃 기능
-                MainActivity.isLogin=true;
+                MainActivity.isLogin=false;
                 main_login_textview.setVisibility(View.VISIBLE);
                 main_logout_textview.setVisibility(View.GONE);
             }
