@@ -88,7 +88,6 @@ public class MyPage extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(MyPage.this).commit();
                 fragmentManager.popBackStack();
                 startActivity(myPage_to_editProfie);
             }
