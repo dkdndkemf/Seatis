@@ -14,10 +14,12 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 public class MainActivity extends AppCompatActivity {
+
     public static boolean isLogin = false;
     public Search search;
     public MyPage myPage;
     public FavoriteTheater favoriteTheater;
+    theater_activity theater_instance;
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         context_main=this;
         search = new Search();
         myPage = new MyPage();
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         main_logout_textview = findViewById(R.id.main_logout_textview);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
+                    theater_instance = (theater_activity)theater_activity._theater_activity;
+                    theater_instance.finish();
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
                     return true;
                 } else if (itemId == R.id.favorite) {

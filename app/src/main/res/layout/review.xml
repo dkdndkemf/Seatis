@@ -123,6 +123,18 @@
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/edit_icon"
+        app:backgroundTint="@color/purple"
+        app:elevation="6dp"
+        app:fabSize="normal"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
     <FrameLayout
         android:id="@+id/containers"
         android:layout_width="match_parent"
@@ -145,16 +157,6 @@
         app:menu="@menu/bottom_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginBottom="70dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/edit_icon"
-        app:backgroundTint="@color/purple"
-        app:elevation="6dp"
-        app:fabSize="normal"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

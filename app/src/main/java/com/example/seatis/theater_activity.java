@@ -1,5 +1,7 @@
 package com.example.seatis;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class theater_activity extends AppCompatActivity {
+    public static Activity _theater_activity;
     Button seat[][]; //좌석 배열
     Button login_btn;
     ConstraintLayout simple_review; //간단한 리뷰 레이아웃
@@ -51,6 +54,7 @@ public class theater_activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theater_activity);
+        _theater_activity=theater_activity.this;
 
         simple_review = findViewById(R.id.simple_review);
         simple_review.setVisibility(View.INVISIBLE);
