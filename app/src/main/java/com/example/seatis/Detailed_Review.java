@@ -32,17 +32,16 @@ public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
     static ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
-    FloatingActionButton fab_btn;
+    FloatingActionButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
 
-    TextView seat_name;
+    TextView seat_name; //좌석 이름
     TextView avg_score;
 
-    static TextView no_review;
+    static TextView no_review; //리뷰가 없으면 나타나는 텍스트뷰
     RatingBar avg_rating;
 
-    float avg_score_string;
-
+    float avg_score_string; //리뷰 평점
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
@@ -57,10 +56,6 @@ public class Detailed_Review extends AppCompatActivity {
 
         context_Detailed_Review = this;
 
-        /*data.add(new Review("안강현", "2023.12.22", 2, 3, 4, "여기서는 잘보이지 않고 소리도 별로에요", 12, 2));
-        data.add(new Review("아아아", "2023.11.22", 5, 5, 4, "좋아요", 1, 123));*/
-
-
         listView = findViewById(R.id.review_viewer);
         listView.setAdapter(detailed_review_adapter);
 
@@ -73,7 +68,7 @@ public class Detailed_Review extends AppCompatActivity {
         login_btn = findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        if (data.isEmpty()) {
+        if (data.isEmpty()) { //리뷰 데이터가 비어져있다면...
             listView.setVisibility(View.INVISIBLE);
             no_review.setVisibility(View.VISIBLE);
         } else {
@@ -81,7 +76,7 @@ public class Detailed_Review extends AppCompatActivity {
             no_review.setVisibility(View.GONE);
         }
 
-        if (MainActivity.isLogin) {
+        if (MainActivity.isLogin) { //로그인을 했다면...
             login_btn.setVisibility(View.INVISIBLE);
             fab_btn.setVisibility(View.VISIBLE);
         } else {
