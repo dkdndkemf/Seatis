@@ -132,5 +132,18 @@ public class Detailed_Review extends AppCompatActivity {
         });
 
     }
+    protected void onResume() {
+        super.onResume();
+        if(MainActivity.isLogin)
+        {
+            login_btn.setVisibility(View.GONE);
+            fab_btn.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            login_btn.setVisibility(View.VISIBLE);
+            fab_btn.setVisibility(View.GONE);
+        }
+    }
 }
 

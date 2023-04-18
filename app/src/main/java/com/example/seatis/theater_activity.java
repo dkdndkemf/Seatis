@@ -13,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -145,6 +146,17 @@ public class theater_activity extends AppCompatActivity {
             }
         });
 
+    }
+    protected void onResume() {
+        super.onResume();
+        if(MainActivity.isLogin)
+        {
+            login_btn.setVisibility(View.GONE);
+        }
+        else
+        {
+            login_btn.setVisibility(View.VISIBLE);
+        }
     }
 
 }
