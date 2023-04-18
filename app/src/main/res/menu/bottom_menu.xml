@@ -6,20 +6,24 @@
         android:title=""
         android:enabled="true"
         android:icon="@drawable/bottom_search_icon"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:iconTintMode="screen"
+        android:iconTint="@color/purple"
+
+         />
     <item
         android:id="@+id/favorite"
         android:title=""
         android:enabled="true"
         android:icon="@drawable/bottom_heart_icon"
-        app:showAsAction="always"/>
+        />
 
     <item
         android:id="@+id/mypage"
         android:title=""
         android:enabled="true"
         android:icon="@drawable/bottom_person_icon"
-        app:showAsAction="always">
-    </item>
+        />
+
 
 </menu>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_weight="1">
+    >
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -101,11 +101,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view1" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn2"
-        android:layout_width="90dp"
-        android:layout_height="46dp"
-        android:paddingTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="30dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/forward_arrow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,11 +128,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn1" />
 
-    <ImageButton
-        android:id="@+id/btn4"
-        android:layout_width="90dp"
-        android:layout_height="46dp"
-        android:paddingTop="16dp"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="30dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/forward_arrow"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,9 +151,8 @@
 
     <Button
         android:id="@+id/btn5"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="19dp"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/nanumgothic"
         android:gravity="left|center_vertical"
@@ -164,11 +164,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view2" />
 
-    <ImageButton
-        android:id="@+id/btn6"
-        android:layout_width="90dp"
-        android:layout_height="46dp"
-        android:paddingTop="16dp"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginRight="30dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/forward_arrow"
         app:layout_constraintEnd_toEndOf="parent"
