@@ -14,7 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    public static boolean isLogin = false;
     public Search search;
     public MyPage myPage;
     public FavoriteTheater favoriteTheater;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO 로그아웃 기능
+                MainActivity.isLogin=true;
                 main_login_textview.setVisibility(View.VISIBLE);
                 main_logout_textview.setVisibility(View.GONE);
             }

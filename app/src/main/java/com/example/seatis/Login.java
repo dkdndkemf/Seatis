@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
                                 Log.e(TAG, "사용자 정보 요청 실패", meError);
                             } else
                                 {
+                                    MainActivity.isLogin=true;
                                     Toast.makeText(Login.this,"로그인 성공(이메일) : "+user.getKakaoAccount().getEmail(),Toast.LENGTH_LONG).show();
                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                     ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
@@ -126,6 +127,7 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(Login.this, "로그인 성공(이메일) : "+personEmail,Toast.LENGTH_LONG).show();
                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                MainActivity.isLogin=true;
                 finish();
             }
         } catch (ApiException e) {
