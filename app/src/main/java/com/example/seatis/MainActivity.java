@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         context_main=this;
         search = new Search();
         myPage = new MyPage();
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         main_login_textview = findViewById(R.id.main_login_textview);
         main_logout_textview = findViewById(R.id.main_logout_textview);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
+
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
