@@ -15,9 +15,11 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static boolean isLogin = false;
     public Search search;
     public MyPage myPage;
     public FavoriteTheater favoriteTheater;
+    theater_activity theater_instance;
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
+                    theater_instance = (theater_activity)theater_activity._theater_activity;
+                    theater_instance.finish();
                     getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
                     return true;
                 } else if (itemId == R.id.favorite) {
@@ -63,8 +67,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO 로그아웃 기능
+                MainActivity.isLogin=true;
                 main_login_textview.setVisibility(View.VISIBLE);
                 main_logout_textview.setVisibility(View.GONE);
+            }
+        });
+        search_textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
             }
         });
 
