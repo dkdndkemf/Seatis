@@ -45,14 +45,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="극장"></TextView>
+            android:text="극장"
+            android:textColor="@color/black"></TextView>
 
         <TextView
             android:id="@+id/theater_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:text="CGV 신촌아트레온"></TextView>
+            android:text="CGV 신촌아트레온"
+            android:textColor="@color/black"></TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -71,14 +73,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="좌석"></TextView>
+            android:text="좌석"
+            android:textColor="@color/black"></TextView>
 
         <TextView
             android:id="@+id/seat_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:text="1관 A열 3번"></TextView>
+            android:text="1관 A열 3번"
+            android:textColor="@color/black"></TextView>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,6 +103,7 @@
             android:layout_marginTop="35dp"
             android:fontFamily="@font/nanumgothic_extrabold"
             android:text="별점"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
@@ -108,6 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:text="시야 :"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@id/score"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
@@ -120,6 +126,7 @@
             android:layout_marginTop="3dp"
             android:isIndicator="false"
             android:numStars="5"
+            android:progressTint="@color/star"
             android:stepSize="0.5"
             app:layout_constraintLeft_toRightOf="@id/see_score_tv"
             app:layout_constraintTop_toTopOf="parent"></RatingBar>
@@ -131,6 +138,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:text="음향 :"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@id/score"
             app:layout_constraintTop_toBottomOf="@id/see_score_tv"></TextView>
 
@@ -143,6 +151,7 @@
             android:layout_marginTop="18dp"
             android:isIndicator="false"
             android:numStars="5"
+            android:progressTint="@color/star"
             android:stepSize="0.5"
             app:layout_constraintLeft_toRightOf="@id/listen_score_tv"
             app:layout_constraintTop_toBottomOf="@+id/see_score"></RatingBar>
@@ -154,6 +163,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:text="기타 :"
+            android:textColor="@color/black"
             app:layout_constraintLeft_toRightOf="@id/score"
             app:layout_constraintTop_toBottomOf="@+id/listen_score_tv"></TextView>
 
@@ -166,6 +176,7 @@
             android:layout_marginTop="18dp"
             android:isIndicator="false"
             android:numStars="5"
+            android:progressTint="@color/star"
             android:stepSize="0.5"
             app:layout_constraintLeft_toRightOf="@id/etc_score_tv"
             app:layout_constraintTop_toBottomOf="@+id/listen_score"></RatingBar>
@@ -187,9 +198,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="상세 후기"></TextView>
+            android:text="상세 후기"
+            android:textColor="@color/black"></TextView>
 
         <EditText
+            android:id="@+id/write_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -197,8 +210,8 @@
             android:hint="후기를 작성해주세요"
             android:inputType="textMultiLine"
             android:maxLines="4"
-            android:id="@+id/write_review"
-            android:scrollHorizontally="false"></EditText>
+            android:scrollHorizontally="false"
+            android:textColor="@color/black"></EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -218,24 +231,25 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp"
             android:fontFamily="@font/nanumgothic_extrabold"
-            android:text="리뷰 이미지"></TextView>
+            android:text="리뷰 이미지"
+            android:textColor="@color/black"></TextView>
 
         <Button
             android:id="@+id/photo_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="사진 선택"></Button>
+            android:text="사진 선택"
+            android:textColor="@color/black"></Button>
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_weight="1"
         android:layout_marginBottom="50dp"
-        />
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"

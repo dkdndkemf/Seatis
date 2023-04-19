@@ -49,32 +49,54 @@ public class Login extends AppCompatActivity {
         kakao_login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                UserApiClient.getInstance().loginWithKakaoTalk(Login.this,(oAuthToken, error) -> {
-                    if (error != null) {
-                        Log.e(TAG, "로그인 실패", error);
-                    } else if (oAuthToken != null) {
-                        Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login.this)) {
+                    UserApiClient.getInstance().loginWithKakaoTalk(Login.this, (oAuthToken, error) -> {
+                        if (error != null) {
+                            Log.e(TAG, "로그인 실패", error);
+                        } else if (oAuthToken != null) {
+                            Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
 
-                        UserApiClient.getInstance().me((user, meError) -> {
-                            if (meError != null) {
-                                Log.e(TAG, "사용자 정보 요청 실패", meError);
-                            } else
-                                {
-                                    MainActivity.isLogin=true;
-                                    Toast.makeText(Login.this,"로그인 성공(이메일) : "+user.getKakaoAccount().getEmail(),Toast.LENGTH_LONG).show();
+                            UserApiClient.getInstance().me((user, meError) -> {
+                                if (meError != null) {
+                                    Log.e(TAG, "사용자 정보 요청 실패", meError);
+                                } else {
+                                    MainActivity.isLogin = true;
+                                    Toast.makeText(Login.this, "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                     ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                                     finish();
                                 }
-                            return null;
-                        });
-                    }
-                    return null;
-                });
+                                return null;
+                            });
+                        }
+                        return null;
+                    });
+                }
+                else {
+                    UserApiClient.getInstance().loginWithKakaoAccount(Login.this, (oAuthToken, error) -> {
+                        if (error != null) {
+                            Log.e(TAG, "로그인 실패", error);
+                        } else if (oAuthToken != null) {
+                            Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
 
+                            UserApiClient.getInstance().me((user, meError) -> {
+                                if (meError != null) {
+                                    Log.e(TAG, "사용자 정보 요청 실패", meError);
+                                } else {
+                                    MainActivity.isLogin = true;
+                                    Toast.makeText(Login.this, "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
+                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                    finish();
+                                }
+                                return null;
+                            });
+                        }
+                        return null;
+                    });
+                }
             }
         });
-
 
         google_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,15 +112,6 @@ public class Login extends AppCompatActivity {
                 signIn();
             }
         });
-
-                /*UserApiClient.getInstance().me((user, meError) -> {
-                    if (meError != null) {
-                        Log.e(TAG, "사용자 정보 요청 실패", meError);
-                    } else {
-                        Log.i(TAG, "사용자 정보 요청 성공" + "\n이메일: "+user.getKakaoAccount().getEmail());
-                    }
-                    return null;
-                });*/
 
     }
     private void signIn() {

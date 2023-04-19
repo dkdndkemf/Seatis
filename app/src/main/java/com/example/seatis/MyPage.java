@@ -1,10 +1,13 @@
 package com.example.seatis;
 
+import static androidx.core.app.ActivityCompat.finishAffinity;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -14,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +66,6 @@ public class MyPage extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,7 +77,14 @@ public class MyPage extends Fragment {
         Button editProfile = (Button)view.findViewById(R.id.btnedit);
         Button logout = (Button)view.findViewById(R.id.btn5);
         //ImageButton logout2 = (ImageButton)view.findViewById(R.id.btn6);
+        /*
+        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        try {
+            picture.setImageURI(EditProfile.uri);
+        }catch(NullPointerException e) {
 
+        }
+         */
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +99,6 @@ public class MyPage extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(MyPage.this).commit();
                 fragmentManager.popBackStack();
                 startActivity(myPage_to_editProfie);
             }
@@ -106,6 +116,8 @@ public class MyPage extends Fragment {
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().remove(MyPage.this).commit();
                         fragmentManager.popBackStack();
+                        MainActivity.isLogin = false;
+                        myPage_to_main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(myPage_to_main);
                     }
                 });

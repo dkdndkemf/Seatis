@@ -11,19 +11,21 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/nanumgothic_bold"
-        android:textSize="20sp"
         android:text="이름"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"></TextView>
+
     <TextView
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/date"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/name_tv"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"></TextView>
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@id/name_tv"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <TextView
         android:id="@+id/see_tv"
@@ -33,6 +35,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="시야: "
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_tv"></TextView>
@@ -58,6 +61,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="음향: "
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/see_tv"></TextView>
@@ -83,6 +87,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="기타: "
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/listen_tv"></TextView>
@@ -105,11 +110,12 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
         android:layout_marginTop="30dp"
+        android:layout_marginRight="60dp"
         android:fontFamily="@font/nanumgothic_extrabold"
-        android:textSize="15sp"
         android:text="리뷰작성"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etc_tv"></TextView>
 
@@ -134,8 +140,8 @@
         android:backgroundTint="@color/purple"
         android:drawableLeft="@drawable/thumb_up_icon"
         android:text="12"
-        app:layout_constraintLeft_toRightOf="@id/agree"
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/agree"></Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

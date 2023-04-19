@@ -3,14 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:id="@+id/layout">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="30dp" />
 
     <View
         android:layout_width="410dp"
@@ -44,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/layout" />
 
     <Button
-        android:id="@+id/btnedit"
+        android:id="@+id/changePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -66,15 +61,16 @@
         android:textSize="15sp"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/nanumgothic_bold"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/btnedit" />
+        app:layout_constraintLeft_toLeftOf="@id/edit"
+        app:layout_constraintTop_toBottomOf="@id/changePic" />
 
     <EditText
         android:id="@+id/nickname"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/txt1"
         android:paddingLeft="10dp"
         android:hint="시디즈"
@@ -105,16 +101,18 @@
         android:text="이메일"
         android:textSize="15sp"
         android:fontFamily="@font/nanumgothic_bold"
-        app:layout_constraintTop_toBottomOf="@id/checknick"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintLeft_toLeftOf="@id/email"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/nickname"
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/txt2"
         android:paddingLeft="10dp"
         android:hint="seatis@mjc.ac.kr"
@@ -130,8 +128,8 @@
         android:layout_height="40dp"
         android:background="@drawable/button_round_mypage"
         app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
-        android:layout_marginRight="30dp"
         android:backgroundTint="@color/bold_purple"
         android:text="수정하기"
         android:textColor="@color/white"
@@ -146,8 +144,8 @@
         android:background="@drawable/button_round_mypage"
         android:backgroundTint="#A0A0A0"
         app:layout_constraintTop_toBottomOf="@id/edit"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
-        android:layout_marginRight="30dp"
         android:text="계정탈퇴"
         android:textColor="@color/white"
         android:textSize="18sp"
