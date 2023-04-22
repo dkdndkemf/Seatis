@@ -2,13 +2,21 @@ package com.example.seatis;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -22,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
+
+    public static Uri picUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkSelfPermission();
         context_main=this;
         search = new Search();
         myPage = new MyPage();
@@ -52,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                     return true;
                 } else if (itemId == R.id.favorite) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                    if(MainActivity.isLogin){
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                    }
+                    else {
+                        startActivity(main_to_login);
+                    }
                     return true;
                 }
                 return false;
@@ -82,7 +98,55 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    //권한에 대한 응답이 있을때 작동하는 함수
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        //권한을 허용 했을 경우
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            int length = permissions.length;
+            for (int i = 0; i < length; i++) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    // 동의
+                    Log.d("MainActivity", "권한 허용 : " + permissions[i]);
+                }
+            }
+        }
+
+
+    }
+
+    public void checkSelfPermission() {
+
+        String temp = "";
+
+        //파일 읽기 권한 확인
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
+        }
+
+        //파일 쓰기 권한 확인
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
+        }
+
+
+        if (TextUtils.isEmpty(temp) == false) {
+            // 권한 요청
+            ActivityCompat.requestPermissions(this, temp.trim().split(" "),1);
+        }else {
+            // 모두 허용 상태
+            Toast.makeText(this, "권한을 모두 허용", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public static void startMyPage() {
+
+    }
 }
+
+
 
 

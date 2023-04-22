@@ -100,8 +100,12 @@ public class Detailed_Review extends AppCompatActivity {
                     }
                     return true;
                 } else if (itemId == R.id.favorite) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
-
+                   if(MainActivity.isLogin) {
+                       getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                   }
+                   else {
+                       startActivity(detailed_review_to_login);
+                   }
                     return true;
                 }
                 return false;

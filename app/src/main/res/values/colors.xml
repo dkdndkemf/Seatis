@@ -8,5 +8,10 @@
     <color name="mypage_gray">#A4A4A4</color>
     <color name="bold_gray">#6C6C6C</color>
     <color name="star">#FEA500</color>
-    <color name="blue">#4285F4</color>
+    <color name="red">#FB0202</color>
+    <color name="orange">#4285F4</color>
+    <color name="blue">#FF8B02</color>
+    <color name="yellow">#F7FC01</color>
+    <color name="light_green">#00FF19</color>
+    <color name="green">#27BE01</color>
 </resources>
