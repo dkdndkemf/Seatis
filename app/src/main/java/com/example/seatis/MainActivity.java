@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -85,9 +88,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO 로그아웃 기능
-                MainActivity.isLogin=false;
-                main_login_textview.setVisibility(View.VISIBLE);
-                main_logout_textview.setVisibility(View.GONE);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
+                dlg.setTitle("로그아웃");
+                dlg.setMessage("로그아웃 하시겠습니까?");
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.isLogin=false;
+                        main_login_textview.setVisibility(View.VISIBLE);
+                        main_logout_textview.setVisibility(View.GONE);
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
             }
         });
         search_textview.setOnClickListener(new View.OnClickListener() {
