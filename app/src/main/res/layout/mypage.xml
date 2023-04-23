@@ -101,7 +101,7 @@
     <ImageButton
         android:id="@+id/btn2"
         android:layout_width="90dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:paddingTop="16dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/forward_arrow"
@@ -127,7 +127,7 @@
     <ImageButton
         android:id="@+id/btn4"
         android:layout_width="90dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:paddingTop="16dp"
         android:backgroundTint="@color/white"
         android:src="@drawable/forward_arrow"
