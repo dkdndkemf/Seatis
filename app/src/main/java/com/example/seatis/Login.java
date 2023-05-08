@@ -58,7 +58,6 @@ public class Login extends AppCompatActivity {
                         } else if (oAuthToken != null) {
                             Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
 
-<<<<<<< Updated upstream
                             UserApiClient.getInstance().me((user, meError) -> {
                                 if (meError != null) {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
@@ -81,7 +80,6 @@ public class Login extends AppCompatActivity {
                             Log.e(TAG, "로그인 실패", error);
                         } else if (oAuthToken != null) {
                             Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
-=======
                         UserApiClient.getInstance().me((user, meError) -> {
                             if (meError != null) {
                                 Log.e(TAG, "사용자 정보 요청 실패", meError);
@@ -98,7 +96,6 @@ public class Login extends AppCompatActivity {
                     }
                     return null;
                 });
->>>>>>> Stashed changes
 
                             UserApiClient.getInstance().me((user, meError) -> {
                                 if (meError != null) {
@@ -113,9 +110,7 @@ public class Login extends AppCompatActivity {
                                 return null;
                             });
                         }
-                        return null;
-                    });
-                }
+
             }
         });
 
