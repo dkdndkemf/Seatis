@@ -1,6 +1,8 @@
 package com.example.seatis;
 
 import static com.example.seatis.MainActivity.context_main;
+import static com.example.seatis.MainActivity.isLogin;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,6 +58,7 @@ public class Login extends AppCompatActivity {
                         } else if (oAuthToken != null) {
                             Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
 
+<<<<<<< Updated upstream
                             UserApiClient.getInstance().me((user, meError) -> {
                                 if (meError != null) {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
@@ -78,6 +81,24 @@ public class Login extends AppCompatActivity {
                             Log.e(TAG, "로그인 실패", error);
                         } else if (oAuthToken != null) {
                             Log.i(TAG, "로그인 성공(토큰) : " + oAuthToken.getAccessToken());
+=======
+                        UserApiClient.getInstance().me((user, meError) -> {
+                            if (meError != null) {
+                                Log.e(TAG, "사용자 정보 요청 실패", meError);
+                            } else
+                            {
+                                isLogin = true;
+                                Toast.makeText(Login.this,"로그인 성공(이메일) : "+user.getKakaoAccount().getEmail(),Toast.LENGTH_LONG).show();
+                                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                finish();
+                            }
+                            return null;
+                        });
+                    }
+                    return null;
+                });
+>>>>>>> Stashed changes
 
                             UserApiClient.getInstance().me((user, meError) -> {
                                 if (meError != null) {
