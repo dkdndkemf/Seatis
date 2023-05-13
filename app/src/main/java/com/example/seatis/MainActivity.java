@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkSelfPermission();
         context_main=this;
         search = new Search();
         myPage = new MyPage();
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     if(MainActivity.isLogin) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
                     }
-                   else {
+                    else {
                         startActivity(main_to_login);
                     }
                     return true;
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         main_login_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(main_to_login);
+                startActivity(main_to_login);
             }
         });
         main_logout_textview.setOnClickListener(new View.OnClickListener() {
@@ -111,53 +110,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    //권한에 대한 응답이 있을때 작동하는 함수
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        //권한을 허용 했을 경우
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            int length = permissions.length;
-            for (int i = 0; i < length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    // 동의
-                    Log.d("MainActivity", "권한 허용 : " + permissions[i]);
-                }
-            }
-        }
 
 
-    }
-
-    public void checkSelfPermission() {
-
-        String temp = "";
-
-        //파일 읽기 권한 확인
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
-        }
-
-        //파일 쓰기 권한 확인
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
-        }
-
-
-        if (TextUtils.isEmpty(temp) == false) {
-            // 권한 요청
-            ActivityCompat.requestPermissions(this, temp.trim().split(" "),1);
-        }else {
-            // 모두 허용 상태
-            Toast.makeText(this, "권한을 모두 허용", Toast.LENGTH_SHORT).show();
-        }
-    }
-    public static void startMyPage() {
-
-    }
 }
 
 
