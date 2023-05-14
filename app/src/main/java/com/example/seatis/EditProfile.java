@@ -89,6 +89,7 @@ public class EditProfile extends AppCompatActivity {
         changePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent toGalley = new Intent(Intent.ACTION_PICK);
                 toGalley.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(toGalley, 1);
