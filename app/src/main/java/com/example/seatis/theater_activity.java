@@ -1,19 +1,15 @@
 package com.example.seatis;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,9 +29,10 @@ public class theater_activity extends AppCompatActivity {
 
     TextView avg_score;
 
-    MyPage myPage;
-    Search search;
-    FavoriteTheater favoriteTheater;
+    F_Login FLogin;
+    F_MyPage FMyPage;
+    F_Search FSearch;
+    F_FavoriteTheater FFavoriteTheater;
 
     int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
             {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
@@ -74,31 +71,34 @@ public class theater_activity extends AppCompatActivity {
         theater_activity_to_review = new Intent(theater_activity.this, Detailed_Review.class);
         Intent theater_activity_to_login=new Intent(theater_activity.this,Login.class);
 
-        search = new Search();
-        myPage = new MyPage();
-        favoriteTheater = new FavoriteTheater();
+        FLogin = new F_Login();
+        FSearch = new F_Search();
+        FMyPage = new F_MyPage();
+        FFavoriteTheater = new F_FavoriteTheater();
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FSearch).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
                     if(MainActivity.isLogin) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FMyPage).commit();
                     }
                    else {
-                       startActivity(theater_activity_to_login);
+                       //startActivity(theater_activity_to_login);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
                     }
                     return true;
                 } else if (itemId == R.id.favorite) {
                     if(MainActivity.isLogin) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FFavoriteTheater).commit();
                     }
                    else {
-                       startActivity(theater_activity_to_login);
+                       //startActivity(theater_activity_to_login);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
                     }
                     return true;
                 }
@@ -145,7 +145,8 @@ public class theater_activity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(theater_activity_to_login);
+                //startActivity(theater_activity_to_login);
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
             }
         });
 
@@ -160,7 +161,6 @@ public class theater_activity extends AppCompatActivity {
         {
             login_btn.setVisibility(View.VISIBLE);
         }
-
     }
 
 }

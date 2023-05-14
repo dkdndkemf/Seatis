@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MyPage_Bottom extends AppCompatActivity {
+class MyPage_Bottom extends AppCompatActivity {
 
     ImageButton back;
 

@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -23,13 +22,18 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
     public static boolean isLogin = false;
-    public Search search;
-    public MyPage myPage;
-    public FavoriteTheater favoriteTheater;
+    // DetailedReview에서 사용할 리뷰 배열
+    //static ArrayList<Review> data = new ArrayList<>();
+    public F_Search FSearch;
+    public F_MyPage FMyPage;
+    public F_Login FLogin;
+    public F_FavoriteTheater FFavoriteTheater;
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
@@ -40,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context_main=this;
-        search = new Search();
-        myPage = new MyPage();
-        favoriteTheater = new FavoriteTheater();
+        FSearch = new F_Search();
+        FMyPage = new F_MyPage();
+        FLogin = new F_Login();
+        FFavoriteTheater = new F_FavoriteTheater();
         Intent main_to_login = new Intent(MainActivity.this, Login.class);
         search_textview = findViewById(R.id.search_textview);
         main_login_textview = findViewById(R.id.main_login_textview);
@@ -54,22 +59,22 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FSearch).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
                     if(MainActivity.isLogin) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FMyPage).commit();
                     }
-                    else {
-                        startActivity(main_to_login);
+                   else {
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
                     }
                     return true;
                 } else if (itemId == R.id.favorite) {
                     if(MainActivity.isLogin){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FFavoriteTheater).commit();
                     }
                     else {
-                        startActivity(main_to_login);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
                     }
                     return true;
                 }
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         main_login_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
                 startActivity(main_to_login);
             }
         });
@@ -104,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
         });
         search_textview.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.containers, FSearch).addToBackStack(null).commit();
             }
         });
 

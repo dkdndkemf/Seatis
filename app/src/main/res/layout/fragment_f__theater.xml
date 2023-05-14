@@ -450,7 +450,438 @@
                         android:text="1"
                         android:textAlignment="center"></Button>
 
-            z        <Button
+                    z        <Button
+                    android:id="@+id/E2"
+                    android:layout_width="0dp"
+                    android:layout_columnWeight="1"
+                    android:layout_marginLeft="5dp"
+                    android:backgroundTint="@color/gray"
+                    android:padding="0dp"
+                    android:text="2"
+                    android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/E_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/E4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/yellow"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/E5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/E6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/E7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/E8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- E열 끝-->
+                </GridLayout>
+                <GridLayout
+                    android:id="@+id/seat_layout12"
+                    android:layout_width="600dp"
+                    android:layout_height="wrap_content"
+                    android:columnCount="9"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:rowCount="5"
+                    app:layout_constraintTop_toBottomOf="@id/screen"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <!-- A열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="A"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/A1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/yellow"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/A4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/red"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/A8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- A열 끝-->
+
+                    <!-- B열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="B"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/B1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/B4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/yellow"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/B8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- B열 끝-->
+
+                    <!-- C열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="C"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/C1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/C4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/green"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/C8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- C열 끝-->
+
+                    <!-- D열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="D"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/D1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/D4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/D8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- D열 끝-->
+
+                    <!-- E열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="E"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/E1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
                         android:id="@+id/E2"
                         android:layout_width="0dp"
                         android:layout_columnWeight="1"
@@ -516,7 +947,6 @@
                         android:textAlignment="center"></Button>
                     <!-- E열 끝-->
                 </GridLayout>
-
             </LinearLayout>
 
         </HorizontalScrollView>
@@ -584,26 +1014,12 @@
             app:layout_constraintTop_toBottomOf="@+id/avg_score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/containers"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomMenu"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        app:itemActiveIndicatorStyle="@color/white"
-        app:itemBackground="@color/purple"
-        app:itemIconTint="@color/white"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:menu="@menu/bottom_menu" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="0dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

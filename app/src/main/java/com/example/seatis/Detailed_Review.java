@@ -42,9 +42,9 @@ public class Detailed_Review extends AppCompatActivity {
     RatingBar avg_rating;
 
     float avg_score_string; //리뷰 평점
-    Search search;
-    MyPage myPage;
-    FavoriteTheater favoriteTheater;
+    F_Search FSearch;
+    F_MyPage FMyPage;
+    F_FavoriteTheater FFavoriteTheater;
 
     Button login_btn;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
@@ -80,20 +80,20 @@ public class Detailed_Review extends AppCompatActivity {
 
         seat_name.setText(getIntent().getStringExtra("seat_name"));
 
-        search = new Search();
-        myPage = new MyPage();
-        favoriteTheater = new FavoriteTheater();
+        FSearch = new F_Search();
+        FMyPage = new F_MyPage();
+        FFavoriteTheater = new F_FavoriteTheater();
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FSearch).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
                     if(MainActivity.isLogin){
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, FMyPage).commit();
                     }
                     else {
                         startActivity(detailed_review_to_login);
@@ -101,7 +101,7 @@ public class Detailed_Review extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.favorite) {
                    if(MainActivity.isLogin) {
-                       getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                       getSupportFragmentManager().beginTransaction().replace(R.id.containers, FFavoriteTheater).commit();
                    }
                    else {
                        startActivity(detailed_review_to_login);
