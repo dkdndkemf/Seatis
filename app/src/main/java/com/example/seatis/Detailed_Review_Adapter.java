@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         TextView review_tv = view.findViewById(R.id.review_tv);
         Button agree = view.findViewById(R.id.agree);
         Button disagree = view.findViewById(R.id.disagree);
-
+        ImageView img_v=view.findViewById(R.id.img_v);
         Review review = (Review) mData.get(position);
 
         name.setText(review.getName());
@@ -56,6 +57,8 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         review_tv.setText(review.getReview());
         agree.setText(String.valueOf(review.getAgree()));
         disagree.setText(String.valueOf(review.getDisagree()));
+        img_v.setImageResource(R.drawable.no_img);
+        //TODO:이미지URL 가져와서 해야함
 
         agree.setOnClickListener(new View.OnClickListener() {
             @Override

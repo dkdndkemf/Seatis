@@ -1,12 +1,15 @@
 package com.example.seatis;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -32,10 +35,13 @@ public class review_write extends AppCompatActivity {
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
-
+    ImageView photo_view;
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
+    Button photo_select;
+    public static Uri uri;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,8 @@ public class review_write extends AppCompatActivity {
         detailed_review_adapter=((Detailed_Review)Detailed_Review.context_Detailed_Review).detailed_review_adapter;
         listView=((Detailed_Review)Detailed_Review.context_Detailed_Review).listView;
         no_review=((Detailed_Review)Detailed_Review.context_Detailed_Review).no_review;
+        photo_view=findViewById(R.id.photo_view);
+        photo_select=findViewById(R.id.photo_select);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
         search = new Search();
@@ -100,8 +108,31 @@ public class review_write extends AppCompatActivity {
                finish();
            }
        });
+        photo_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toGalley = new Intent(Intent.ACTION_PICK);
+                toGalley.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(toGalley, 1);
+            }
+        });
 
 
 
+
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch(requestCode) {
+            case 1:
+                if(resultCode == RESULT_OK) {
+                    uri = data.getData();
+                    photo_view.setImageURI(uri);
+                }
+                break;
+
+        }
     }
 }
