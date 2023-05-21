@@ -31,6 +31,8 @@ import java.util.List;
 public class Detailed_Review extends AppCompatActivity {
     public static Context context_Detailed_Review;
     static ListView listView;
+
+    TextView theater_name_tv;
     static ArrayList<Review> data = new ArrayList<>();
     ImageButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
@@ -56,6 +58,7 @@ public class Detailed_Review extends AppCompatActivity {
 
         context_Detailed_Review = this;
 
+        theater_name_tv=findViewById(R.id.theater_name_tv);
         listView = findViewById(R.id.review_viewer);
         listView.setAdapter(detailed_review_adapter);
 
@@ -67,6 +70,7 @@ public class Detailed_Review extends AppCompatActivity {
         no_review = findViewById(R.id.no_review);
         login_btn = findViewById(R.id.login_btn);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
+
         Intent detailed_review_to_login = new Intent(Detailed_Review.this, Login.class);
 
         if (data.isEmpty()) { //리뷰 데이터가 비어있다면...
@@ -76,9 +80,10 @@ public class Detailed_Review extends AppCompatActivity {
             listView.setVisibility(View.VISIBLE);
             no_review.setVisibility(View.GONE);
         }
+        ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
 
-
-        seat_name.setText(getIntent().getStringExtra("seat_name"));
+        theater_name_tv.setText((theater_name.get(1))); //극장 이름 값 받아오기
+        seat_name.setText(theater_name.get(0)); //좌석 이름 받아오기
 
         search = new Search();
         myPage = new MyPage();
@@ -119,11 +124,16 @@ public class Detailed_Review extends AppCompatActivity {
 
 
         Intent review_to_review_write = new Intent(Detailed_Review.this, review_write.class);//리뷰페이지 -> 리뷰작성페이지
+
         Intent review_to_login = new Intent(Detailed_Review.this, Login.class);// 리뷰페이지 -> 로그인
 
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ArrayList<String>theater_name=new ArrayList<>();
+                theater_name.add(theater_name_tv.getText().toString());
+                theater_name.add(seat_name.getText().toString());
+                review_to_review_write.putExtra("theater_name",theater_name);
                 startActivity(review_to_review_write);
             }
         });

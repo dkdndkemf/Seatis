@@ -31,11 +31,14 @@ public class review_write extends AppCompatActivity {
     Button write_btn;
     EditText write_review;
 
+    TextView theater_tv;
     TextView no_review;
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
     ImageView photo_view;
+
+    TextView seat_tv;
     Search search;
     MyPage myPage;
     FavoriteTheater favoriteTheater;
@@ -47,9 +50,11 @@ public class review_write extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_write);
 
+        theater_tv=findViewById(R.id.theater_tv);
         back_btn=findViewById(R.id.back_Btn);
         write_btn=findViewById(R.id.write_btn);
         write_review=findViewById(R.id.write_review);
+        seat_tv=findViewById(R.id.seat_tv);
 
         see_score=findViewById(R.id.see_score);
         listen_score=findViewById(R.id.listen_score);
@@ -65,6 +70,10 @@ public class review_write extends AppCompatActivity {
         search = new Search();
         myPage = new MyPage();
         favoriteTheater = new FavoriteTheater();
+
+        ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
+        theater_tv.setText(theater_name.get(0));
+        seat_tv.setText(theater_name.get(1));
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
