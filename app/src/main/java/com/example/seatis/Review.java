@@ -11,7 +11,6 @@ public class Review {
     String review;
     int agree;
     int disagree;
-
     String img_url;
 
     public Review(String name, String date, float see_rating, float listen_rating, float etc_rating, String review, int agree, int disagree,String img_url) {
@@ -24,7 +23,7 @@ public class Review {
         this.agree = agree;
         this.disagree = disagree;
         this.img_url=img_url;
-    }//이미지 존재
+    }//이미지가 있을때 생성자
     public Review(String name, String date, float see_rating, float listen_rating, float etc_rating, String review, int agree, int disagree) {
         this.name = name;
         this.date = date;
@@ -34,7 +33,7 @@ public class Review {
         this.review = review;
         this.agree = agree;
         this.disagree = disagree;
-    }//이미지 없음
+    }//이미지가 없을때 생성자
 
     public String getName() {
         return name;
@@ -107,6 +106,5 @@ public class Review {
     public void setImg_Url(String img_url) {
         this.img_url = img_url;
     }
-
 
 }
