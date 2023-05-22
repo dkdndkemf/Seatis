@@ -40,7 +40,7 @@
         android:background="@drawable/bottom_border"
         android:fontFamily="@font/nanumgothic_bold"
         android:padding="5dp"
-        android:text="CGV 신촌아트레온 1관"
+        android:text="드림 아트센터 1관"
         android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/back_Btn"></TextView>
@@ -75,24 +75,24 @@
                 app:layout_constraintTop_toBottomOf="@id/dislike">
 
                 <TextView
-                    android:id="@+id/screen"
+                    android:id="@+id/floor1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="20dp"
                     android:paddingBottom="20dp"
-                    android:text="SCREEN"
+                    android:text="1층"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"></TextView>
 
                 <GridLayout
-                    android:id="@+id/seat_layout"
+                    android:id="@+id/seat_layout1"
                     android:layout_width="600dp"
                     android:layout_height="wrap_content"
                     android:columnCount="9"
                     android:orientation="horizontal"
                     android:padding="10dp"
-                    android:rowCount="5"
+                    android:rowCount="3"
                     app:layout_constraintTop_toBottomOf="@id/screen"
                     tools:layout_editor_absoluteX="0dp">
 
@@ -347,6 +347,29 @@
                         android:text="8"
                         android:textAlignment="center"></Button>
                     <!-- C열 끝-->
+                </GridLayout>
+
+                <TextView
+                    android:id="@+id/floor2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="20dp"
+                    android:text="2층"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"></TextView>
+
+                <GridLayout
+                    android:id="@+id/seat_layout2"
+                    android:layout_width="600dp"
+                    android:layout_height="wrap_content"
+                    android:columnCount="9"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:rowCount="6"
+                    app:layout_constraintTop_toBottomOf="@id/screen"
+                    tools:layout_editor_absoluteX="0dp">
 
                     <!-- D열 시작-->
                     <TextView
@@ -515,6 +538,343 @@
                         android:text="8"
                         android:textAlignment="center"></Button>
                     <!-- E열 끝-->
+
+                    <!-- F열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="F"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/F1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/F4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/F8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- F열 끝-->
+
+                    <!-- G열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="G"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/G1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/G4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/G8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- G열 끝-->
+
+                    <!-- H열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="H"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/H1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/H4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/H8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- H열 끝-->
+
+                    <!-- I열 시작-->
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="0.5"
+                        android:text="I"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"></TextView>
+
+                    <Button
+                        android:id="@+id/I1"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="1"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I2"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="2"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I_emtpy"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:visibility="invisible"></Button>
+
+                    <Button
+                        android:id="@+id/I4"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="4"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I5"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="5"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I6"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="6"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I7"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="7"
+                        android:textAlignment="center"></Button>
+
+                    <Button
+                        android:id="@+id/I8"
+                        android:layout_width="0dp"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/gray"
+                        android:padding="0dp"
+                        android:text="8"
+                        android:textAlignment="center"></Button>
+                    <!-- I열 끝-->
+
                 </GridLayout>
 
             </LinearLayout>
@@ -584,7 +944,7 @@
             app:layout_constraintTop_toBottomOf="@+id/avg_score"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
+        <FrameLayout
         android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
