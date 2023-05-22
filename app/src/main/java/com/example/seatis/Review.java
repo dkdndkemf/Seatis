@@ -23,7 +23,7 @@ public class Review {
         this.agree = agree;
         this.disagree = disagree;
         this.img_url=img_url;
-    }//이미지가 있을때 생성자
+    }//이미지 있을때 생성자
     public Review(String name, String date, float see_rating, float listen_rating, float etc_rating, String review, int agree, int disagree) {
         this.name = name;
         this.date = date;

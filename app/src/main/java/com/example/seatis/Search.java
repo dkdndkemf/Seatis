@@ -87,7 +87,7 @@ public class Search extends Fragment {
             }
         });
 
-        favorite2.setOnClickListener(new View.OnClickListener() {
+        favorite2.setOnClickListener(new View.OnClickListener() {//드림아트센터
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

@@ -119,7 +119,7 @@ public class small_theater_activity extends AppCompatActivity {
 
         seat_floor1 = new Button[seat_layout1.getRowCount()][seat_layout1.getColumnCount()];
 
-        for (int row = 0; row < seat_floor1.length; row++) { //시작
+        for (int row = 0; row < seat_floor1.length; row++) { //1층 시작
             final int row_num = row;
             for (int col = 0; col < seat_floor1[row].length - 1; col++) {
                 final int col_num = col;
@@ -143,7 +143,7 @@ public class small_theater_activity extends AppCompatActivity {
 
         seat_floor2 = new Button[seat_layout2.getRowCount()][seat_layout2.getColumnCount()];
 
-        for (int row = 0; row < seat_floor2.length; row++) { //시작
+        for (int row = 0; row < seat_floor2.length; row++) { //2층 시작
             final int row_num = row;
             for (int col = 0; col < seat_floor2[row].length - 1; col++) {
                 final int col_num = col;

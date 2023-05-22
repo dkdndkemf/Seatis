@@ -101,7 +101,7 @@ public class review_write extends AppCompatActivity {
        write_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               data.add(new Review("테스트","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
+               data.add(new Review("테스트1","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
                if(data.isEmpty())
                {
                    listView.setVisibility(View.INVISIBLE);
