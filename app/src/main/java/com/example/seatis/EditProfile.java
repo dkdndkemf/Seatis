@@ -3,6 +3,7 @@ package com.example.seatis;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -20,7 +22,7 @@ public class EditProfile extends AppCompatActivity {
     Button edit, secession, changePic;
     CircleImageView picture;
 
-    F_MyPage FMyPage;
+    public static Uri uri;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,21 +35,20 @@ public class EditProfile extends AppCompatActivity {
         secession = findViewById(R.id.secession);
         changePic = findViewById(R.id.changePic);
         picture = findViewById(R.id.circle_iv);
-        FMyPage = new F_MyPage();
-        try {
-            picture.setImageURI(MainActivity.picUri);
-        }catch(NullPointerException e) {
-
-        }
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                //getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit(); 수정할꺼
             }
         });
 
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +103,8 @@ public class EditProfile extends AppCompatActivity {
         switch(requestCode) {
             case 1:
                 if(resultCode == RESULT_OK) {
-                    MainActivity.picUri = data.getData();
-                    picture.setImageURI(MainActivity.picUri);
+                    uri = data.getData();
+                    picture.setImageURI(uri);
                 }
                 break;
 
