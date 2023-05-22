@@ -1,14 +1,18 @@
 package com.example.seatis;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -18,6 +22,8 @@ import android.widget.ImageButton;
  * create an instance of this fragment.
  */
 public class F_Search extends Fragment {
+
+    ConstraintLayout layout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -65,10 +71,28 @@ public class F_Search extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        layout = (ConstraintLayout)view.findViewById(R.id.layout);
+
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
         Button favorite1 = (Button)view.findViewById(R.id.favorite1);
 
         F_Theater FTheater = new F_Theater();
+
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        layout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (getActivity() != null && getActivity().getCurrentFocus() != null)
+                {
+                    // 프래그먼트기 때문에 getActivity() 사용
+                    //InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                return false;
+            }
+        });
 
         favorite1.setOnClickListener(new View.OnClickListener() {
             @Override

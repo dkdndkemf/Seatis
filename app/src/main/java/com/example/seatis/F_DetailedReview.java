@@ -43,6 +43,8 @@ public class F_DetailedReview extends Fragment {
     Button login_btn;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
 
+    F_ReviewWrite FReviewWrite;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -88,7 +90,7 @@ public class F_DetailedReview extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_f__detailed_review, container, false);
-        context_DetailedReview = container.getContext();
+        //context_DetailedReview = container.getContext();
 
         listView = (ListView)view.findViewById(R.id.review_viewer);
         listView.setAdapter(detailed_review_adapter);
@@ -102,7 +104,7 @@ public class F_DetailedReview extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         F_Login FLogin = new F_Login();
-        F_ReviewWrite FReviewWrite = new F_ReviewWrite();
+        FReviewWrite = new F_ReviewWrite();
 
         if (data.isEmpty()) { //리뷰 데이터가 비어있다면...
             listView.setVisibility(View.INVISIBLE);
@@ -124,6 +126,9 @@ public class F_DetailedReview extends Fragment {
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                    if(FReviewWrite != null) {
+                       FReviewWrite = new F_ReviewWrite();
+                    }
                     fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
             }
         });

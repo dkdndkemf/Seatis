@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.containers, FLogin).commit();
-                startActivity(main_to_login);
+                //startActivity(main_to_login);
             }
         });
         main_logout_textview.setOnClickListener(new View.OnClickListener() {

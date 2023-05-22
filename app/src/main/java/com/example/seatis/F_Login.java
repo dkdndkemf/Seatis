@@ -40,6 +40,9 @@ public class F_Login extends Fragment {
     private ImageButton back_btn, kakao_login, google_login;
     GoogleSignInClient mGoogleSignInClient;
 
+    Fragment theater;
+    Fragment detailedReview;
+
     private ViewModel viewModel;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -91,7 +94,13 @@ public class F_Login extends Fragment {
         kakao_login = (ImageButton)view.findViewById(R.id.kakao_login);
         google_login = (ImageButton)view.findViewById(R.id.google_login);
 
+        F_Theater FTheater = new F_Theater();
+        F_DetailedReview FDetailedReview = F_Theater.FDetailedReview;
+
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        theater = fragmentManager.findFragmentByTag("FT");
+        detailedReview = fragmentManager.findFragmentByTag("FD");
+
 
         // 뒤로가기
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -119,12 +128,24 @@ public class F_Login extends Fragment {
                                 } else {
                                     MainActivity.isLogin = true;
                                     //viewModel.setIsLogin(true);
-                                    viewModel.getIsLogin().setValue(true);
+                                    //viewModel.getIsLogin().setValue(true);
+                                    if(detailedReview != null) {
+                                        fragmentManager.beginTransaction().remove(F_Login.this);
+                                        fragmentManager.popBackStack();
+                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater).commit();
+                                    }
+                                    else if(theater != null) {
+                                        fragmentManager.beginTransaction().remove(F_Login.this);
+                                        fragmentManager.popBackStack();
+                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                        //fragmentManager.beginTransaction().add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                        //fragmentManager.beginTransaction().add(R.id.containers, theater).addToBackStack(null).commit();
+                                    }
                                     Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                     ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                                    fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                    fragmentManager.popBackStack();
+                                    //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                    //fragmentManager.popBackStack();
                                 }
                                 return null;
                             });
@@ -144,11 +165,22 @@ public class F_Login extends Fragment {
                                 } else
                                 {
                                     MainActivity.isLogin = true;
+                                    if(detailedReview != null) {
+                                        fragmentManager.beginTransaction().remove(F_Login.this);
+                                        fragmentManager.popBackStack();
+                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
+                                                .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
+                                    }
+                                    else if(theater != null) {
+                                        fragmentManager.beginTransaction().remove(F_Login.this);
+                                        fragmentManager.popBackStack();
+                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                    }
                                     Toast.makeText(getActivity(),"로그인 성공(이메일) : "+user.getKakaoAccount().getEmail(),Toast.LENGTH_LONG).show();
                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                     ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                                    fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                    fragmentManager.popBackStack();
+                                    //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                   // fragmentManager.popBackStack();
                                 }
                                 return null;
                             });
@@ -161,11 +193,22 @@ public class F_Login extends Fragment {
                             Log.e(TAG, "사용자 정보 요청 실패", meError);
                         } else {
                             MainActivity.isLogin = true;
+                            if(detailedReview != null) {
+                                fragmentManager.beginTransaction().remove(F_Login.this);
+                                fragmentManager.popBackStack();
+                                fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
+                                        .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
+                            }
+                            else if(theater != null) {
+                                fragmentManager.beginTransaction().remove(F_Login.this);
+                                fragmentManager.popBackStack();
+                                fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                            }
                             Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                             ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                             ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                            fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                            fragmentManager.popBackStack();
+                            //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                            //fragmentManager.popBackStack();
                         }
                         return null;
                     });
@@ -217,7 +260,8 @@ public class F_Login extends Fragment {
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-
+        F_Theater FTheater = new F_Theater();
+        F_DetailedReview FDetailedReview = new F_DetailedReview();
         try {
             GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
 
@@ -226,10 +270,21 @@ public class F_Login extends Fragment {
                 Toast.makeText(getActivity(), "로그인 성공(이메일) : "+personEmail,Toast.LENGTH_LONG).show();
                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                MainActivity.isLogin=true;
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                fragmentManager.popBackStack();
+                MainActivity.isLogin=true;
+                if(detailedReview != null) {
+                    fragmentManager.beginTransaction().remove(F_Login.this);
+                    fragmentManager.popBackStack();
+                    fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
+                            .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
+                }
+                else if(theater != null) {
+                    fragmentManager.beginTransaction().remove(F_Login.this);
+                    fragmentManager.popBackStack();
+                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                }
+                //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                //fragmentManager.popBackStack();
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

@@ -1,16 +1,20 @@
 package com.example.seatis;
 
 import android.app.Activity;
+import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,6 +45,8 @@ public class F_ReviewWrite extends Fragment {
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
+
+    ConstraintLayout layout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -89,6 +95,8 @@ public class F_ReviewWrite extends Fragment {
         View view = inflater.inflate(R.layout.fragment_f__review_write, container, false);
         Activity activity = getActivity();
 
+        layout = (ConstraintLayout)view.findViewById(R.id.layout);
+
         back_btn = (ImageButton)view.findViewById(R.id.back_Btn);
         write_btn = (Button)view.findViewById(R.id.write_btn);
         write_review = (EditText)view.findViewById(R.id.write_review);
@@ -104,17 +112,26 @@ public class F_ReviewWrite extends Fragment {
         no_review = (TextView)activity.findViewById(R.id.no_review);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        // 초기화
-        see_score.setRating(0.0f);
-        listen_score.setRating(0.0f);
-        etc_score.setRating(0.0f);
-        write_review.setText("");
+       layout.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+               if (getActivity() != null && getActivity().getCurrentFocus() != null)
+               {
+                   // 프래그먼트기 때문에 getActivity() 사용
+                   //InputMethodManager inputManager = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+               }
+               return false;
+           }
+       });
 
         // 뒤로가기
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
                 fragmentManager.beginTransaction().remove(F_ReviewWrite.this).commit();
                 fragmentManager.popBackStack();
             }
@@ -137,8 +154,8 @@ public class F_ReviewWrite extends Fragment {
                     no_review.setVisibility(View.GONE);
                     F_DetailedReview_adapter.notifyDataSetChanged();
                 }
+                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
                 fragmentManager.beginTransaction().remove(F_ReviewWrite.this).commit();
-                //fragmentManager.beginTransaction().detach(F_ReviewWrite.this).commit();
                 fragmentManager.popBackStack();
             }
         });

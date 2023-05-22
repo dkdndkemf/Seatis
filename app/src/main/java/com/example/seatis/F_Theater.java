@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -29,6 +30,8 @@ import org.w3c.dom.Text;
  * create an instance of this fragment.
  */
 public class F_Theater extends Fragment {
+
+    static F_DetailedReview FDetailedReview = new F_DetailedReview();
 
     public static Activity _theater_activity;
     private ViewModel viewModel;
@@ -112,7 +115,6 @@ public class F_Theater extends Fragment {
         seat = new Button[seat_layout.getRowCount()][seat_layout.getColumnCount()];
 
         F_Login FLogin = new F_Login();
-        F_DetailedReview FDetailedReview = new F_DetailedReview();
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         bundle = new Bundle();
@@ -166,7 +168,7 @@ public class F_Theater extends Fragment {
 
         return view;
     }
-    /*
+
     public void onResume() {
         super.onResume();
         if(MainActivity.isLogin) //로그인 여부 판단...
@@ -178,14 +180,14 @@ public class F_Theater extends Fragment {
             login_btn.setVisibility(View.VISIBLE);
         }
     }
-    */
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(ViewModel.class);
     }
-
+    /*
     public void onResume() {
         super.onResume();
         //viewModel = new ViewModelProvider(this).get(ViewModel.class);
@@ -203,4 +205,5 @@ public class F_Theater extends Fragment {
         };
         viewModel.getIsLogin().observe(this, loginObserver);
     }
+     */
 }
