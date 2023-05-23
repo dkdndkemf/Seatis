@@ -84,10 +84,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/edit_round"
         android:fontFamily="@font/nanumgothic"
-        android:hint="시디즈"
         android:paddingLeft="10dp"
-        android:textColorHint="@color/black"
         android:textSize="15sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/txt1" />
