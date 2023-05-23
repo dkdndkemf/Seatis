@@ -6,21 +6,30 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfile extends AppCompatActivity {
 
     ImageButton back;
-    Button edit, secession, changePic;
+    Button edit, secession, changePic, checknick;
     CircleImageView picture;
+    EditText nickname;
 
     public static Uri uri;
     @Override
@@ -35,7 +44,44 @@ public class EditProfile extends AppCompatActivity {
         secession = findViewById(R.id.secession);
         changePic = findViewById(R.id.changePic);
         picture = findViewById(R.id.circle_iv);
+        checknick = findViewById(R.id.checknick);
+        nickname = findViewById(R.id.nickname);
 
+        checknick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nick = nickname.getText().toString();
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jResponse = new JSONObject(response);
+                            boolean newID = jResponse.getBoolean("newID");
+
+                            if(newID){
+                                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(EditProfile.this);
+
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 아이디입니다.")
+                                        .setNegativeButton("확인",null).create();
+                                dialog.show();
+
+                            }else {
+                                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(EditProfile.this);
+
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 아이디입니다.")
+                                        .setNegativeButton("확인",null).create();
+                                dialog.show();
+                            }
+                        }catch (Exception e){
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                ValidityRequest vRequest = new ValidityRequest(nick, rListener);
+                RequestQueue queue = Volley.newRequestQueue(EditProfile.this);
+                queue.add(vRequest);
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
