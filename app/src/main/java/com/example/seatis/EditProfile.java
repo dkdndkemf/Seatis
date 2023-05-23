@@ -14,7 +14,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -56,19 +55,19 @@ public class EditProfile extends AppCompatActivity {
                     public void onResponse(String response) {
                         try{
                             JSONObject jResponse = new JSONObject(response);
-                            boolean newID = jResponse.getBoolean("newID");
+                            boolean newID = jResponse.getBoolean("newNick");
 
                             if(newID){
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(EditProfile.this);
 
-                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 아이디입니다.")
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 닉네임입니다.")
                                         .setNegativeButton("확인",null).create();
                                 dialog.show();
 
                             }else {
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(EditProfile.this);
 
-                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 아이디입니다.")
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
                                         .setNegativeButton("확인",null).create();
                                 dialog.show();
                             }
@@ -77,7 +76,7 @@ public class EditProfile extends AppCompatActivity {
                         }
                     }
                 };
-                ValidityRequest vRequest = new ValidityRequest(nick, rListener);
+                CheckNickRequest vRequest = new CheckNickRequest(nick, rListener);
                 RequestQueue queue = Volley.newRequestQueue(EditProfile.this);
                 queue.add(vRequest);
             }
