@@ -67,6 +67,9 @@ public class Search extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
         Button favorite1 = (Button)view.findViewById(R.id.favorite1);
+        Button favorite2 = (Button)view.findViewById(R.id.favorite2);
+
+
         favorite1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +86,23 @@ public class Search extends Fragment {
                 startActivity(search_to_theater);
             }
         });
+
+        favorite2.setOnClickListener(new View.OnClickListener() {//드림아트센터
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().remove(Search.this).commit();
+                fragmentManager.popBackStack();
+                try {
+                    theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                    theater_instance.finish();
+                } catch (NullPointerException e){
+                    System.out.println("처음 누름");
+                }
+                Intent search_to_small_theater = new Intent(getActivity(),small_theater_activity.class);
+                startActivity(search_to_small_theater);
+            }
+        });//드림아트센터로 이동
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
