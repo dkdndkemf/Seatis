@@ -1,15 +1,19 @@
 package com.example.seatis;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
 
 public class theater_activity extends AppCompatActivity {
     public static Activity _theater_activity;
@@ -29,6 +35,7 @@ public class theater_activity extends AppCompatActivity {
 
     TextView avg_score;
 
+    TextView theater_name_tv;
     F_Login FLogin;
     F_MyPage FMyPage;
     F_Search FSearch;
@@ -54,6 +61,7 @@ public class theater_activity extends AppCompatActivity {
         setContentView(R.layout.theater_activity);
         _theater_activity=theater_activity.this;
 
+        theater_name_tv=findViewById(R.id.theater_name_tv);
         simple_review = findViewById(R.id.simple_review);
         simple_review.setVisibility(View.INVISIBLE);
         seat_layout = findViewById(R.id.seat_layout);
@@ -120,7 +128,10 @@ public class theater_activity extends AppCompatActivity {
                         char row_char = (char) row_ASCII; //문자로 변환
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
-                        theater_activity_to_review.putExtra("seat_name", seat_string);
+                        ArrayList<String> theater_name=new ArrayList<>();
+                        theater_name.add(seat_string);
+                        theater_name.add(theater_name_tv.getText().toString());
+                        theater_activity_to_review.putExtra("theater_name", theater_name);
                         simple_review.setVisibility(View.VISIBLE);
                     }
                 });
@@ -161,6 +172,7 @@ public class theater_activity extends AppCompatActivity {
         {
             login_btn.setVisibility(View.VISIBLE);
         }
+
     }
 
 }

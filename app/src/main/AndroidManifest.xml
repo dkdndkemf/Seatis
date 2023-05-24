@@ -59,6 +59,9 @@
         <activity
             android:name=".theater_activity"
             android:exported="true" />
+        <activity
+            android:name=".small_theater_activity"
+            android:exported="true" />
         <activity android:name=".Detailed_Review" />
         <activity android:name=".review_write" />
         <activity android:name=".Account" />

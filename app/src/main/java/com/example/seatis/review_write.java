@@ -31,6 +31,7 @@ public class review_write extends AppCompatActivity {
     Button write_btn;
     EditText write_review;
 
+    TextView theater_tv;
     TextView no_review;
     RatingBar see_score;
     RatingBar listen_score;
@@ -43,6 +44,8 @@ public class review_write extends AppCompatActivity {
     F_Search search;
     F_MyPage myPage;
     F_FavoriteTheater favoriteTheater;
+
+    TextView seat_tv;
     Button photo_select;
     public static Uri uri;
 
@@ -51,9 +54,11 @@ public class review_write extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review_write);
 
+        theater_tv=findViewById(R.id.theater_tv);
         back_btn=findViewById(R.id.back_Btn);
         write_btn=findViewById(R.id.write_btn);
         write_review=findViewById(R.id.write_review);
+        seat_tv=findViewById(R.id.seat_tv);
 
         see_score=findViewById(R.id.see_score);
         listen_score=findViewById(R.id.listen_score);
@@ -69,6 +74,10 @@ public class review_write extends AppCompatActivity {
         FSearch = new F_Search();
         FMyPage = new F_MyPage();
         FFavoriteTheater = new F_FavoriteTheater();
+
+        ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
+        theater_tv.setText(theater_name.get(0));
+        seat_tv.setText(theater_name.get(1));
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -96,7 +105,7 @@ public class review_write extends AppCompatActivity {
        write_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               data.add(new Review("테스트","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
+               data.add(new Review("테스트1","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
                if(data.isEmpty())
                {
                    listView.setVisibility(View.INVISIBLE);
