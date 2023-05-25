@@ -3,6 +3,7 @@ package com.example.seatis;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,6 +29,8 @@ public class F_FavoriteTheater extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    public static boolean isfav_1=false;
+    public static boolean isfav_2=false;
     public F_FavoriteTheater() {
         // Required empty public constructor
     }
@@ -67,9 +70,47 @@ public class F_FavoriteTheater extends Fragment {
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
         Button favorite1 = (Button)view.findViewById(R.id.favorite1);
         Button favorite2 = (Button)view.findViewById(R.id.favorite2);
+        ImageButton imgbtn1=view.findViewById(R.id.imgbtn1);
+        ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
+
+        ConstraintLayout fav1ConstraintLayout=view.findViewById(R.id.fav1);
+        ConstraintLayout fav2ConstraintLayout=view.findViewById(R.id.fav2);
+
+        //좋아요한 극장 영화관 초기설정
+        if(isfav_1==true)
+        {
+            fav1ConstraintLayout.setVisibility(View.VISIBLE);
+        } else if (isfav_1==false) {
+            fav1ConstraintLayout.setVisibility(View.GONE);
+        }
+
+        if(isfav_2==true)
+        {
+            fav2ConstraintLayout.setVisibility(View.VISIBLE);
+        } else if (isfav_2==false) {
+            fav2ConstraintLayout.setVisibility(View.GONE);
+        }
+        //여기 까지
+
+        imgbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isfav_1=false;
+                fav1ConstraintLayout.setVisibility(View.GONE);
+            }
+        });
+        imgbtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isfav_2=false;
+                fav2ConstraintLayout.setVisibility(View.GONE);
+            }
+        });
 
         //Intent favoriteTheater_to_theater = new Intent(getActivity(), theater_activity.class);
         F_Theater FTheater = new F_Theater();
+
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

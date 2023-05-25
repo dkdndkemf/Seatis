@@ -77,6 +77,9 @@ public class F_Search extends Fragment {
         ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
         Button favorite1 = (Button)view.findViewById(R.id.favorite1);
 
+        ImageButton imgbtn1=view.findViewById(R.id.imgbtn1);
+        ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
+
         F_Theater FTheater = new F_Theater();
 
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -91,6 +94,39 @@ public class F_Search extends Fragment {
                     imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 }
                 return false;
+            }
+        });
+
+        imgbtn1.setOnClickListener(new View.OnClickListener() { //영화관 종아요
+            @Override
+            public void onClick(View v) {
+                if(F_FavoriteTheater.isfav_1==false)
+                {
+                    F_FavoriteTheater.isfav_1=true;
+                    imgbtn1.setImageResource(R.drawable.heart_fill);
+                }
+                else if( F_FavoriteTheater.isfav_1==true)
+                {
+                    F_FavoriteTheater.isfav_1=false;
+                    imgbtn1.setImageResource(R.drawable.heart);
+                }
+
+            }
+        });
+        imgbtn2.setOnClickListener(new View.OnClickListener() { //영화관 종아요
+            @Override
+            public void onClick(View v) {
+                if(F_FavoriteTheater.isfav_2==false)
+                {
+                    F_FavoriteTheater.isfav_2=true;
+                    imgbtn2.setImageResource(R.drawable.heart_fill);
+                }
+                else if( F_FavoriteTheater.isfav_2==true)
+                {
+                    F_FavoriteTheater.isfav_2=false;
+                    imgbtn2.setImageResource(R.drawable.heart);
+                }
+
             }
         });
 
