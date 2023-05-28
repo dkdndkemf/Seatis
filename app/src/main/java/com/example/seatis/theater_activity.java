@@ -125,6 +125,7 @@ public class theater_activity extends AppCompatActivity {
                 seat[row][col].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int theaterId = 1;
                         int row_ASCII = 65 + row_num; //A의 아스키코드값은 65.... 거기에 row를 더해줌
                         char row_char = (char) row_ASCII; //문자로 변환
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
