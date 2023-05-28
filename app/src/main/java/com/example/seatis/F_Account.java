@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -33,6 +34,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -55,6 +58,7 @@ public class F_Account extends Fragment {
     CircleImageView picture;
     String user_email="";
     String platform_type="";
+    String nick="";
     TextView email;
 
     public F_Account() {
@@ -125,7 +129,7 @@ public class F_Account extends Fragment {
         checknick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nick = nickname.getText().toString();
+                nick = nickname.getText().toString();
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -133,17 +137,17 @@ public class F_Account extends Fragment {
                             JSONObject jResponse = new JSONObject(response);
                             boolean newID = jResponse.getBoolean("newNick");
 
-                            if(newID){
+                            if(newID && !(nick.equals(""))){
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
-                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 아이디입니다.")
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 닉네임입니다.")
                                         .setNegativeButton("확인",null).create();
                                 dialog.show();
 
                             }else {
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
-                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 아이디입니다.")
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
                                         .setNegativeButton("확인",null).create();
                                 dialog.show();
                             }
@@ -163,18 +167,69 @@ public class F_Account extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("회원가입");
-                dlg.setMessage("가입하시겠습니까?");
+                dlg.setMessage("가입 하시겠습니까?");
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity.isLogin = true;
-                        ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                        ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                        String nick = nickname.getText().toString();
+                        nick = nickname.getText().toString();
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try{
+                                    JSONObject jResponse = new JSONObject(response);
+                                    boolean newID = jResponse.getBoolean("newNick");
+
+                                    if(newID && !(nick.equals(""))){
+                                        MainActivity.isLogin = true;
+                                        ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                        ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                        nick = nickname.getText().toString();
+
+                                        Response.Listener rListener = new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+                                                try{
+                                                    JSONObject jResponse = new JSONObject(response);
 
 
-                        fragmentManager.beginTransaction().remove(F_Account.this).commit();
-                        fragmentManager.popBackStack();
+                                                }catch (Exception e){
+                                                    Log.d("mytest", e.toString());
+                                                }
+                                            }
+                                        };
+                                        RegisterRequest vRequest = new RegisterRequest(user_email, platform_type,nick, rListener);
+                                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                                        queue.add(vRequest);
+
+                                        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+                                        androidx.appcompat.app.AlertDialog dialog = builder.setMessage("회원가입 되었습니다.")
+                                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        fragmentManager.beginTransaction().remove(F_Account.this).commit();
+                                                        fragmentManager.popBackStack();
+                                                    }
+                                                }).create();
+                                        dialog.show();
+
+
+                                    }else {
+                                        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+                                        androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
+                                                .setNegativeButton("확인",null).create();
+                                        dialog.show();
+                                    }
+                                }catch (Exception e){
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        CheckNickRequest vRequest = new CheckNickRequest(nick, rListener);
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequest);
+
+
                     }
                 });
                 dlg.setNegativeButton("취소", null);
