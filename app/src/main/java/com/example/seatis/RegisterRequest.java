@@ -1,0 +1,30 @@
+package com.example.seatis;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class RegisterRequest extends StringRequest {
+    final static private String URL = "http://101.101.211.66:8080/SeatIs/ValidateRequest.jsp";
+    private Map<String, String> parameters;
+
+    public RegisterRequest(String user_id, String user_email, String platform_type, String nickname,
+                           String user_image, String recent_search, Response.Listener<String> listener){
+        super(Method.POST, URL, listener, null);
+        parameters = new HashMap<>();
+        parameters.put("user_id", user_id);
+        parameters.put("user_email", user_email);
+        parameters.put("platform_type", platform_type);
+        parameters.put("nickname", nickname);
+        parameters.put("user_image", user_image);
+        parameters.put("recent_search", recent_search);
+    }
+
+    @Override
+    protected Map<String, String> getParams() throws AuthFailureError{
+        return parameters;
+    }
+}

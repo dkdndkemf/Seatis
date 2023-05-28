@@ -110,19 +110,19 @@
         app:layout_constraintLeft_toRightOf="@id/guideline"
         android:layout_marginTop="8dp" />
 
-    <EditText
+    <TextView
         android:id="@+id/email"
         android:layout_width="350dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toRightOf="@id/guideline"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/txt2"
         android:paddingLeft="10dp"
-        android:hint="seatis@mjc.ac.kr"
+        android:text="seatis@mjc.ac.kr"
         android:textColorHint="@color/black"
         android:fontFamily="@font/nanumgothic"
-        android:textSize="15sp"
-        android:background="@drawable/edit_round"
+        android:textSize="18sp"
         />
 
     <android.widget.Button
