@@ -20,11 +20,11 @@ public class Account extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account);
+        setContentView(R.layout.create_profile);
 
         email = findViewById(R.id.email);
         back = findViewById(R.id.back_Btn);
-        account = findViewById(R.id.account);
+
         Intent secondIntent = getIntent();
 
         email.setText(secondIntent.getStringExtra("user_email"));

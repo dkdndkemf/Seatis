@@ -78,8 +78,8 @@ public class Login extends AppCompatActivity {
                                                 if(new_email){
                                                     Intent intent = new Intent(Login.this, Account.class);
                                                     intent.putExtra("user_email", user_email);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    Login.this.startActivity(intent);
+                                                    Login.this.finish();
                                                 }else {
                                                     MainActivity.isLogin = true;
                                                     Toast.makeText(Login.this, "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
@@ -95,7 +95,6 @@ public class Login extends AppCompatActivity {
                                     CheckIdRequest vRequest = new CheckIdRequest(user_email, rListener);
                                     RequestQueue queue = Volley.newRequestQueue(Login.this);
                                     queue.add(vRequest);
-
                                 }
                                 return null;
                             });
