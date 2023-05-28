@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CheckIdRequest extends StringRequest {
-    final static private String URL = "http://101.101.211.66:8080/SeatIs/CheckNickRequest.jsp";
+    final static private String URL = "http://101.101.211.66:8080/SeatIs/ValidateId.jsp";
     private Map<String, String> parameters;
 
     public CheckIdRequest(String user_email, Response.Listener<String> listener){

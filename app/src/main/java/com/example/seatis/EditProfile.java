@@ -77,7 +77,7 @@ public class EditProfile extends AppCompatActivity {
                         }
                     }
                 };
-                ValidityRequest vRequest = new ValidityRequest(nick, rListener);
+                CheckNickRequest vRequest = new CheckNickRequest(nick, rListener);
                 RequestQueue queue = Volley.newRequestQueue(EditProfile.this);
                 queue.add(vRequest);
             }
