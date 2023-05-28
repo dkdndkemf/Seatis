@@ -50,9 +50,9 @@ public class F_EditProfile extends Fragment {
     private String mParam1;
     private String mParam2;
     CircleImageView picture;
-    String user_email="";
-    String platform_type="";
-    String nick="";
+    String user_email = "";
+    String platform_type = "";
+    String nick = "";
     TextView email;
 
     public F_EditProfile() {
@@ -84,13 +84,13 @@ public class F_EditProfile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_f__edit_profile, container, false);
-        ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
-        Button edit = (Button)view.findViewById(R.id.edit);
-        Button secession = (Button)view.findViewById(R.id.secession);
-        Button changePic = (Button)view.findViewById(R.id.changePic);
-        Button checknick = (Button)view.findViewById(R.id.checknick);
-        EditText nickname = (EditText)view.findViewById(R.id.nickname);
-        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        ImageButton back = (ImageButton) view.findViewById(R.id.back_Btn);
+        Button edit = (Button) view.findViewById(R.id.edit);
+        Button secession = (Button) view.findViewById(R.id.secession);
+        Button changePic = (Button) view.findViewById(R.id.changePic);
+        Button checknick = (Button) view.findViewById(R.id.checknick);
+        EditText nickname = (EditText) view.findViewById(R.id.nickname);
+        CircleImageView picture = (CircleImageView) view.findViewById(R.id.circle_iv);
 
         Intent editProfile_to_main = new Intent(getActivity(), MainActivity.class);
 
@@ -99,11 +99,11 @@ public class F_EditProfile extends Fragment {
         Response.Listener rListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try{
+                try {
                     JSONObject jResponse = new JSONObject(response);
                     nick = jResponse.getString("nickname");
                     nickname.setText(nick);
-                }catch (Exception e){
+                } catch (Exception e) {
                     Log.d("mytest", e.toString());
                 }
             }
@@ -138,25 +138,25 @@ public class F_EditProfile extends Fragment {
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jResponse = new JSONObject(response);
                             boolean newID = jResponse.getBoolean("newNick");
 
-                            if(newID && !(nick.equals(""))){
+                            if (newID && !(nick.equals(""))) {
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
                                 androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 닉네임입니다.")
-                                        .setNegativeButton("확인",null).create();
+                                        .setNegativeButton("확인", null).create();
                                 dialog.show();
 
-                            }else {
+                            } else {
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
                                 androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
-                                        .setNegativeButton("확인",null).create();
+                                        .setNegativeButton("확인", null).create();
                                 dialog.show();
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Log.d("mytest", e.toString());
                         }
                     }
@@ -173,18 +173,18 @@ public class F_EditProfile extends Fragment {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("회원정보 수정");
                 dlg.setMessage("수정하시겠습니까?");
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                dlg.setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         nick = nickname.getText().toString();
                         Response.Listener rListener = new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                try{
+                                try {
                                     JSONObject jResponse = new JSONObject(response);
                                     boolean newID = jResponse.getBoolean("newNick");
 
-                                    if(newID && !(nick.equals(""))){
+                                    if (newID && !(nick.equals(""))) {
                                         MainActivity.isLogin = true;
                                         ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                         ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
@@ -193,11 +193,11 @@ public class F_EditProfile extends Fragment {
                                         Response.Listener rListener = new Response.Listener<String>() {
                                             @Override
                                             public void onResponse(String response) {
-                                                try{
+                                                try {
                                                     JSONObject jResponse = new JSONObject(response);
 
 
-                                                }catch (Exception e){
+                                                } catch (Exception e) {
                                                     Log.d("mytest", e.toString());
                                                 }
                                             }
@@ -218,14 +218,14 @@ public class F_EditProfile extends Fragment {
                                         dialog.show();
 
 
-                                    }else {
+                                    } else {
                                         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
                                         androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 닉네임입니다.")
-                                                .setNegativeButton("확인",null).create();
+                                                .setNegativeButton("확인", null).create();
                                         dialog.show();
                                     }
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     Log.d("mytest", e.toString());
                                 }
                             }
@@ -241,6 +241,37 @@ public class F_EditProfile extends Fragment {
                 dlg.show();
             }
         });
+
+        //탈퇴기능
+        secession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("계정탈퇴");
+                dlg.setMessage("정말 탈퇴하시겠습니까?").setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                MainActivity.user_email="";
+                                MainActivity.isLogin = false;
+                                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                fragmentManager.beginTransaction().remove(F_EditProfile.this).commit();
+                                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                getActivity().finish();
+                                startActivity(editProfile_to_main);
+                            }
+                        };
+                        DeleteRequest vRequest = new DeleteRequest(MainActivity.user_email, rListener);
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequest);
+                    }
+                }).create().show();
+
+            }
+        });
         return view;
     }
 
@@ -248,12 +279,13 @@ public class F_EditProfile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Bundle bundle = getArguments();
-        if (bundle!=null){
+        if (bundle != null) {
             user_email = bundle.getString("user_email");
             platform_type = bundle.getString("platform_type");
             email.setText(user_email);
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -263,4 +295,4 @@ public class F_EditProfile extends Fragment {
             picture.setImageURI(imageUri);
         }
     }
-    }
+}
