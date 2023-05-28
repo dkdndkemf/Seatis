@@ -1,8 +1,13 @@
 package com.example.seatis;
 
+import static com.example.seatis.MainActivity.context_main;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +24,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -38,10 +46,13 @@ public class F_Account extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int REQUEST_IMAGE_PICK = 1;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    CircleImageView picture;
     String user_email="";
     TextView email;
 
@@ -84,10 +95,19 @@ public class F_Account extends Fragment {
         Button changePic = (Button)view.findViewById(R.id.changePic);
         Button checknick = (Button)view.findViewById(R.id.checknick);
         EditText nickname = (EditText)view.findViewById(R.id.nickname);
-        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        picture = (CircleImageView)view.findViewById(R.id.circle_iv);
         Intent createProfile_to_main = new Intent(getActivity(), MainActivity.class);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        //이미지 등록
+        changePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, REQUEST_IMAGE_PICK);
+            }
+        });
 
 
         // 뒤로가기
@@ -135,7 +155,7 @@ public class F_Account extends Fragment {
                 queue.add(vRequest);
             }
         });
-        // 수정하기
+        // 회원가입하기
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,9 +165,14 @@ public class F_Account extends Fragment {
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.isLogin = true;
+                        ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                        ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                        String nick = nickname.getText().toString();
+
+
                         fragmentManager.beginTransaction().remove(F_Account.this).commit();
                         fragmentManager.popBackStack();
-                        startActivity(createProfile_to_main);
                     }
                 });
                 dlg.setNegativeButton("취소", null);
@@ -166,4 +191,15 @@ public class F_Account extends Fragment {
             email.setText(user_email);
         }
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            Uri imageUri = data.getData();
+            // 이미지 URI를 사용하여 picture 이미지뷰에 설정
+            picture.setImageURI(imageUri);
+        }
+    }
+
+
 }
