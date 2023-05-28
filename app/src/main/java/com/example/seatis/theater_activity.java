@@ -21,12 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationBarView;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -46,14 +41,6 @@ public class theater_activity extends AppCompatActivity {
     F_MyPage FMyPage;
     F_Search FSearch;
     F_FavoriteTheater FFavoriteTheater;
-
-
-
-    String request_seat_score = "";
-    String seat_col = "";
-    String seat_num = "";
-
-    Float request_float_seat_score;
 
     int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
             {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
@@ -135,55 +122,11 @@ public class theater_activity extends AppCompatActivity {
             for (int col = 0; col < seat[row].length - 1; col++) {
                 final int col_num = col;
                 seat[row][col] = findViewById(seat_id[row][col]);
-
-                int row_ASCII = 65 + row_num; //A의 아스키코드값은 65.... 거기에 row를 더해줌
-                char row_char = (char) row_ASCII; //문자로 변환
-
-                int finalRow = row;
-                int finalCol = col;
-
-                seat_col = String.valueOf(finalRow);
-                seat_num = String.valueOf(finalCol+1);
-                Response.Listener rListener = new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                try {
-                                    JSONObject jResponse = new JSONObject(response);
-
-                                    request_seat_score = jResponse.getString("request_seat_score");
-                                    request_float_seat_score = Float.valueOf(request_seat_score);
-
-                                    Toast.makeText(theater_activity.this, request_seat_score, Toast.LENGTH_SHORT).show();
-                                    if (0 <= request_float_seat_score && request_float_seat_score <= 1)
-                                        seat[finalRow][finalCol].setBackgroundColor(Color.RED);
-                                   else  if (1.1 <= request_float_seat_score && request_float_seat_score <=2)
-                                        seat[finalRow][finalCol].setBackgroundColor(Color.parseColor("#FF8000"));
-                                    else if (2.1 <= request_float_seat_score && request_float_seat_score <=3)
-                                        seat[finalRow][finalCol].setBackgroundColor(Color.YELLOW);
-                                    else if (3.1 <= request_float_seat_score && request_float_seat_score <=4)
-                                        seat[finalRow][finalCol].setBackgroundColor(Color.parseColor("#01DF3A"));
-                                    else if (4.1 <= request_float_seat_score && request_float_seat_score <=5)
-                                        seat[finalRow][finalCol].setBackgroundColor(Color.GREEN);
-
-
-
-                                } catch (Exception e) {
-                                    Log.d("mytest", e.toString());
-                                }
-
-                            }
-                        };
-                        theater_activity_Request vRequest = new theater_activity_Request(seat_col, seat_num, rListener); //열
-
-                        RequestQueue queue = Volley.newRequestQueue(theater_activity.this);
-                        queue.add(vRequest);
-
-
-
                 seat[row][col].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        int row_ASCII = 65 + row_num; //A의 아스키코드값은 65.... 거기에 row를 더해줌
+                        char row_char = (char) row_ASCII; //문자로 변환
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
                         ArrayList<String> theater_name=new ArrayList<>();

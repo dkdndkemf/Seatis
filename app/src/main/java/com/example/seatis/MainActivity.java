@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public F_Login FLogin;
     public F_FavoriteTheater FFavoriteTheater;
 
+    public Search search;
+    public F_MyPage myPage;
+    public F_FavoriteTheater favoriteTheater;
+
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
     public static String user_email="";
