@@ -140,22 +140,25 @@ public class F_Login extends Fragment {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
                                                 if (new_email) {
-                                                    fragmentManager.beginTransaction().remove(F_Login.this);
-                                                    fragmentManager.popBackStack();
-                                                    fragmentManager.beginTransaction().replace(R.id.containers, FAccount).commit();
+                                                    F_Account fragment = F_Account.newInstance(user_email);
+                                                    fragmentManager.beginTransaction().remove(F_Login.this)
+                                                            .replace(R.id.containers, fragment)
+                                                            .commit();
                                                 } else {
                                                     MainActivity.isLogin = true;
                                                     if (detailedReview != null) {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                                        fragmentManager.popBackStack();
-                                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater).commit();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .replace(R.id.containers, FTheater)
+                                                                .commit();
                                                     } else if (theater != null) {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                                        fragmentManager.popBackStack();
-                                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(theater)
+                                                                .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
                                                     } else {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                                        fragmentManager.popBackStack();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .commit();
                                                     }
                                                     Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
@@ -193,22 +196,25 @@ public class F_Login extends Fragment {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
                                                 if (new_email) {
-                                                    fragmentManager.beginTransaction().remove(F_Login.this);
-                                                    fragmentManager.popBackStack();
-                                                    fragmentManager.beginTransaction().replace(R.id.containers, FAccount).commit();
+                                                    F_Account fragment = F_Account.newInstance(user_email);
+                                                    fragmentManager.beginTransaction().remove(F_Login.this)
+                                                            .replace(R.id.containers, fragment)
+                                                            .commit();
                                                 } else {
                                                     MainActivity.isLogin = true;
                                                     if (detailedReview != null) {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                                        fragmentManager.popBackStack();
-                                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater).commit();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .replace(R.id.containers, FTheater)
+                                                                .commit();
                                                     } else if (theater != null) {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                                        fragmentManager.popBackStack();
-                                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(theater)
+                                                                .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
                                                     } else {
-                                                        fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                                        fragmentManager.popBackStack();
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .commit();
                                                     }
                                                     Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                                                     ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
@@ -228,7 +234,7 @@ public class F_Login extends Fragment {
                         }
                         return null;
                     });
-
+                    /*
                     UserApiClient.getInstance().me((user, meError) -> {
                         if (meError != null) {
                             Log.e(TAG, "사용자 정보 요청 실패", meError);
@@ -254,7 +260,7 @@ public class F_Login extends Fragment {
                             //fragmentManager.popBackStack();
                         }
                         return null;
-                    });
+                    });*/
                 }
 
             }
@@ -313,26 +319,47 @@ public class F_Login extends Fragment {
 
             if (acct != null) {
                 String personEmail = acct.getEmail();
-                Toast.makeText(getActivity(), "로그인 성공(이메일) : " + personEmail, Toast.LENGTH_LONG).show();
-                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                MainActivity.isLogin = true;
-                if (detailedReview != null) {
-                    fragmentManager.beginTransaction().remove(F_Login.this);
-                    fragmentManager.popBackStack();
-                    fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
-                            .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
-                } else if (theater != null) {
-                    fragmentManager.beginTransaction().remove(F_Login.this);
-                    fragmentManager.popBackStack();
-                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
-                } else {
-                    fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                    fragmentManager.popBackStack();
-                }
-                //fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                //fragmentManager.popBackStack();
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response);
+                            boolean new_email = jResponse.getBoolean("new_email");
+                            if (new_email) {
+                                F_Account fragment = F_Account.newInstance(personEmail);
+                                fragmentManager.beginTransaction().remove(F_Login.this)
+                                        .replace(R.id.containers, fragment)
+                                        .commit();
+                            } else {
+                                Toast.makeText(getActivity(), "로그인 성공(이메일) : " + personEmail, Toast.LENGTH_LONG).show();
+                                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                MainActivity.isLogin = true;
+                                if (detailedReview != null) {
+                                    fragmentManager.beginTransaction().remove(F_Login.this);
+                                    fragmentManager.popBackStack();
+                                    fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
+                                            .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
+                                } else if (theater != null) {
+                                    fragmentManager.beginTransaction().remove(F_Login.this);
+                                    fragmentManager.popBackStack();
+                                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                } else {
+                                    fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                    fragmentManager.popBackStack();
+                                }
+                                //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                //fragmentManager.popBackStack();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                CheckIdRequest vRequest = new CheckIdRequest(personEmail, rListener);
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(vRequest);
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

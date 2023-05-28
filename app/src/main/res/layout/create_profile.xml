@@ -73,6 +73,7 @@
         android:layout_marginTop="3dp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="닉네임"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="@id/edit"
         app:layout_constraintTop_toBottomOf="@id/changePic" />
@@ -85,8 +86,8 @@
         android:background="@drawable/edit_round"
         android:fontFamily="@font/nanumgothic"
         android:paddingLeft="10dp"
-        android:textSize="15sp"
         android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/txt1" />
@@ -112,6 +113,7 @@
         android:layout_marginTop="50dp"
         android:fontFamily="@font/nanumgothic_bold"
         android:text="이메일"
+        android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintLeft_toLeftOf="@id/email"
@@ -125,6 +127,7 @@
         android:fontFamily="@font/nanumgothic"
         android:paddingLeft="10dp"
         android:text="seatis@mjc.ac.kr"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@id/layout"
