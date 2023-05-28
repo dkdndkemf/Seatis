@@ -133,6 +133,7 @@ public class F_Login extends Fragment {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
                                 } else {
                                     String user_email = user.getKakaoAccount().getEmail();
+                                    String platform_type = "kakao";
                                     Response.Listener rListener = new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
@@ -140,7 +141,7 @@ public class F_Login extends Fragment {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
                                                 if (new_email) {
-                                                    F_Account fragment = F_Account.newInstance(user_email);
+                                                    F_Account fragment = F_Account.newInstance(user_email, platform_type);
                                                     fragmentManager.beginTransaction().remove(F_Login.this)
                                                             .replace(R.id.containers, fragment)
                                                             .commit();
@@ -195,8 +196,9 @@ public class F_Login extends Fragment {
                                             try {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
+                                                String platform_type = "kakao";
                                                 if (new_email) {
-                                                    F_Account fragment = F_Account.newInstance(user_email);
+                                                    F_Account fragment = F_Account.newInstance(user_email, platform_type);
                                                     fragmentManager.beginTransaction().remove(F_Login.this)
                                                             .replace(R.id.containers, fragment)
                                                             .commit();
@@ -319,6 +321,7 @@ public class F_Login extends Fragment {
 
             if (acct != null) {
                 String personEmail = acct.getEmail();
+                String platform_type = "google";
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
@@ -327,7 +330,7 @@ public class F_Login extends Fragment {
                             JSONObject jResponse = new JSONObject(response);
                             boolean new_email = jResponse.getBoolean("new_email");
                             if (new_email) {
-                                F_Account fragment = F_Account.newInstance(personEmail);
+                                F_Account fragment = F_Account.newInstance(personEmail, platform_type);
                                 fragmentManager.beginTransaction().remove(F_Login.this)
                                         .replace(R.id.containers, fragment)
                                         .commit();

@@ -54,6 +54,7 @@ public class F_Account extends Fragment {
     private String mParam2;
     CircleImageView picture;
     String user_email="";
+    String platform_type="";
     TextView email;
 
     public F_Account() {
@@ -68,10 +69,11 @@ public class F_Account extends Fragment {
      * @return A new instance of fragment F_Account.
      */
     // TODO: Rename and change types and number of parameters
-    public static F_Account newInstance(String user_email) {
+    public static F_Account newInstance(String user_email, String platform_type) {
         F_Account fragment = new F_Account();
         Bundle args = new Bundle();
         args.putString("user_email", user_email);
+        args.putString("platform_type", platform_type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -188,6 +190,7 @@ public class F_Account extends Fragment {
         Bundle bundle = getArguments();
         if (bundle!=null){
             user_email = bundle.getString("user_email");
+            platform_type = bundle.getString("platform_type");
             email.setText(user_email);
         }
     }
