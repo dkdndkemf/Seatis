@@ -36,12 +36,16 @@ public class review_write extends AppCompatActivity {
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
+
+    F_Search FSearch;
+    F_MyPage FMyPage;
+    F_FavoriteTheater FFavoriteTheater;
     ImageView photo_view;
+    F_Search search;
+    F_MyPage myPage;
+    F_FavoriteTheater favoriteTheater;
 
     TextView seat_tv;
-    Search search;
-    MyPage myPage;
-    FavoriteTheater favoriteTheater;
     Button photo_select;
     public static Uri uri;
 
@@ -67,9 +71,9 @@ public class review_write extends AppCompatActivity {
         photo_select=findViewById(R.id.photo_select);
         NavigationBarView navigationBarView = findViewById(R.id.bottomMenu);
 
-        search = new Search();
-        myPage = new MyPage();
-        favoriteTheater = new FavoriteTheater();
+        FSearch = new F_Search();
+        FMyPage = new F_MyPage();
+        FFavoriteTheater = new F_FavoriteTheater();
 
         ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
         theater_tv.setText(theater_name.get(0));
@@ -80,13 +84,13 @@ public class review_write extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.search) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, search).addToBackStack(null).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FSearch).addToBackStack(null).commit();
                     return true;
                 } else if (itemId == R.id.mypage) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, myPage).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FMyPage).commit();
                     return true;
                 } else if (itemId == R.id.favorite) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, favoriteTheater).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.containers, FFavoriteTheater).commit();
                     return true;
                 }
                 return false;

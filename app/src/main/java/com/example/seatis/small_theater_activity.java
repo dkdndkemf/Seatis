@@ -36,9 +36,9 @@ public class small_theater_activity extends AppCompatActivity {
 
     TextView avg_score;
 
-    MyPage myPage;
-    Search search;
-    FavoriteTheater favoriteTheater;
+    F_MyPage myPage;
+    F_Search search;
+    F_FavoriteTheater favoriteTheater;
 
     int seat_id1[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
             {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
@@ -87,9 +87,9 @@ public class small_theater_activity extends AppCompatActivity {
         Intent small_theater_activity_to_review = new Intent(small_theater_activity.this, Detailed_Review.class);
         Intent small_theater_activity_to_login = new Intent(small_theater_activity.this, Login.class);
 
-        search = new Search();
-        myPage = new MyPage();
-        favoriteTheater = new FavoriteTheater();
+        search = new F_Search();
+        myPage = new F_MyPage();
+        favoriteTheater = new F_FavoriteTheater();
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
