@@ -180,6 +180,7 @@ public class F_Account extends Fragment {
                                     boolean newID = jResponse.getBoolean("newNick");
 
                                     if(newID && !(nick.equals(""))){
+                                        MainActivity.user_email=user_email;
                                         MainActivity.isLogin = true;
                                         ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                         ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
