@@ -1,15 +1,31 @@
 package com.example.seatis;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,6 +79,81 @@ public class F_Account extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.create_profile, container, false);
         email = (TextView) view.findViewById(R.id.email);
+        ImageButton back = (ImageButton)view.findViewById(R.id.back_Btn);
+        Button edit = (Button)view.findViewById(R.id.edit);
+        Button changePic = (Button)view.findViewById(R.id.changePic);
+        Button checknick = (Button)view.findViewById(R.id.checknick);
+        EditText nickname = (EditText)view.findViewById(R.id.nickname);
+        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        Intent createProfile_to_main = new Intent(getActivity(), MainActivity.class);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+
+        // 뒤로가기
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager.beginTransaction().remove(F_Account.this).commit();
+                fragmentManager.popBackStack();
+            }
+        });
+
+        //중복확인
+        checknick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nick = nickname.getText().toString();
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jResponse = new JSONObject(response);
+                            boolean newID = jResponse.getBoolean("newNick");
+
+                            if(newID){
+                                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 있는 아이디입니다.")
+                                        .setNegativeButton("확인",null).create();
+                                dialog.show();
+
+                            }else {
+                                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+                                androidx.appcompat.app.AlertDialog dialog = builder.setMessage("사용할 수 없는 아이디입니다.")
+                                        .setNegativeButton("확인",null).create();
+                                dialog.show();
+                            }
+                        }catch (Exception e){
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                CheckNickRequest vRequest = new CheckNickRequest(nick, rListener);
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(vRequest);
+            }
+        });
+        // 수정하기
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("회원가입");
+                dlg.setMessage("가입하시겠습니까?");
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fragmentManager.beginTransaction().remove(F_Account.this).commit();
+                        fragmentManager.popBackStack();
+                        startActivity(createProfile_to_main);
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.show();
+            }
+        });
         return view;
     }
 
