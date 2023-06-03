@@ -47,6 +47,7 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         Button agree = view.findViewById(R.id.agree);
         Button disagree = view.findViewById(R.id.disagree);
         ImageView img_v=view.findViewById(R.id.img_v);
+
         Review review = (Review) mData.get(position);
 
         name.setText(review.getName());
