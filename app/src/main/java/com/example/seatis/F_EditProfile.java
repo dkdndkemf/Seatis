@@ -6,6 +6,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -29,6 +33,8 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
+
+import java.util.Base64;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -102,6 +108,14 @@ public class F_EditProfile extends Fragment {
                 try {
                     JSONObject jResponse = new JSONObject(response);
                     nick = jResponse.getString("nickname");
+                    String base64EncodedString = jResponse.getString("user_image");
+                    byte[] imageData = new byte[0];
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        imageData = Base64.getDecoder().decode(base64EncodedString);
+                    }
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+                    Drawable drawable = new BitmapDrawable(getActivity().getResources(), bitmap);
+                    picture.setImageDrawable(drawable);
                     nickname.setText(nick);
                 } catch (Exception e) {
                     Log.d("mytest", e.toString());
