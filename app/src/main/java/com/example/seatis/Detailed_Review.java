@@ -80,6 +80,7 @@ public class Detailed_Review extends AppCompatActivity {
             listView.setVisibility(View.VISIBLE);
             no_review.setVisibility(View.GONE);
         }
+        //여기부터 구현
         ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
 
         theater_name_tv.setText((theater_name.get(1))); //극장 이름 값 받아옴

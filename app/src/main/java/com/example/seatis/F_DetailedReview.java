@@ -3,6 +3,8 @@ package com.example.seatis;
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -57,7 +59,7 @@ public class F_DetailedReview extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    private String user_email;
 
     public F_DetailedReview() {
         // Required empty public constructor
@@ -81,13 +83,20 @@ public class F_DetailedReview extends Fragment {
         return fragment;
     }
 
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle!=null){
+            user_email = bundle.getString("user_email");
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-
         }
     }
 
@@ -123,8 +132,6 @@ public class F_DetailedReview extends Fragment {
 
         if(getArguments() != null)
         {
-
-
             seat_name.setText(getArguments().getString("seat_name"));
             avg_score_string = getArguments().getString("avg_score");
 
@@ -137,7 +144,6 @@ public class F_DetailedReview extends Fragment {
             theater_name_tv.setText(getArguments().getString("theater_name"));
 
         }
-
 
         // 리뷰작성
         fab_btn.setOnClickListener(new View.OnClickListener() {

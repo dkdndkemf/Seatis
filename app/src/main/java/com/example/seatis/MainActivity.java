@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static boolean isLogin = false;
+    public static boolean isLogin = true;
     // DetailedReview에서 사용할 리뷰 배열
     //static ArrayList<Review> data = new ArrayList<>();
     public F_Search FSearch;

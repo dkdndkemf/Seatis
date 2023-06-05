@@ -63,7 +63,8 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         review_tv.setText(review.getReview());
         agree.setText(String.valueOf(review.getAgree()));
         disagree.setText(String.valueOf(review.getDisagree()));
-        img_v.setImageResource(R.drawable.no_img);
+        img_v.setImageResource(Integer.parseInt(review.img_url));
+        //img_v.setImageResource(R.drawable.no_img);
         //TODO:이미지URL 가져와 해야함
 
         agree.setOnClickListener(new View.OnClickListener() {
