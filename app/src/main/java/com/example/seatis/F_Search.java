@@ -13,6 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -69,7 +72,6 @@ public class F_Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
@@ -107,6 +109,44 @@ public class F_Search extends Fragment {
             imgbtn2_fill.setVisibility(View.VISIBLE);
             imgbtn2.setVisibility(View.GONE);
         }
+
+        String[] theater_li = {"CGV 신촌 아트레온", "드림아트센터"};
+        AutoCompleteTextView search_button = (AutoCompleteTextView)view.findViewById(R.id.search_button);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_dropdown_item_1line, theater_li);
+        search_button.setAdapter(adapter);
+
+        search_button.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String ch = (String)adapter.getItem(i);
+                if(ch == "CGV 신촌 아트레온"){
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    //fragmentManager.beginTransaction().remove(F_Search.this).commit();
+                    fragmentManager.popBackStack();
+                    try {
+                        theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                        theater_instance.finish();
+                    } catch (NullPointerException e){
+                        System.out.println("처음 누름");
+                    }
+                    //Intent search_to_theater = new Intent(getActivity(),theater_activity.class);
+                    //startActivity(search_to_theater);
+                    fragmentManager.beginTransaction().add(R.id.containers, FTheater, "FT").addToBackStack(null).commit();
+                } else if (ch == "드림아트센터") {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentManager.beginTransaction().remove(F_Search.this).commit();
+                    fragmentManager.popBackStack();
+                    try {
+                        theater_activity theater_instance = (theater_activity) theater_activity._theater_activity;
+                        theater_instance.finish();
+                    } catch (NullPointerException e){
+                        System.out.println("처음 누름");
+                    }
+                    Intent search_to_small_theater = new Intent(getActivity(),small_theater_activity.class);
+                    startActivity(search_to_small_theater);
+                }
+            }
+        });
 
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override

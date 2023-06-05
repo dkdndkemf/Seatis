@@ -5,6 +5,8 @@ import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,7 +26,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.zip.Inflater;
 
 /**
@@ -41,6 +45,7 @@ public class F_ReviewWrite extends Fragment {
     Button write_btn;
     EditText write_review;
 
+    String user_email="";
     TextView no_review;
     RatingBar see_score;
     RatingBar listen_score;
@@ -79,9 +84,18 @@ public class F_ReviewWrite extends Fragment {
         return fragment;
     }
 
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle!=null){
+            user_email = bundle.getString("user_email");
+        }
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //가져오기?
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -105,7 +119,7 @@ public class F_ReviewWrite extends Fragment {
         listen_score = (RatingBar)view.findViewById(R.id.listen_score);
         etc_score = (RatingBar)view.findViewById(R.id.etc_score);
         //data = ((F_DetailedReview)F_DetailedReview.context_DetailedReview).data;
-        data = F_DetailedReview.data;
+        //data = F_DetailedReview.data; 혜원
         //F_DetailedReview_adapter = ((F_DetailedReview)F_DetailedReview.context_DetailedReview).F_DetailedReview_adapter;
         F_DetailedReview_adapter = F_DetailedReview.detailed_review_adapter;
         listView = (ListView)activity.findViewById(R.id.review_viewer);
@@ -113,6 +127,14 @@ public class F_ReviewWrite extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        data = new ArrayList<>();
+        
+
+        //TODO 데이터베이스 가져오기 전에 data 어레이를 한번 초기화 하기
+        // /데이베이스에 있는 데이터들 가져오기. 2차원배열 갖고와서 오면 반복문 돌려서 data.add(리뷰데이터)
+
+
 
        layout.setOnTouchListener(new View.OnTouchListener() {
            @Override
@@ -141,7 +163,9 @@ public class F_ReviewWrite extends Fragment {
         write_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.add(new Review("테스트","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
+                String date = new SimpleDateFormat("yyyy.MM.dd").format(new Date());
+
+                data.add(new Review(user_email, date, see_score.getRating(), listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0,String.valueOf(R.drawable.no_img) ));
                 if(data.isEmpty())
                 {
                     listView.setVisibility(View.INVISIBLE);
