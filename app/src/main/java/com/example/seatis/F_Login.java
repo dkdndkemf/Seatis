@@ -20,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -27,6 +30,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.kakao.sdk.user.UserApiClient;
+
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,11 +95,12 @@ public class F_Login extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_f__login, container, false);
-        back_btn = (ImageButton)view.findViewById(R.id.back_btn_login);
-        kakao_login = (ImageButton)view.findViewById(R.id.kakao_login);
-        google_login = (ImageButton)view.findViewById(R.id.google_login);
+        back_btn = (ImageButton) view.findViewById(R.id.back_btn_login);
+        kakao_login = (ImageButton) view.findViewById(R.id.kakao_login);
+        google_login = (ImageButton) view.findViewById(R.id.google_login);
 
         F_Theater FTheater = new F_Theater();
+        F_Account FAccount = new F_Account();
         F_DetailedReview FDetailedReview = F_Theater.FDetailedReview;
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -106,16 +112,16 @@ public class F_Login extends Fragment {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               fragmentManager.beginTransaction().remove(F_Login.this).commit();
-               fragmentManager.popBackStack();
+                fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                fragmentManager.popBackStack();
             }
         });
 
         // 카카오로그인
-        kakao_login.setOnClickListener(new View.OnClickListener(){
+        kakao_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(getActivity())) {
+                if (UserApiClient.getInstance().isKakaoTalkLoginAvailable(getActivity())) {
                     UserApiClient.getInstance().loginWithKakaoTalk(getActivity(), (oAuthToken, error) -> {
                         if (error != null) {
                             Log.e(TAG, "로그인 실패", error);
@@ -126,34 +132,55 @@ public class F_Login extends Fragment {
                                 if (meError != null) {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
                                 } else {
-                                    MainActivity.isLogin = true;
-                                    //viewModel.setIsLogin(true);
-                                    //viewModel.getIsLogin().setValue(true);
-                                    if(detailedReview != null) {
-                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                        fragmentManager.popBackStack();
-                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater).commit();
-                                    }
-                                    else if(theater != null) {
-                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                        fragmentManager.popBackStack();
-                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
-                                        //fragmentManager.beginTransaction().add(R.id.containers, FTheater).addToBackStack(null).commit();
-                                        //fragmentManager.beginTransaction().add(R.id.containers, theater).addToBackStack(null).commit();
-                                    }
-                                    Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
-                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                                    //fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                    //fragmentManager.popBackStack();
+                                    String user_email = user.getKakaoAccount().getEmail();
+                                    String platform_type = "kakao";
+                                    Response.Listener rListener = new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                JSONObject jResponse = new JSONObject(response);
+                                                boolean new_email = jResponse.getBoolean("new_email");
+                                                if (new_email) {
+                                                    F_Account fragment = F_Account.newInstance(user_email, platform_type);
+                                                    fragmentManager.beginTransaction().remove(F_Login.this)
+                                                            .replace(R.id.containers, fragment)
+                                                            .commit();
+                                                } else {
+                                                    MainActivity.user_email=user_email;
+                                                    MainActivity.isLogin = true;
+                                                    if (detailedReview != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .replace(R.id.containers, FTheater)
+                                                                .commit();
+                                                    } else if (theater != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(theater)
+                                                                .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                    } else {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .commit();
+                                                    }
+                                                    Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
+                                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                                }
+                                            } catch (Exception e) {
+                                                Log.d("mytest", e.toString());
+                                            }
+                                        }
+                                    };
+                                    CheckIdRequest vRequest = new CheckIdRequest(user_email, rListener);
+                                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                                    queue.add(vRequest);
                                 }
                                 return null;
                             });
                         }
                         return null;
                     });
-                }
-                else {
+                } else {
                     UserApiClient.getInstance().loginWithKakaoAccount(getActivity(), (oAuthToken, error) -> {
                         if (error != null) {
                             Log.e(TAG, "로그인 실패", error);
@@ -162,47 +189,73 @@ public class F_Login extends Fragment {
                             UserApiClient.getInstance().me((user, meError) -> {
                                 if (meError != null) {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
-                                } else
-                                {
-                                    MainActivity.isLogin = true;
-                                    if(detailedReview != null) {
-                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                        fragmentManager.popBackStack();
-                                        fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
-                                                .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
-                                    }
-                                    else if(theater != null) {
-                                        fragmentManager.beginTransaction().remove(F_Login.this);
-                                        fragmentManager.popBackStack();
-                                        fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
-                                    }
-                                    Toast.makeText(getActivity(),"로그인 성공(이메일) : "+user.getKakaoAccount().getEmail(),Toast.LENGTH_LONG).show();
-                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                                    //fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                                   // fragmentManager.popBackStack();
+                                } else {
+                                    String user_email = user.getKakaoAccount().getEmail();
+                                    Response.Listener rListener = new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try {
+                                                JSONObject jResponse = new JSONObject(response);
+                                                boolean new_email = jResponse.getBoolean("new_email");
+                                                String platform_type = "kakao";
+                                                if (new_email) {
+                                                    F_Account fragment = F_Account.newInstance(user_email, platform_type);
+                                                    fragmentManager.beginTransaction().remove(F_Login.this)
+                                                            .replace(R.id.containers, fragment)
+                                                            .commit();
+                                                } else {
+                                                    MainActivity.user_email=user_email;
+                                                    MainActivity.isLogin = true;
+                                                    if (detailedReview != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .replace(R.id.containers, FTheater)
+                                                                .commit();
+                                                    } else if (theater != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(theater)
+                                                                .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                    } else {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .commit();
+                                                    }
+                                                    Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
+                                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                                }
+                                            } catch (Exception e) {
+                                                Log.d("mytest", e.toString());
+                                            }
+                                        }
+                                    };
+                                    CheckIdRequest vRequest = new CheckIdRequest(user_email, rListener);
+                                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                                    queue.add(vRequest);
                                 }
                                 return null;
                             });
                         }
                         return null;
                     });
-
+                    /*
                     UserApiClient.getInstance().me((user, meError) -> {
                         if (meError != null) {
                             Log.e(TAG, "사용자 정보 요청 실패", meError);
                         } else {
                             MainActivity.isLogin = true;
-                            if(detailedReview != null) {
+                            if (detailedReview != null) {
                                 fragmentManager.beginTransaction().remove(F_Login.this);
                                 fragmentManager.popBackStack();
                                 fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
                                         .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
-                            }
-                            else if(theater != null) {
+                            } else if (theater != null) {
                                 fragmentManager.beginTransaction().remove(F_Login.this);
                                 fragmentManager.popBackStack();
                                 fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                            } else {
+                                fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                fragmentManager.popBackStack();
                             }
                             Toast.makeText(getActivity(), "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
                             ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
@@ -211,7 +264,7 @@ public class F_Login extends Fragment {
                             //fragmentManager.popBackStack();
                         }
                         return null;
-                    });
+                    });*/
                 }
 
             }
@@ -245,6 +298,7 @@ public class F_Login extends Fragment {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -256,7 +310,9 @@ public class F_Login extends Fragment {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
-        if (requestCode == 12501) { return; }   // google account 선택 안 했을 때
+        if (requestCode == 12501) {
+            return;
+        }   // google account 선택 안 했을 때
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
@@ -267,24 +323,49 @@ public class F_Login extends Fragment {
 
             if (acct != null) {
                 String personEmail = acct.getEmail();
-                Toast.makeText(getActivity(), "로그인 성공(이메일) : "+personEmail,Toast.LENGTH_LONG).show();
-                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                String platform_type = "google";
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                MainActivity.isLogin=true;
-                if(detailedReview != null) {
-                    fragmentManager.beginTransaction().remove(F_Login.this);
-                    fragmentManager.popBackStack();
-                    fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
-                            .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
-                }
-                else if(theater != null) {
-                    fragmentManager.beginTransaction().remove(F_Login.this);
-                    fragmentManager.popBackStack();
-                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
-                }
-                //fragmentManager.beginTransaction().remove(F_Login.this).commit();
-                //fragmentManager.popBackStack();
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jResponse = new JSONObject(response);
+                            boolean new_email = jResponse.getBoolean("new_email");
+                            if (new_email) {
+                                F_Account fragment = F_Account.newInstance(personEmail, platform_type);
+                                fragmentManager.beginTransaction().remove(F_Login.this)
+                                        .replace(R.id.containers, fragment)
+                                        .commit();
+                            } else {
+                                Toast.makeText(getActivity(), "로그인 성공(이메일) : " + personEmail, Toast.LENGTH_LONG).show();
+                                ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                MainActivity.user_email=personEmail;
+                                MainActivity.isLogin = true;
+                                if (detailedReview != null) {
+                                    fragmentManager.beginTransaction().remove(F_Login.this);
+                                    fragmentManager.popBackStack();
+                                    fragmentManager.beginTransaction().replace(R.id.containers, FTheater)
+                                            .add(R.id.containers, FDetailedReview).addToBackStack(null).commit();
+                                } else if (theater != null) {
+                                    fragmentManager.beginTransaction().remove(F_Login.this);
+                                    fragmentManager.popBackStack();
+                                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
+                                } else {
+                                    fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                    fragmentManager.popBackStack();
+                                }
+                                //fragmentManager.beginTransaction().remove(F_Login.this).commit();
+                                //fragmentManager.popBackStack();
+                            }
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                CheckIdRequest vRequest = new CheckIdRequest(personEmail, rListener);
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(vRequest);
             }
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

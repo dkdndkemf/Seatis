@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    android:id="@+id/layout">
+    android:background="@color/white">
 
 
     <View
@@ -43,122 +43,127 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="사진 변경"
-        android:textSize="18sp"
-        android:textColor="@color/bold_purple"
         android:backgroundTint="@color/white"
         android:fontFamily="@font/nanumgothic_bold"
-        app:layout_constraintTop_toBottomOf="@id/circle_iv"
+        android:text="사진 변경"
+        android:textColor="@color/bold_purple"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@+id/layout"
-        />
+        app:layout_constraintTop_toBottomOf="@id/circle_iv" />
 
     <TextView
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="닉네임"
-        android:textSize="15sp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="3dp"
         android:fontFamily="@font/nanumgothic_bold"
-        app:layout_constraintLeft_toLeftOf="@id/edit"
+        android:text="닉네임"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/changePic" />
 
     <EditText
         android:id="@+id/nickname"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginHorizontal="30dp"
+        android:textColor="@color/black"
         android:layout_marginTop="8dp"
+        android:background="@drawable/edit_round"
+        android:fontFamily="@font/nanumgothic"
+        android:paddingLeft="10dp"
+        android:textColorHint="@color/black"
+        android:textSize="15sp"
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
-        app:layout_constraintTop_toBottomOf="@id/txt1"
-        android:paddingLeft="10dp"
-        android:hint="시디즈"
-        android:textColorHint="@color/black"
-        android:fontFamily="@font/nanumgothic"
-        android:textSize="15sp"
-        android:background="@drawable/edit_round"
-        />
+        app:layout_constraintTop_toBottomOf="@id/txt1" />
 
     <android.widget.Button
         android:id="@+id/checknick"
         android:layout_width="90dp"
         android:layout_height="30dp"
-        android:background="@drawable/button_round_mypage"
-        app:layout_constraintTop_toBottomOf="@id/nickname"
-        app:layout_constraintRight_toRightOf="@id/layout"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="30dp"
+        android:background="@drawable/button_round_mypage"
+        android:fontFamily="@font/nanumgothic_bold"
         android:text="중복확인"
         android:textColor="@color/white"
         android:textSize="11sp"
-        android:fontFamily="@font/nanumgothic_bold"
-        android:layout_marginTop="5dp"/>
+        app:layout_constraintRight_toRightOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@id/nickname" />
 
     <TextView
         android:id="@+id/txt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이메일"
-        android:textSize="15sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="@font/nanumgothic_bold"
-        app:layout_constraintLeft_toLeftOf="@id/email"
+        android:text="이메일"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/nickname"
-        android:layout_marginTop="50dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nickname" />
 
     <TextView
         android:id="@+id/email"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/layout"
-        app:layout_constraintRight_toRightOf="@id/layout"
-        app:layout_constraintTop_toBottomOf="@id/txt2"
+        android:fontFamily="@font/nanumgothic"
         android:paddingLeft="10dp"
         android:text="seatis@mjc.ac.kr"
+        android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:fontFamily="@font/nanumgothic"
         android:textSize="18sp"
-        />
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@id/txt2" />
 
     <android.widget.Button
         android:id="@+id/edit"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
         android:layout_height="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_round_mypage"
-        app:layout_constraintTop_toBottomOf="@id/email"
-        app:layout_constraintLeft_toLeftOf="@id/layout"
-        app:layout_constraintRight_toRightOf="@id/layout"
         android:backgroundTint="@color/bold_purple"
+        android:fontFamily="@font/nanumgothic_bold"
         android:text="수정하기"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:fontFamily="@font/nanumgothic_bold"
-        android:layout_marginTop="60dp"/>
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@id/email" />
 
     <android.widget.Button
         android:id="@+id/secession"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="30dp"
         android:layout_height="40dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/button_round_mypage"
         android:backgroundTint="#A0A0A0"
-        app:layout_constraintTop_toBottomOf="@id/edit"
-        app:layout_constraintLeft_toLeftOf="@id/layout"
-        app:layout_constraintRight_toRightOf="@id/layout"
+        android:fontFamily="@font/nanumgothic_bold"
         android:text="계정탈퇴"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:fontFamily="@font/nanumgothic_bold"
-        android:layout_marginTop="30dp"/>
+        app:layout_constraintLeft_toLeftOf="@id/layout"
+        app:layout_constraintRight_toRightOf="@id/layout"
+        app:layout_constraintTop_toBottomOf="@id/edit" />
 
     <FrameLayout
         android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_weight="1"
         android:layout_marginBottom="50dp"
-        />
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,8 +24,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.Account;
 
+
+import org.json.JSONObject;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -62,11 +67,34 @@ public class Login extends AppCompatActivity {
                                 if (meError != null) {
                                     Log.e(TAG, "사용자 정보 요청 실패", meError);
                                 } else {
-                                    MainActivity.isLogin = true;
-                                    Toast.makeText(Login.this, "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
-                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
-                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
-                                    finish();
+                                    String user_email = user.getKakaoAccount().getEmail();
+                                    Response.Listener rListener = new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            try{
+                                                JSONObject jResponse = new JSONObject(response);
+                                                boolean new_email = jResponse.getBoolean("new_email");
+
+                                                if(new_email){
+                                                    Intent intent = new Intent(Login.this, Account.class);
+                                                    intent.putExtra("user_email", user_email);
+                                                    Login.this.startActivity(intent);
+                                                    Login.this.finish();
+                                                }else {
+                                                    MainActivity.isLogin = true;
+                                                    Toast.makeText(Login.this, "로그인 성공(이메일) : " + user.getKakaoAccount().getEmail(), Toast.LENGTH_LONG).show();
+                                                    ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
+                                                    ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                                    finish();
+                                                }
+                                            }catch (Exception e){
+                                                Log.d("mytest", e.toString());
+                                            }
+                                        }
+                                    };
+                                    CheckIdRequest vRequest = new CheckIdRequest(user_email, rListener);
+                                    RequestQueue queue = Volley.newRequestQueue(Login.this);
+                                    queue.add(vRequest);
                                 }
                                 return null;
                             });

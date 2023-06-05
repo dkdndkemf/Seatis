@@ -13,17 +13,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
+import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
+import java.text.SimpleDateFormat;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
 public class review_write extends AppCompatActivity {
 
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+    long mNow;
     ListView listView;
     ArrayList<Review> data;
     Detailed_Review_Adapter detailed_review_adapter;
@@ -78,6 +81,8 @@ public class review_write extends AppCompatActivity {
         ArrayList<String>theater_name= getIntent().getStringArrayListExtra("theater_name");
         theater_tv.setText(theater_name.get(0));
         seat_tv.setText(theater_name.get(1));
+        mNow=System.currentTimeMillis();
+
 
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -105,7 +110,7 @@ public class review_write extends AppCompatActivity {
        write_btn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               data.add(new Review("테스트1","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
+               data.add(new Review("테스트1",getTime(),see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
                if(data.isEmpty())
                {
                    listView.setVisibility(View.INVISIBLE);
@@ -147,5 +152,10 @@ public class review_write extends AppCompatActivity {
                 break;
 
         }
+    }
+    private String getTime(){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+        return mFormat.format(mDate);
     }
 }

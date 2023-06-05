@@ -1,5 +1,7 @@
 package com.example.seatis;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class Detailed_Review_Adapter extends BaseAdapter {
     final List mData;
+    ArrayList<Review> data;
 
     public Detailed_Review_Adapter(List mData) {
         this.mData = mData;
@@ -47,6 +50,9 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         Button agree = view.findViewById(R.id.agree);
         Button disagree = view.findViewById(R.id.disagree);
         ImageView img_v=view.findViewById(R.id.img_v);
+        TextView modify=view.findViewById(R.id.modify);
+        TextView delete=view.findViewById(R.id.delete);
+        data=((Detailed_Review)Detailed_Review.context_Detailed_Review).data;
         Review review = (Review) mData.get(position);
 
         name.setText(review.getName());
@@ -78,6 +84,21 @@ public class Detailed_Review_Adapter extends BaseAdapter {
             }
         });
 
+        //수정하기 텍스트 클릭시 발생할 이벤트
+        modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //삭제하기 텍스트 클릭시 발생할 이벤트
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         return view;
     }
 }
