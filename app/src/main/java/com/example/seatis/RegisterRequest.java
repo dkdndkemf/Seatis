@@ -11,14 +11,13 @@ public class RegisterRequest extends StringRequest {
     final static private String URL = "http://101.101.211.66:8080/SeatIs/RegisterRequest.jsp";
     private Map<String, String> parameters;
 
-    public RegisterRequest(String user_email, String platform_type, String nickname, String base64EncodedString,
+    public RegisterRequest(String user_email, String platform_type, String nickname,
                             Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
         parameters = new HashMap<>();
         parameters.put("user_email", user_email);
         parameters.put("platform_type", platform_type);
         parameters.put("nickname", nickname);
-        parameters.put("user_image", base64EncodedString);
     }
 
     @Override

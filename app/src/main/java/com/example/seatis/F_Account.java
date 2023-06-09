@@ -34,6 +34,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +69,9 @@ public class F_Account extends Fragment {
     String platform_type = "";
     String nick = "";
     TextView email;
-    Drawable changedDrawable=null;
+    Drawable changedDrawable = null;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     public F_Account() {
         // Required empty public constructor
@@ -177,15 +182,31 @@ public class F_Account extends Fragment {
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Drawable drawable = picture.getDrawable();
-                        if (changedDrawable!=null){
-                            drawable=changedDrawable;
-                        }
-                        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-                        byte[] byteArray = outputStream.toByteArray();
-                        String base64EncodedString = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+                        // ImageView에서 비트맵 가져오기
+                        BitmapDrawable drawable = (BitmapDrawable) picture.getDrawable();
+                        Bitmap bitmap = drawable.getBitmap();
+
+                        // Firebase Storage에 업로드할 파일 경로 생성
+                        String fileName = "image.jpg";
+                        StorageReference imageRef = storageRef.child(fileName);
+
+                        // 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] data = baos.toByteArray();
+
+                        UploadTask uploadTask = imageRef.putBytes(data);
+                        uploadTask.addOnFailureListener(exception -> {
+                            // 업로드 실패 시 처리
+                        }).addOnSuccessListener(taskSnapshot -> {
+                            // 업로드 성공 시 처리
+                            // 업로드된 파일의 다운로드 URL 가져오기
+                            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                // 다운로드 URL 사용
+                                String downloadUrl = uri.toString();
+                                // ...
+                            });
+                        });
 
 
                         nick = nickname.getText().toString();
@@ -225,7 +246,7 @@ public class F_Account extends Fragment {
                                                 dialog.show();
                                             }
                                         };
-                                        RegisterRequest vRequest = new RegisterRequest(user_email, platform_type, nick, base64EncodedString, rListener);
+                                        RegisterRequest vRequest = new RegisterRequest(user_email, platform_type, nick, rListener);
                                         RequestQueue queue = Volley.newRequestQueue(getActivity());
                                         queue.add(vRequest);
 
@@ -274,7 +295,7 @@ public class F_Account extends Fragment {
             Uri imageUri = data.getData();
             // 이미지 URI를 사용하여 picture 이미지뷰에 설정
             picture.setImageURI(imageUri);
-            changedDrawable=getDrawableFromUri(imageUri);
+            changedDrawable = getDrawableFromUri(imageUri);
         }
     }
 
