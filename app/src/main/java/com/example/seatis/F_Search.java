@@ -81,6 +81,7 @@ public class F_Search extends Fragment {
         ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
 
         F_Theater FTheater = new F_Theater();
+        F_SmallTheater FSTheater = new F_SmallTheater();
 
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
 
@@ -163,8 +164,9 @@ public class F_Search extends Fragment {
                 } catch (NullPointerException e){
                     System.out.println("처음 누름");
                 }
-                Intent search_to_small_theater = new Intent(getActivity(),small_theater_activity.class);
-                startActivity(search_to_small_theater);
+                //Intent search_to_small_theater = new Intent(getActivity(),small_theater_activity.class);
+                ///startActivity(search_to_small_theater);
+                fragmentManager.beginTransaction().add(R.id.containers, FSTheater, "FST").addToBackStack(null).commit(); //프래그먼트 사용
             }
         });//드림아트센터로 이동
         back.setOnClickListener(new View.OnClickListener() {

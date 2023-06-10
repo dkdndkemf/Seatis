@@ -109,6 +109,7 @@ public class F_FavoriteTheater extends Fragment {
 
         //Intent favoriteTheater_to_theater = new Intent(getActivity(), theater_activity.class);
         F_Theater FTheater = new F_Theater();
+        F_SmallTheater FSTheater = new F_SmallTheater();
 
 
 
@@ -152,7 +153,7 @@ public class F_FavoriteTheater extends Fragment {
                     System.out.println("처음 누름");
                 }
                 //startActivity(favoriteTheater_to_theater);
-                fragmentManager.beginTransaction().add(R.id.containers, FTheater, "FT").commit();
+                fragmentManager.beginTransaction().add(R.id.containers, FSTheater, "FST").commit();
             }
         });
 

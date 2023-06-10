@@ -46,6 +46,7 @@ public class F_Login extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
 
     Fragment theater;
+    Fragment stheater;
     Fragment detailedReview;
 
     private ViewModel viewModel;
@@ -100,12 +101,14 @@ public class F_Login extends Fragment {
         google_login = (ImageButton) view.findViewById(R.id.google_login);
 
         F_Theater FTheater = new F_Theater();
+        F_SmallTheater FSTheater = new F_SmallTheater();
         F_Account FAccount = new F_Account();
         F_DetailedReview FDetailedReview = F_Theater.FDetailedReview;
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         theater = fragmentManager.findFragmentByTag("FT");
         detailedReview = fragmentManager.findFragmentByTag("FD");
+        stheater = fragmentManager.findFragmentByTag("FST");
 
 
         // 뒤로가기
@@ -155,6 +158,12 @@ public class F_Login extends Fragment {
                                                         fragmentManager.beginTransaction().remove(F_Login.this)
                                                                 .remove(theater)
                                                                 .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                    } else if (stheater != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(stheater)
+                                                                .add(R.id.containers, FSTheater)
                                                                 .addToBackStack(null)
                                                                 .commit();
                                                     } else {
@@ -212,6 +221,12 @@ public class F_Login extends Fragment {
                                                         fragmentManager.beginTransaction().remove(F_Login.this)
                                                                 .remove(theater)
                                                                 .add(R.id.containers, FTheater)
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                    } else if (stheater != null) {
+                                                        fragmentManager.beginTransaction().remove(F_Login.this)
+                                                                .remove(stheater)
+                                                                .add(R.id.containers, FSTheater)
                                                                 .addToBackStack(null)
                                                                 .commit();
                                                     } else {
@@ -315,6 +330,7 @@ public class F_Login extends Fragment {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         F_Theater FTheater = new F_Theater();
+        F_SmallTheater FSTheater = new F_SmallTheater();
         F_DetailedReview FDetailedReview = new F_DetailedReview();
         try {
             GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
@@ -348,7 +364,12 @@ public class F_Login extends Fragment {
                                     fragmentManager.beginTransaction().remove(F_Login.this);
                                     fragmentManager.popBackStack();
                                     fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FTheater).addToBackStack(null).commit();
-                                } else {
+                                }else if (stheater != null) {
+                                    fragmentManager.beginTransaction().remove(F_Login.this);
+                                    fragmentManager.popBackStack();
+                                    fragmentManager.beginTransaction().remove(theater).add(R.id.containers, FSTheater).addToBackStack(null).commit();
+                                }
+                                else {
                                     fragmentManager.beginTransaction().remove(F_Login.this).commit();
                                     fragmentManager.popBackStack();
                                 }
