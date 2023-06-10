@@ -172,6 +172,7 @@ public class F_Account extends Fragment {
                 queue.add(vRequest);
             }
         });
+
         // 회원가입하기
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,33 +183,6 @@ public class F_Account extends Fragment {
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // ImageView에서 비트맵 가져오기
-                        BitmapDrawable drawable = (BitmapDrawable) picture.getDrawable();
-                        Bitmap bitmap = drawable.getBitmap();
-
-                        // Firebase Storage에 업로드할 파일 경로 생성
-                        String fileName = "image.jpg";
-                        StorageReference imageRef = storageRef.child(fileName);
-
-                        // 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] data = baos.toByteArray();
-
-                        UploadTask uploadTask = imageRef.putBytes(data);
-                        uploadTask.addOnFailureListener(exception -> {
-                            // 업로드 실패 시 처리
-                        }).addOnSuccessListener(taskSnapshot -> {
-                            // 업로드 성공 시 처리
-                            // 업로드된 파일의 다운로드 URL 가져오기
-                            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                // 다운로드 URL 사용
-                                String downloadUrl = uri.toString();
-                                // ...
-                            });
-                        });
-
-
                         nick = nickname.getText().toString();
                         Response.Listener rListener = new Response.Listener<String>() {
                             @Override
@@ -237,6 +211,31 @@ public class F_Account extends Fragment {
                                                             public void onClick(DialogInterface dialog, int which) {
                                                                 MainActivity.user_email = user_email;
                                                                 MainActivity.isLogin = true;
+                                                                // ImageView에서 비트맵 가져오기
+                                                                BitmapDrawable drawable = (BitmapDrawable) picture.getDrawable();
+                                                                Bitmap bitmap = drawable.getBitmap();
+
+                                                                // Firebase Storage에 업로드할 파일 경로 생성
+                                                                String fileName = user_email+".jpg";
+                                                                StorageReference imageRef = storageRef.child(fileName);
+
+                                                                // 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
+                                                                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                                                byte[] data = baos.toByteArray();
+
+                                                                UploadTask uploadTask = imageRef.putBytes(data);
+                                                                uploadTask.addOnFailureListener(exception -> {
+                                                                    // 업로드 실패 시 처리
+                                                                }).addOnSuccessListener(taskSnapshot -> {
+                                                                    // 업로드 성공 시 처리
+                                                                    // 업로드된 파일의 다운로드 URL 가져오기
+                                                                    /*imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                                                        // 다운로드 URL 사용
+                                                                        String downloadUrl = uri.toString();
+                                                                        // ...
+                                                                    });*/
+                                                                });
                                                                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                                                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                                                                 fragmentManager.beginTransaction().remove(F_Account.this).commit();

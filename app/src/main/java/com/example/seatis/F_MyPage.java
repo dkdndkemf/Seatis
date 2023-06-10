@@ -3,16 +3,30 @@ package com.example.seatis;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,10 +41,17 @@ public class F_MyPage extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    CircleImageView picture;
+    File localFile = null;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String nick;
+    View white_view;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     public F_MyPage() {
         // Required empty public constructor
@@ -74,16 +95,39 @@ public class F_MyPage extends Fragment {
         Button editProfile = (Button)view.findViewById(R.id.btnedit);
         Button logout = (Button)view.findViewById(R.id.btn5);
         //ImageButton logout2 = (ImageButton)view.findViewById(R.id.btn6);
+        white_view = (View) view.findViewById(R.id.white_view);
+        white_view.setVisibility(View.VISIBLE);
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-        CircleImageView picture = (CircleImageView)view.findViewById(R.id.circle_iv);
+        picture = (CircleImageView)view.findViewById(R.id.circle_iv);
 
-        try {
-            picture.setImageURI(MainActivity.picUri);
-        }catch(NullPointerException e) {
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response);
+                    nick = jResponse.getString("nickname");
+                    StorageReference imageRef = storageRef.child(MainActivity.user_email+".jpg");
 
-        }
+                    File localFile = File.createTempFile("temp", "jpg");
+                    imageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
+                        // 이미지 다운로드 성공 시 처리
+                        // 다운로드한 이미지 파일을 ImageView에 설정
+                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        picture.setImageBitmap(bitmap);
+                        white_view.setVisibility(View.INVISIBLE);
+                    }).addOnFailureListener(exception -> {
+                        // 이미지 다운로드 실패 시 처리
+                    });
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        FindNickByEmail vRequest = new FindNickByEmail(MainActivity.user_email, rListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(vRequest);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +141,7 @@ public class F_MyPage extends Fragment {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentManager.beginTransaction().add(R.id.containers, f_editProfile).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().add(R.id.containers, f_editProfile).addToBackStack("F_MyPage").commit();
             }
         });
 
@@ -124,4 +168,5 @@ public class F_MyPage extends Fragment {
         });
         return view;
     }
+
 }
