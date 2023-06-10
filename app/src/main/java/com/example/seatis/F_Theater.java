@@ -119,9 +119,9 @@ public class F_Theater extends Fragment {
         View view = inflater.inflate(R.layout.fragment_f__theater, container, false);
         // Inflate the layout for this fragment
         simple_review = (ConstraintLayout)view.findViewById(R.id.simple_review);
+        simple_review.setVisibility(View.INVISIBLE);
         whiteView = (View)view.findViewById(R.id.whiteView);
         whiteView.setVisibility(View.VISIBLE);
-        simple_review.setVisibility(View.INVISIBLE);
         seat_layout = (GridLayout)view.findViewById(R.id.seat_layout);
         see_review = (TextView)view.findViewById(R.id.see_review);
         back_btn = (ImageButton)view.findViewById(R.id.back_Btn);
@@ -182,7 +182,6 @@ public class F_Theater extends Fragment {
                         RequestQueue queue = Volley.newRequestQueue(getActivity());
                         queue.add(vRequests);
 
-                        // TODO: 2023-06-06 좌석클릭시 평점 변경되게 , 소극장도 마찬가지 avg_rating, avg_score
                         simple_review.setVisibility(View.VISIBLE);
                     }
                 });
@@ -314,7 +313,7 @@ public class F_Theater extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(vRequest);
-        Log.d("요청끝남", "제발요");
+
     }
     /*
     public void onResume() {
