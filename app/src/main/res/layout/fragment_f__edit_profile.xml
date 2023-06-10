@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
     <View
         android:layout_width="410dp"
         android:layout_height="188dp"
@@ -156,6 +155,14 @@
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintRight_toRightOf="@id/layout"
         app:layout_constraintTop_toBottomOf="@id/edit" />
+    <View
+        android:id="@+id/white_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:translationZ="10dp"
+        android:visibility="visible"
+        />
 
     <FrameLayout
         android:id="@+id/containers"
