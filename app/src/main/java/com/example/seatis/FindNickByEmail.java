@@ -7,17 +7,14 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterRequest extends StringRequest {
-    final static private String URL = "http://101.101.211.66:8080/SeatIs/RegisterRequest.jsp";
+public class FindNickByEmail extends StringRequest {
+    final static private String URL = "http://101.101.211.66:8080/SeatIs/FindNickByEmail.jsp";
     private Map<String, String> parameters;
 
-    public RegisterRequest(String user_email, String platform_type, String nickname,
-                            Response.Listener<String> listener){
+    public FindNickByEmail(String user_email, Response.Listener<String> listener){
         super(Method.POST, URL, listener, null);
         parameters = new HashMap<>();
         parameters.put("user_email", user_email);
-        parameters.put("platform_type", platform_type);
-        parameters.put("nickname", nickname);
     }
 
 

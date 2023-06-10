@@ -1,6 +1,7 @@
 package com.example.seatis;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +51,14 @@ public class F_Theater extends Fragment {
     ImageButton back_btn;
     RatingBar avg_rating;
     TextView avg_score;
+    View whiteView;
+
+    String request_seat_score = "";
+    String seat_col = "";
+    String seat_num = "";
+
+    Float request_float_seat_score;
+
     int seat_id[][] = {{R.id.A1, R.id.A2, R.id.A_emtpy, R.id.A4, R.id.A5, R.id.A6, R.id.A7, R.id.A8},
             {R.id.B1, R.id.B2, R.id.B_emtpy, R.id.B4, R.id.B5, R.id.B6, R.id.B7, R.id.B8},
             {R.id.C1, R.id.C2, R.id.C_emtpy, R.id.C4, R.id.C5, R.id.C6, R.id.C7, R.id.C8},
@@ -51,6 +68,8 @@ public class F_Theater extends Fragment {
     GridLayout seat_layout; //좌석 그리드 레이아웃
     String seat_string; //좌석 이름 문자열
     float get_avg_score; //별점
+
+
 
     Bundle bundle;
 
@@ -100,6 +119,8 @@ public class F_Theater extends Fragment {
         View view = inflater.inflate(R.layout.fragment_f__theater, container, false);
         // Inflate the layout for this fragment
         simple_review = (ConstraintLayout)view.findViewById(R.id.simple_review);
+        whiteView = (View)view.findViewById(R.id.whiteView);
+        whiteView.setVisibility(View.VISIBLE);
         simple_review.setVisibility(View.INVISIBLE);
         seat_layout = (GridLayout)view.findViewById(R.id.seat_layout);
         see_review = (TextView)view.findViewById(R.id.see_review);
@@ -119,25 +140,57 @@ public class F_Theater extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         bundle = new Bundle();
 
+
         for (int row = 0; row < seat.length; row++) { //시작
             final int row_num = row;
+
             for (int col = 0; col < seat[row].length - 1; col++) {
                 final int col_num = col;
+
                 seat[row][col] = (Button)view.findViewById(seat_id[row][col]);
                 seat[row][col].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         int row_ASCII = 65 + row_num; //A의 아스키코드값은 65.... 거기에 row를 더해줌
                         char row_char = (char) row_ASCII; //문자로 변환
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
                         bundle.putString("seat_name", seat_string);
                         //theater_activity_to_review.putExtra("seat_name", seat_string);
+                        Response.Listener rListeners = new Response.Listener<String>() {
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jResponse = new JSONObject(response);
+
+                                    String avg_scores = jResponse.getString("request_seat_score");
+                                    avg_score.setText(avg_scores);
+                                    avg_rating.setRating(Float.valueOf(avg_scores));
+
+                                } catch (Exception e) {
+
+                                }
+
+                            }
+                        };
+
+                        seat_col = String.valueOf(row_char);
+                        seat_num = String.valueOf(col_num+1);
+
+                        theater_activity_Request vRequests = new theater_activity_Request(seat_col, seat_num, rListeners); //열
+
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequests);
+
+                        // TODO: 2023-06-06 좌석클릭시 평점 변경되게 , 소극장도 마찬가지 avg_rating, avg_score
                         simple_review.setVisibility(View.VISIBLE);
                     }
                 });
             }
         }
+        processRequests(0,0);
+
+
 
         see_review.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +239,82 @@ public class F_Theater extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(ViewModel.class);
+    }
+
+
+    private void processRequests(final int row, final int col) {
+        if (row >= seat.length) {
+            // 모든 요청 처리 완료
+            whiteView.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        if (col >= seat[row].length - 1) {
+            // 현재 행의 모든 열에 대한 요청 처리 완료
+            processRequests(row + 1, 0);
+            return;
+        }
+
+        final int row_num = row;
+        final int col_num = col;
+        final Button seatButton = seat[row][col];
+
+        int row_ASCII = 65 + row_num;
+        char row_char = (char) row_ASCII;
+
+        char finalRow = row_char;
+        int finalCol = col + 1;
+
+        seat_col = String.valueOf(finalRow);
+        seat_num = String.valueOf(finalCol);
+
+        theater_activity_Request vRequest = new theater_activity_Request(seat_col, seat_num, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response);
+
+                    request_seat_score = jResponse.getString("request_seat_score");
+                    request_float_seat_score = Float.valueOf(request_seat_score);
+                    Log.d("12345678", String.valueOf(request_float_seat_score));
+
+                    if (0.0 <= request_float_seat_score && request_float_seat_score <= 1.0) { //빨강
+                        seatButton.setBackgroundColor(Color.RED);
+
+                    }
+                    else if (1.0 < request_float_seat_score && request_float_seat_score <= 2.0){ //주황
+                        seatButton.setBackgroundColor(Color.parseColor("#FF8000"));
+                        Log.d("1027", String.valueOf(request_float_seat_score));
+                    }
+
+                    else if (2.0 < request_float_seat_score && request_float_seat_score <= 3.0){ //노랑
+                        seatButton.setBackgroundColor(Color.parseColor("#F4FA58"));
+                        Log.d("1028", String.valueOf(request_float_seat_score));
+
+                    }
+                    else if (3.0 < request_float_seat_score && request_float_seat_score <= 4.0){ //연두
+                        seatButton.setBackgroundColor(Color.parseColor("#01DF3A"));
+                    Log.d("1029", String.valueOf(request_float_seat_score));
+
+                    }
+                    else //if (4.1 <= request_float_seat_score && request_float_seat_score <= 5.0) //초록
+                    {
+                        seatButton.setBackgroundColor(Color.parseColor("#04B431"));
+                        Log.d("1030", String.valueOf(request_float_seat_score));
+                    }
+
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                } finally {
+                    // 다음 요청 처리
+                    processRequests(row_num, col_num + 1);
+                }
+            }
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(vRequest);
+        Log.d("요청끝남", "제발요");
     }
     /*
     public void onResume() {

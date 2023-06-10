@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
+    public static String user_email="";
 
     public static Uri picUri;
     @Override

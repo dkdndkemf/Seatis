@@ -149,6 +149,7 @@ public class F_Login extends Fragment {
                                                             .replace(R.id.containers, fragment)
                                                             .commit();
                                                 } else {
+                                                    MainActivity.user_email=user_email;
                                                     MainActivity.isLogin = true;
                                                     if (detailedReview != null) {
                                                         fragmentManager.beginTransaction().remove(F_Login.this)
@@ -212,6 +213,7 @@ public class F_Login extends Fragment {
                                                             .replace(R.id.containers, fragment)
                                                             .commit();
                                                 } else {
+                                                    MainActivity.user_email=user_email;
                                                     MainActivity.isLogin = true;
                                                     if (detailedReview != null) {
                                                         fragmentManager.beginTransaction().remove(F_Login.this)
@@ -354,6 +356,7 @@ public class F_Login extends Fragment {
                                 Toast.makeText(getActivity(), "로그인 성공(이메일) : " + personEmail, Toast.LENGTH_LONG).show();
                                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
+                                MainActivity.user_email=personEmail;
                                 MainActivity.isLogin = true;
                                 if (detailedReview != null) {
                                     fragmentManager.beginTransaction().remove(F_Login.this);
