@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -36,6 +38,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -66,6 +69,7 @@ public class F_Account extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final int REQUEST_IMAGE_PICK = 1;
 
+    private String mCurrentPhotoPath;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -242,7 +246,7 @@ public class F_Account extends Fragment {
                                                                 Bitmap bitmap = drawable.getBitmap();
 
                                                                 // 이미지 크기 최적화
-                                                                int maxWidth = 180; // 원하는 최대 너비 설정
+                                                                int maxWidth = 182; // 원하는 최대 너비 설정
                                                                 int maxHeight = 180; // 원하는 최대 높이 설정
                                                                 int originalWidth = bitmap.getWidth();
                                                                 int originalHeight = bitmap.getHeight();
@@ -327,13 +331,13 @@ public class F_Account extends Fragment {
         }
     }
 
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (photoFile != null) {
                 Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                bitmap = rotateBitmap(bitmap, photoFile.getAbsolutePath());
                 picture.setImageBitmap(bitmap);
             }
 
@@ -345,7 +349,10 @@ public class F_Account extends Fragment {
                         InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         if (bitmap != null) {
-                            picture.setImageBitmap(bitmap);
+                            Glide.with(this).load(selectedImageUri).into(picture);
+                           // bitmap = rotateBitmap(bitmap, getRealPathFromURI(selectedImageUri));
+                          //  picture.setImageBitmap(bitmap);
+
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -355,22 +362,95 @@ public class F_Account extends Fragment {
         }
     }
 
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(null);
-        File image = null;
+    private Bitmap rotateBitmap(Bitmap bitmap, String filePath) {
+        ExifInterface exifInterface;
         try {
-            image = File.createTempFile(
-                    imageFileName,
-                    ".jpg",
-                    storageDir
-            );
+            exifInterface = new ExifInterface(filePath);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            int rotationAngle = getRotationAngle(orientation);
+            if (rotationAngle != 0) {
+                Matrix matrix = new Matrix();
+                matrix.postRotate(rotationAngle);
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return image;
+        return bitmap;
     }
 
+    private int getRotationAngle(int rotation) {
+        int rotationAngle = 0;
+        switch (rotation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotationAngle = 90;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotationAngle = 180;
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotationAngle = 270;
+                break;
+        }
+        return rotationAngle;
+    }
+
+    private String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String path = cursor.getString(column_index);
+        cursor.close();
+        return path;
+    }
+
+
+    private void selectImage() {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Take Photo")) {
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        if (photoFile != null) {
+                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
+                                    "com.example.seatis.fileprovider",
+                                    photoFile);
+                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            startActivityForResult(takePictureIntent, 1);
+                        }
+                    }
+                } else if (options[item].equals("Choose from Gallery")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, 1);
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private File createImageFile() throws IOException {
+        // 이미지 파일 이름
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        // 이미지가 저장될 폴더 이름
+        File storageDir = getActivity().getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES);
+        // 이미지 파일 생성
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = imageFile.getAbsolutePath();
+        return imageFile;
+    }
 
 }
