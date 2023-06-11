@@ -888,7 +888,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:visibility="GONE"
+
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
         app:layout_constraintLeft_toLeftOf="@id/layout">
 
