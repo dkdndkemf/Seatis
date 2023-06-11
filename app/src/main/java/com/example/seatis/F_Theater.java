@@ -44,6 +44,8 @@ public class F_Theater extends Fragment {
 
     public static Activity _theater_activity;
     private ViewModel viewModel;
+
+    TextView theater_name_tv;
     Button seat[][]; //좌석 배열
     Button login_btn;
     ConstraintLayout simple_review; //간단한 리뷰 레이아웃
@@ -129,9 +131,9 @@ public class F_Theater extends Fragment {
         avg_rating = (RatingBar)view.findViewById(R.id.avg_rating);
         avg_score = (TextView)view.findViewById(R.id.avg_score);
         login_btn = (Button)view.findViewById(R.id.login_btn);
-
+        theater_name_tv=(TextView)view.findViewById(R.id.theater_name_tv);
         get_avg_score=Float.parseFloat(avg_score.getText().toString());
-        avg_rating.setRating(get_avg_score);
+        //avg_rating.setRating(get_avg_score);
 
         seat = new Button[seat_layout.getRowCount()][seat_layout.getColumnCount()];
 
@@ -156,7 +158,7 @@ public class F_Theater extends Fragment {
                         char row_char = (char) row_ASCII; //문자로 변환
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
-                        bundle.putString("seat_name", seat_string);
+
                         //theater_activity_to_review.putExtra("seat_name", seat_string);
                         Response.Listener rListeners = new Response.Listener<String>() {
                             public void onResponse(String response) {
@@ -194,7 +196,16 @@ public class F_Theater extends Fragment {
         see_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bundle.putFloat("avg_rating", get_avg_score);
+                //bundle.putFloat("avg_rating", get_avg_score);
+                bundle.putString("seat_name", seat_string);
+                bundle.putString("theater_name",theater_name_tv.getText().toString());
+
+
+                bundle.putString("avg_score",avg_score.getText().toString());
+                bundle.putFloat("avg_rating",avg_rating.getRating());
+                Float a=avg_rating.getRating();
+                String aa=a.toString();
+                Log.d("6678",aa);
                 //theater_activity_to_review.putExtra("avg_rating", get_avg_score);
                 FDetailedReview.setArguments(bundle);
                 fragmentManager.beginTransaction().add(R.id.containers, FDetailedReview, "FD").addToBackStack(null).commit();

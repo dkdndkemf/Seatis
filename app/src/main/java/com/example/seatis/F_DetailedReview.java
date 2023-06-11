@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import java.util.ArrayList;
  */
 public class F_DetailedReview extends Fragment {
 
+    TextView theater_name_tv;
+
     public Context context_DetailedReview;
     static ListView listView;
     static ArrayList<Review> data = new ArrayList<>();
@@ -38,7 +41,7 @@ public class F_DetailedReview extends Fragment {
     static TextView no_review; //리뷰가 없으면 나타나는 텍스트뷰
     RatingBar avg_rating;
 
-    float avg_score_string; //리뷰 평점
+    String avg_score_string; //리뷰 평점
 
     Button login_btn;
     static Detailed_Review_Adapter detailed_review_adapter = new Detailed_Review_Adapter(data);
@@ -53,6 +56,8 @@ public class F_DetailedReview extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
 
     public F_DetailedReview() {
         // Required empty public constructor
@@ -82,6 +87,7 @@ public class F_DetailedReview extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -92,6 +98,7 @@ public class F_DetailedReview extends Fragment {
         View view = inflater.inflate(R.layout.fragment_f__detailed_review, container, false);
         //context_DetailedReview = container.getContext();
 
+        theater_name_tv=(TextView)view.findViewById(R.id.theater_name_tv);
         listView = (ListView)view.findViewById(R.id.review_viewer);
         listView.setAdapter(detailed_review_adapter);
         fab_btn = (ImageButton)view.findViewById(R.id.fab_btn);
@@ -116,11 +123,21 @@ public class F_DetailedReview extends Fragment {
 
         if(getArguments() != null)
         {
+
+
             seat_name.setText(getArguments().getString("seat_name"));
-            avg_score_string = getArguments().getFloat("avg_rating", 0.0f);
-            avg_score.setText(String.valueOf(avg_score_string));
-            avg_rating.setRating(avg_score_string);
+            avg_score_string = getArguments().getString("avg_score");
+
+
+            avg_score.setText(avg_score_string);
+            avg_rating.setRating(getArguments().getFloat("avg_rating"));
+            Float avg=avg_rating.getRating();
+            String avg_s=avg.toString();
+            Log.d("6656",avg_s);
+            theater_name_tv.setText(getArguments().getString("theater_name"));
+
         }
+
 
         // 리뷰작성
         fab_btn.setOnClickListener(new View.OnClickListener() {

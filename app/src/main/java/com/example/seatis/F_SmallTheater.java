@@ -141,9 +141,8 @@ public class F_SmallTheater extends Fragment {
         avg_rating = (RatingBar)view.findViewById(R.id.avg_rating);
         avg_score = (TextView)view.findViewById(R.id.avg_score);
         login_btn = (Button)view.findViewById(R.id.login_btn);
-
         get_avg_score = Float.parseFloat(avg_score.getText().toString());
-        avg_rating.setRating(get_avg_score);
+
 
         seat_floor1 = new Button[seat_layout1.getRowCount()][seat_layout1.getColumnCount()];
 
@@ -168,11 +167,11 @@ public class F_SmallTheater extends Fragment {
                         seat_string = "1층 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
 
-                        ArrayList<String> theater_name = new ArrayList<>();
+                       /* ArrayList<String> theater_name = new ArrayList<>();
 
                         theater_name.add(seat_string);
                         theater_name.add(theater_name_tv.getText().toString());
-                        bundle.putStringArrayList("theater_name", theater_name);
+                        bundle.putStringArrayList("theater_name", theater_name);*/
                         //small_theater_activity_to_review.putExtra("theater_name", theater_name);
 
                         Response.Listener rListeners = new Response.Listener<String>() {
@@ -224,11 +223,11 @@ public class F_SmallTheater extends Fragment {
                         seat_string = "2층 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
 
-                        ArrayList<String>theater_name=new ArrayList<>();
+                        /*ArrayList<String>theater_name=new ArrayList<>();
 
                         theater_name.add(seat_string);
                         theater_name.add(theater_name_tv.getText().toString());
-                        bundle.putStringArrayList("theater_name", theater_name);
+                        bundle.putStringArrayList("theater_name", theater_name);*/
                         //small_theater_activity_to_review.putExtra("theater_name", theater_name);
 
                         Response.Listener rListeners = new Response.Listener<String>() {
@@ -254,7 +253,6 @@ public class F_SmallTheater extends Fragment {
 
                         RequestQueue queue = Volley.newRequestQueue(getActivity());
                         queue.add(vRequests);
-
                         simple_review.setVisibility(View.VISIBLE);
                     }
                 });
@@ -275,7 +273,12 @@ public class F_SmallTheater extends Fragment {
             @Override
             public void onClick(View v) {
                 //small_theater_activity_to_review.putExtra("avg_rating", get_avg_score);
-                bundle.putFloat("avg_rating", get_avg_score);
+                bundle.putString("seat_name", seat_string);
+                bundle.putString("theater_name",theater_name_tv.getText().toString());
+
+                Log.d("6678",avg_score.getText().toString());
+                bundle.putString("avg_score",avg_score.getText().toString());
+                bundle.putFloat("avg_rating",avg_rating.getRating());
                 FDetailedReview.setArguments(bundle);
                 fragmentManager.beginTransaction().add(R.id.containers, FDetailedReview, "FD").addToBackStack(null).commit();
             }
