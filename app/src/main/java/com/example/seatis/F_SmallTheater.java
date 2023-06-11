@@ -375,7 +375,7 @@ private void processRequests(final int row, final int col) {
 
                 }
                 else if (3.0 < request_float_seat_score && request_float_seat_score <= 4.0){ //연두
-                    seatButton.setBackgroundColor(Color.parseColor("#86E57F"));
+                    seatButton.setBackgroundColor(Color.parseColor("#00FF19"));
                     Log.d("1029", String.valueOf(request_float_seat_score));
 
                 }
