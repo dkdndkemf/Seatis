@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +16,14 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.TextClock;
 import android.widget.TextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -33,7 +38,7 @@ public class F_DetailedReview extends Fragment {
 
     public Context context_DetailedReview;
     static ListView listView;
-    static ArrayList<Review> data = new ArrayList<>();
+    static ArrayList<String> data = new ArrayList<String>();
     ImageButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
 
@@ -60,6 +65,9 @@ public class F_DetailedReview extends Fragment {
     private String mParam2;
 
     private String user_email;
+
+    private String seatID;
+    private String theaterName, seatRow, seatCol;
 
     public F_DetailedReview() {
         // Required empty public constructor
@@ -134,8 +142,9 @@ public class F_DetailedReview extends Fragment {
         {
             seat_name.setText(getArguments().getString("seat_name"));
             avg_score_string = getArguments().getString("avg_score");
-
-
+            theaterName = getArguments().getString("theaterName");
+            seatCol = getArguments().getString("seat_col");
+            seatRow = getArguments().getString("seat_num");
             avg_score.setText(avg_score_string);
             avg_rating.setRating(getArguments().getFloat("avg_rating"));
             Float avg=avg_rating.getRating();
@@ -144,6 +153,41 @@ public class F_DetailedReview extends Fragment {
             theater_name_tv.setText(getArguments().getString("theater_name"));
 
         }
+
+        data = new ArrayList<String>();
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response);
+                    seatID = jResponse.getString("seatId");
+
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    String item = jsonArray.getString(i);
+                                    data.add(item);
+                                }
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
+                            }
+                        }
+                    };
+                    ReviewWriteRequest vRequest = new ReviewWriteRequest(seatID, rListener);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                    queue.add(vRequest);
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        GetSeatId vRequest = new GetSeatId(theaterName, seatCol, seatRow, rListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(vRequest);
 
         // 리뷰작성
         fab_btn.setOnClickListener(new View.OnClickListener() {
