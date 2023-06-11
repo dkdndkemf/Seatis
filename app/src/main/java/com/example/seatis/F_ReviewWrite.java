@@ -3,8 +3,6 @@ package com.example.seatis;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -194,34 +192,11 @@ public class F_ReviewWrite extends Fragment {
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
                     try {
-                        // 이미지를 비트맵으로 로드
                         InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        inputStream.close(); // 입력 스트림 닫기
-
-                        // Exif 정보 확인
-                        ExifInterface exifInterface = new ExifInterface(selectedImageUri.getPath());
-                        int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-
-                        // 이미지를 알맞게 회전
-                        Matrix matrix = new Matrix();
-                        switch (orientation) {
-                            case ExifInterface.ORIENTATION_ROTATE_90:
-                                matrix.setRotate(90);
-                                break;
-                            case ExifInterface.ORIENTATION_ROTATE_180:
-                                matrix.setRotate(180);
-                                break;
-                            case ExifInterface.ORIENTATION_ROTATE_270:
-                                matrix.setRotate(270);
-                                break;
-                            default:
-                                break;
+                        if (bitmap != null) {
+                            photoImageView.setImageBitmap(bitmap);
                         }
-                        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-
-                        // 이미지뷰에 회전된 이미지 설정
-                        photoImageView.setImageBitmap(rotatedBitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -229,7 +204,6 @@ public class F_ReviewWrite extends Fragment {
             }
         }
     }
-
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
