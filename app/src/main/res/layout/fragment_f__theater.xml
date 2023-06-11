@@ -598,7 +598,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
-        android:visibility="visible"
+        android:visibility="invisible"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

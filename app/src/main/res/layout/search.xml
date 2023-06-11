@@ -20,7 +20,7 @@
         android:layout_marginTop="24dp"
         android:background="@color/white"
         android:src="@drawable/back_icon"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintLeft_toLeftOf="@id/layout"
         app:layout_constraintTop_toTopOf="@+id/layout" />
 
