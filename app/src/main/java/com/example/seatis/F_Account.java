@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -42,8 +44,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -65,6 +71,7 @@ public class F_Account extends Fragment {
     private String mParam1;
     private String mParam2;
     CircleImageView picture;
+    private File photoFile; //사진 파일 부분
     String user_email = "";
     String platform_type = "";
     String nick = "";
@@ -122,7 +129,26 @@ public class F_Account extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, REQUEST_IMAGE_PICK);
+                galleryIntent.setType("image/*");
+
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    if (photoFile != null) {
+                        Uri photoUri = FileProvider.getUriForFile(getActivity(), "com.example.seatis.fileprovider", photoFile);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    }
+                }
+
+                Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Image");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraIntent });
+
+                startActivityForResult(chooserIntent, 1);
             }
         });
 
@@ -302,24 +328,48 @@ public class F_Account extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            // 이미지 URI를 사용하여 picture 이미지뷰에 설정
-            picture.setImageURI(imageUri);
-            changedDrawable = getDrawableFromUri(imageUri);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (photoFile != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                picture.setImageBitmap(bitmap);
+            }
+
+            // 이미지뷰에 갤러리에서 선택한 이미지 세팅
+            if (data != null) {
+                Uri selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    try {
+                        InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        if (bitmap != null) {
+                            picture.setImageBitmap(bitmap);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 
-    public Drawable getDrawableFromUri(Uri uri) {
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(null);
+        File image = null;
         try {
-            InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-            return Drawable.createFromStream(inputStream, uri.toString());
+            image = File.createTempFile(
+                    imageFileName,
+                    ".jpg",
+                    storageDir
+            );
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return image;
     }
 
 
