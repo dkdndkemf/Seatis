@@ -1,5 +1,7 @@
 package com.example.seatis;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,11 +9,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,39 +83,94 @@ public class F_FavoriteTheater extends Fragment {
         Button favorite2 = (Button)view.findViewById(R.id.favorite2);
         ImageButton imgbtn1=view.findViewById(R.id.imgbtn1);
         ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
-
+        View white_view = view.findViewById(R.id.white_view);
         ConstraintLayout fav1ConstraintLayout=view.findViewById(R.id.fav1);
         ConstraintLayout fav2ConstraintLayout=view.findViewById(R.id.fav2);
 
-        //좋아요한 극장 영화관 초기설정
-        if(isfav_1==true)
-        {
-            fav1ConstraintLayout.setVisibility(View.VISIBLE);
-        } else if (isfav_1==false) {
-            fav1ConstraintLayout.setVisibility(View.GONE);
-        }
+        white_view.setVisibility(View.VISIBLE);
+        fav1ConstraintLayout.setVisibility(View.INVISIBLE);
+        fav2ConstraintLayout.setVisibility(View.INVISIBLE);
 
-        if(isfav_2==true)
-        {
-            fav2ConstraintLayout.setVisibility(View.VISIBLE);
-        } else if (isfav_2==false) {
-            fav2ConstraintLayout.setVisibility(View.GONE);
-        }
-        //여기 까지
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+
+                    JSONObject jResponse = new JSONObject(response);
+                    int theater_id;
+
+                    JSONArray theaterIdsArray = jResponse.getJSONArray("theater_ids");
+
+                    for (int i = 0; i < theaterIdsArray.length(); i++) {
+                        theater_id=theaterIdsArray.getInt(i);
+
+                        if (theater_id==1){
+                            fav1ConstraintLayout.setVisibility(View.VISIBLE);
+                        } else if (theater_id==2){
+                            fav2ConstraintLayout.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    white_view.setVisibility(View.INVISIBLE);
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        CheckLikeRequest vRequest = new CheckLikeRequest(MainActivity.user_email, rListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(vRequest);
 
         imgbtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                isfav_1=false;
-                fav1ConstraintLayout.setVisibility(View.GONE);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setMessage("좋아요한 극장에서 삭제하시겠습니까?");
+                dlg.setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    fav1ConstraintLayout.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        DislikeRequest vRequest = new DislikeRequest(MainActivity.user_email,"1", rListener);
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequest);
+                    }
+                });
+                dlg.show();
             }
+
         });
         imgbtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                isfav_2=false;
-                fav2ConstraintLayout.setVisibility(View.GONE);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setMessage("좋아요한 극장에서 삭제하시겠습니까?");
+                dlg.setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    fav2ConstraintLayout.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        DislikeRequest vRequest = new DislikeRequest(MainActivity.user_email,"2", rListener);
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequest);
+                    }
+                });
+                dlg.show();
             }
+
         });
 
         //Intent favoriteTheater_to_theater = new Intent(getActivity(), theater_activity.class);

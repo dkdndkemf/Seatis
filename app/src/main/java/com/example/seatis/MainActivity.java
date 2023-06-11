@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public F_MyPage FMyPage;
     public F_Login FLogin;
     public F_FavoriteTheater FFavoriteTheater;
+
+    public Search search;
+    public F_MyPage myPage;
+    public F_FavoriteTheater favoriteTheater;
 
     public static Context context_main;
     public TextView main_login_textview, main_logout_textview, search_textview;
