@@ -97,6 +97,18 @@
             app:layout_constraintRight_toRightOf="@id/favorite1"
             android:layout_marginRight="18dp"
             />
+        <ImageButton
+            android:id="@+id/imgbtn1_fill"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/heart_fill"
+            android:backgroundTint="@color/white"
+
+            app:layout_constraintTop_toTopOf="@id/favorite1"
+            app:layout_constraintBottom_toBottomOf="@id/favorite1"
+            app:layout_constraintRight_toRightOf="@id/favorite1"
+            android:layout_marginRight="18dp"
+            />
 
         <ImageView
             android:layout_width="90dp"
@@ -131,6 +143,18 @@
             android:layout_height="24dp"
             android:src="@drawable/heart"
             android:backgroundTint="@color/white"
+            app:layout_constraintTop_toTopOf="@id/favorite2"
+            app:layout_constraintBottom_toBottomOf="@id/favorite2"
+            app:layout_constraintRight_toRightOf="@id/favorite2"
+            android:layout_marginRight="18dp"
+            />
+        <ImageButton
+            android:id="@+id/imgbtn2_fill"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/heart_fill"
+            android:backgroundTint="@color/white"
+
             app:layout_constraintTop_toTopOf="@id/favorite2"
             app:layout_constraintBottom_toBottomOf="@id/favorite2"
             app:layout_constraintRight_toRightOf="@id/favorite2"
