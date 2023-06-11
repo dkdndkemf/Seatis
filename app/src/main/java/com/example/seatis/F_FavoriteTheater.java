@@ -136,7 +136,7 @@ public class F_FavoriteTheater extends Fragment {
                     System.out.println("처음 누름");
                 }
                 //startActivity(favoriteTheater_to_theater);
-                fragmentManager.beginTransaction().add(R.id.containers1, FTheater, "FT").commit();
+                fragmentManager.beginTransaction().add(R.id.containers, FTheater, "FT").commit();
             }
         });
 
