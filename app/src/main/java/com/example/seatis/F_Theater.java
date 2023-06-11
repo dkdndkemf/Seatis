@@ -291,7 +291,10 @@ public class F_Theater extends Fragment {
                     request_float_seat_score = Float.valueOf(request_seat_score);
                     Log.d("12345678", String.valueOf(request_float_seat_score));
 
-                    if (0.0 <= request_float_seat_score && request_float_seat_score <= 1.0) { //빨강
+                    if (0.0 == request_float_seat_score) { //회색
+                        seatButton.setBackgroundColor(Color.GRAY);
+                    }
+                    else if (0.1 <= request_float_seat_score && request_float_seat_score <= 1.0) { //빨강
                         seatButton.setBackgroundColor(Color.RED);
 
                     }
