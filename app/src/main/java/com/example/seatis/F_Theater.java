@@ -207,6 +207,9 @@ public class F_Theater extends Fragment {
                 String aa=a.toString();
                 Log.d("6678",aa);
                 //theater_activity_to_review.putExtra("avg_rating", get_avg_score);
+                if(FDetailedReview != null) {
+                    FDetailedReview = new F_DetailedReview();
+                }
                 FDetailedReview.setArguments(bundle);
                 fragmentManager.beginTransaction().add(R.id.containers, FDetailedReview, "FD").addToBackStack(null).commit();
             }

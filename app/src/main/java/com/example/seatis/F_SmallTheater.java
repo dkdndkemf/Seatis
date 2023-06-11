@@ -279,6 +279,9 @@ public class F_SmallTheater extends Fragment {
                 Log.d("6678",avg_score.getText().toString());
                 bundle.putString("avg_score",avg_score.getText().toString());
                 bundle.putFloat("avg_rating",avg_rating.getRating());
+                if(FDetailedReview != null) {
+                    FDetailedReview = new F_DetailedReview();
+                }
                 FDetailedReview.setArguments(bundle);
                 fragmentManager.beginTransaction().add(R.id.containers, FDetailedReview, "FD").addToBackStack(null).commit();
             }
