@@ -215,13 +215,26 @@ public class F_Account extends Fragment {
                                                                 BitmapDrawable drawable = (BitmapDrawable) picture.getDrawable();
                                                                 Bitmap bitmap = drawable.getBitmap();
 
+                                                                // 이미지 크기 최적화
+                                                                int maxWidth = 180; // 원하는 최대 너비 설정
+                                                                int maxHeight = 180; // 원하는 최대 높이 설정
+                                                                int originalWidth = bitmap.getWidth();
+                                                                int originalHeight = bitmap.getHeight();
+                                                                float scaleFactor = Math.min(((float) maxWidth / originalWidth), ((float) maxHeight / originalHeight));
+
+                                                                int resizedWidth = Math.round(originalWidth * scaleFactor);
+                                                                int resizedHeight = Math.round(originalHeight * scaleFactor);
+
+                                                                // 이미지 크기 조정
+                                                                Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, true);
+
                                                                 // Firebase Storage에 업로드할 파일 경로 생성
-                                                                String fileName = user_email+".jpg";
+                                                                String fileName = user_email + ".jpg";
                                                                 StorageReference imageRef = storageRef.child(fileName);
 
-                                                                // 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
+                                                                // 조정된 크기의 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
                                                                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                                                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                                                 byte[] data = baos.toByteArray();
 
                                                                 UploadTask uploadTask = imageRef.putBytes(data);
@@ -236,6 +249,7 @@ public class F_Account extends Fragment {
                                                                         // ...
                                                                     });*/
                                                                 });
+
                                                                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                                                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                                                                 fragmentManager.beginTransaction().remove(F_Account.this).commit();

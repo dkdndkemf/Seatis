@@ -221,13 +221,25 @@ public class F_EditProfile extends Fragment {
                                         BitmapDrawable drawable = (BitmapDrawable) picture.getDrawable();
                                         Bitmap bitmap = drawable.getBitmap();
 
+                                        int maxWidth = 180; // 원하는 최대 너비 설정
+                                        int maxHeight = 180; // 원하는 최대 높이 설정
+                                        int originalWidth = bitmap.getWidth();
+                                        int originalHeight = bitmap.getHeight();
+                                        float scaleFactor = Math.min(((float) maxWidth / originalWidth), ((float) maxHeight / originalHeight));
+
+                                        int resizedWidth = Math.round(originalWidth * scaleFactor);
+                                        int resizedHeight = Math.round(originalHeight * scaleFactor);
+
+                                        // 이미지 크기 조정
+                                        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, true);
+
                                         // Firebase Storage에 업로드할 파일 경로 생성
-                                        String fileName = MainActivity.user_email+".jpg";
+                                        String fileName = MainActivity.user_email + ".jpg";
                                         StorageReference imageRef = storageRef.child(fileName);
 
-                                        // 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
+                                        // 조정된 크기의 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
                                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                                         byte[] data = baos.toByteArray();
 
                                         UploadTask uploadTask = imageRef.putBytes(data);
