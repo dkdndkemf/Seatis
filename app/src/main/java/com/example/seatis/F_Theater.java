@@ -142,6 +142,7 @@ public class F_Theater extends Fragment {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         bundle = new Bundle();
 
+        simple_review.setVisibility(View.GONE);
 
         for (int row = 0; row < seat.length; row++) { //시작
             final int row_num = row;

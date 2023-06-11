@@ -151,6 +151,8 @@ public class F_SmallTheater extends Fragment {
         F_Login FLogin = new F_Login();
         bundle = new Bundle();
 
+        simple_review.setVisibility(View.GONE);
+
         for (int row = 0; row < seat_floor1.length; row++) { //1층 시작
             final int row_num = row;
 
