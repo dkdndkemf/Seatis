@@ -3,10 +3,9 @@ package com.example.seatis;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,14 +15,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextClock;
 import android.widget.TextView;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -38,7 +31,7 @@ public class F_DetailedReview extends Fragment {
 
     public Context context_DetailedReview;
     static ListView listView;
-    static ArrayList<String> data = new ArrayList<String>();
+    static ArrayList<Review> data = new ArrayList<>();
     ImageButton fab_btn; //리뷰작성을 위한 플로팅 버튼
     ImageButton back_btn;
 
@@ -64,10 +57,7 @@ public class F_DetailedReview extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private String user_email;
 
-    private String seatID;
-    private String theaterName, seatRow, seatCol;
 
     public F_DetailedReview() {
         // Required empty public constructor
@@ -91,20 +81,13 @@ public class F_DetailedReview extends Fragment {
         return fragment;
     }
 
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Bundle bundle = getArguments();
-        if (bundle!=null){
-            user_email = bundle.getString("user_email");
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -140,11 +123,12 @@ public class F_DetailedReview extends Fragment {
 
         if(getArguments() != null)
         {
+
+
             seat_name.setText(getArguments().getString("seat_name"));
             avg_score_string = getArguments().getString("avg_score");
-            theaterName = getArguments().getString("theaterName");
-            seatCol = getArguments().getString("seat_col");
-            seatRow = getArguments().getString("seat_num");
+
+
             avg_score.setText(avg_score_string);
             avg_rating.setRating(getArguments().getFloat("avg_rating"));
             Float avg=avg_rating.getRating();
@@ -154,49 +138,15 @@ public class F_DetailedReview extends Fragment {
 
         }
 
-        data = new ArrayList<String>();
-        Response.Listener rListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jResponse = new JSONObject(response);
-                    seatID = jResponse.getString("seatId");
-
-                    Response.Listener rListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONArray jsonArray = new JSONArray(response);
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    String item = jsonArray.getString(i);
-                                    data.add(item);
-                                }
-                            } catch (Exception e) {
-                                Log.d("mytest", e.toString());
-                            }
-                        }
-                    };
-                    ReviewWriteRequest vRequest = new ReviewWriteRequest(seatID, rListener);
-                    RequestQueue queue = Volley.newRequestQueue(getActivity());
-                    queue.add(vRequest);
-                } catch (Exception e) {
-                    Log.d("mytest", e.toString());
-                }
-            }
-        };
-        GetSeatId vRequest = new GetSeatId(theaterName, seatCol, seatRow, rListener);
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(vRequest);
 
         // 리뷰작성
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if(FReviewWrite != null) {
-                       FReviewWrite = new F_ReviewWrite();
-                    }
-                    fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
+                if(FReviewWrite != null) {
+                    FReviewWrite = new F_ReviewWrite();
+                }
+                fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
             }
         });
 
