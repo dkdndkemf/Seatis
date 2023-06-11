@@ -235,12 +235,6 @@ public class F_EditProfile extends Fragment {
                                             // 업로드 실패 시 처리
                                         }).addOnSuccessListener(taskSnapshot -> {
                                             // 업로드 성공 시 처리
-                                            // 업로드된 파일의 다운로드 URL 가져오기
-                                                                    /*imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                                                        // 다운로드 URL 사용
-                                                                        String downloadUrl = uri.toString();
-                                                                        // ...
-                                                                    });*/
                                         });
                                         ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                         ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
