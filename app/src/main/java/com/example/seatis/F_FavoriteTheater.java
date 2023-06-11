@@ -116,7 +116,6 @@ public class F_FavoriteTheater extends Fragment {
                 }
             }
         };
-
         CheckLikeRequest vRequest = new CheckLikeRequest(MainActivity.user_email, rListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(vRequest);

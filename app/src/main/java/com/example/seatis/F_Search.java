@@ -103,26 +103,6 @@ public class F_Search extends Fragment {
 
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        if( F_FavoriteTheater.isfav_1==false)
-        {
-            imgbtn1.setVisibility(View.VISIBLE);
-            imgbtn1_fill.setVisibility(View.GONE);
-
-        } else if ( F_FavoriteTheater.isfav_1==true) {
-            imgbtn1_fill.setVisibility(View.VISIBLE);
-            imgbtn1.setVisibility(View.GONE);
-        }
-
-        if( F_FavoriteTheater.isfav_2==false)
-        {
-            imgbtn2.setVisibility(View.VISIBLE);
-            imgbtn2_fill.setVisibility(View.GONE);
-
-        } else if ( F_FavoriteTheater.isfav_2==true) {
-            imgbtn2_fill.setVisibility(View.VISIBLE);
-            imgbtn2.setVisibility(View.GONE);
-        }
-
 
         if(MainActivity.isLogin){
             Response.Listener rListener = new Response.Listener<String>() {
@@ -134,10 +114,10 @@ public class F_Search extends Fragment {
                         int theater_id;
 
                         JSONArray theaterIdsArray = jResponse.getJSONArray("theater_ids");
-
+                        imgbtn1_fill.setVisibility(View.INVISIBLE);
+                        imgbtn2_fill.setVisibility(View.INVISIBLE);
                         for (int i = 0; i < theaterIdsArray.length(); i++) {
                             theater_id=theaterIdsArray.getInt(i);
-
                             if (theater_id==1){
                                 imgbtn1_fill.setVisibility(View.VISIBLE);
                                 imgbtn1.setVisibility(View.GONE);
