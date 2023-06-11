@@ -69,6 +69,7 @@ public class F_Search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
@@ -79,11 +80,33 @@ public class F_Search extends Fragment {
 
         ImageButton imgbtn1=view.findViewById(R.id.imgbtn1);
         ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
+        ImageButton imgbtn1_fill=view.findViewById(R.id.imgbtn1_fill);
+        ImageButton imgbtn2_fill=view.findViewById(R.id.imgbtn2_fill);
 
         F_Theater FTheater = new F_Theater();
         F_SmallTheater FSTheater = new F_SmallTheater();
 
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+        if( F_FavoriteTheater.isfav_1==false)
+        {
+            imgbtn1.setVisibility(View.VISIBLE);
+            imgbtn1_fill.setVisibility(View.GONE);
+
+        } else if ( F_FavoriteTheater.isfav_1==true) {
+            imgbtn1_fill.setVisibility(View.VISIBLE);
+            imgbtn1.setVisibility(View.GONE);
+        }
+
+        if( F_FavoriteTheater.isfav_2==false)
+        {
+            imgbtn2.setVisibility(View.VISIBLE);
+            imgbtn2_fill.setVisibility(View.GONE);
+
+        } else if ( F_FavoriteTheater.isfav_2==true) {
+            imgbtn2_fill.setVisibility(View.VISIBLE);
+            imgbtn2.setVisibility(View.GONE);
+        }
 
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -101,32 +124,44 @@ public class F_Search extends Fragment {
         imgbtn1.setOnClickListener(new View.OnClickListener() { //영화관 종아요
             @Override
             public void onClick(View v) {
-                if(F_FavoriteTheater.isfav_1==false)
-                {
+
                     F_FavoriteTheater.isfav_1=true;
-                    imgbtn1.setImageResource(R.drawable.heart_fill);
-                }
-                else if( F_FavoriteTheater.isfav_1==true)
-                {
+                   imgbtn1_fill.setVisibility(View.VISIBLE);
+                   imgbtn1.setVisibility(View.GONE);
+
+
+
+            }
+        });
+        imgbtn1_fill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                     F_FavoriteTheater.isfav_1=false;
-                    imgbtn1.setImageResource(R.drawable.heart);
-                }
+                    imgbtn1.setVisibility(View.VISIBLE);
+                    imgbtn1_fill.setVisibility(View.GONE);
 
             }
         });
         imgbtn2.setOnClickListener(new View.OnClickListener() { //영화관 종아요
             @Override
             public void onClick(View v) {
-                if(F_FavoriteTheater.isfav_2==false)
-                {
-                    F_FavoriteTheater.isfav_2=true;
-                    imgbtn2.setImageResource(R.drawable.heart_fill);
-                }
-                else if( F_FavoriteTheater.isfav_2==true)
-                {
-                    F_FavoriteTheater.isfav_2=false;
-                    imgbtn2.setImageResource(R.drawable.heart);
-                }
+
+                F_FavoriteTheater.isfav_2=true;
+                imgbtn2_fill.setVisibility(View.VISIBLE);
+                imgbtn2.setVisibility(View.GONE);
+
+
+
+            }
+        });
+        imgbtn2_fill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                F_FavoriteTheater.isfav_2=false;
+                imgbtn2.setVisibility(View.VISIBLE);
+                imgbtn2_fill.setVisibility(View.GONE);
 
             }
         });
