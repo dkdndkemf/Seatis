@@ -87,7 +87,7 @@
 
                 <GridLayout
                     android:id="@+id/seat_layout1"
-                    android:layout_width="600dp"
+                    android:layout_width="450dp"
                     android:layout_height="wrap_content"
                     android:columnCount="9"
                     android:orientation="horizontal"
@@ -99,11 +99,12 @@
                     <!-- A열 시작-->
                     <TextView
                         android:padding="10dp"
-                        android:layout_width="0dp"
+                        android:layout_width="10dp"
                         android:layout_columnWeight="0.5"
                         android:text="A"
                         android:textColor="@color/black"
                         android:textSize="20sp"></TextView>
+
 
                     <Button
                         android:id="@+id/A1"
@@ -362,7 +363,7 @@
 
                 <GridLayout
                     android:id="@+id/seat_layout2"
-                    android:layout_width="600dp"
+                    android:layout_width="450dp"
                     android:layout_height="wrap_content"
                     android:columnCount="9"
                     android:orientation="horizontal"
@@ -374,7 +375,7 @@
                     <!-- D열 시작-->
                     <TextView
                         android:padding="10dp"
-                        android:layout_width="0dp"
+                        android:layout_width="10dp"
                         android:layout_columnWeight="0.5"
                         android:text="D"
                         android:textColor="@color/black"
