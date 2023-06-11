@@ -110,11 +110,6 @@ public class F_Login extends Fragment {
         detailedReview = fragmentManager.findFragmentByTag("FD");
         stheater = fragmentManager.findFragmentByTag("FST");
 
-        //혜원 테스트
-        F_Account fragmentReview = new F_Account();
-        Bundle bundleReview = new Bundle();
-        bundleReview.putString("user_email", "MYNAME");
-        fragmentReview.setArguments(bundleReview);
 
         // 뒤로가기
         back_btn.setOnClickListener(new View.OnClickListener() {

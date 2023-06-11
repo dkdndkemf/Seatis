@@ -1,5 +1,7 @@
 package com.example.seatis;
 
+import static com.example.seatis.MainActivity.context_main;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +21,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +95,9 @@ public class F_Search extends Fragment {
         ImageButton imgbtn2=view.findViewById(R.id.imgbtn2);
         ImageButton imgbtn1_fill=view.findViewById(R.id.imgbtn1_fill);
         ImageButton imgbtn2_fill=view.findViewById(R.id.imgbtn2_fill);
+        View white_view = view.findViewById(R.id.white_view);
 
+        white_view.setVisibility(View.VISIBLE);
         F_Theater FTheater = new F_Theater();
         F_SmallTheater FSTheater = new F_SmallTheater();
 
@@ -109,6 +122,48 @@ public class F_Search extends Fragment {
             imgbtn2_fill.setVisibility(View.VISIBLE);
             imgbtn2.setVisibility(View.GONE);
         }
+
+
+        if(MainActivity.isLogin){
+            Response.Listener rListener = new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+
+                        JSONObject jResponse = new JSONObject(response);
+                        int theater_id;
+
+                        JSONArray theaterIdsArray = jResponse.getJSONArray("theater_ids");
+
+                        for (int i = 0; i < theaterIdsArray.length(); i++) {
+                            theater_id=theaterIdsArray.getInt(i);
+
+                            if (theater_id==1){
+                                imgbtn1_fill.setVisibility(View.VISIBLE);
+                                imgbtn1.setVisibility(View.GONE);
+                            } else if (theater_id==2){
+                                imgbtn2_fill.setVisibility(View.VISIBLE);
+                                imgbtn2.setVisibility(View.GONE);
+                            }
+                        }
+                        white_view.setVisibility(View.INVISIBLE);
+                    } catch (Exception e) {
+                        Log.d("mytest", e.toString());
+                    }
+                }
+            };
+
+            CheckLikeRequest vRequest = new CheckLikeRequest(MainActivity.user_email, rListener);
+            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            queue.add(vRequest);
+        }else {
+            white_view.setVisibility(View.INVISIBLE);
+            imgbtn1_fill.setVisibility(View.INVISIBLE);
+            imgbtn1.setVisibility(View.INVISIBLE);
+            imgbtn2_fill.setVisibility(View.INVISIBLE);
+            imgbtn2.setVisibility(View.INVISIBLE);
+        }
+
 
         String[] theater_li = {"CGV 신촌 아트레온", "드림아트센터"};
         AutoCompleteTextView search_button = (AutoCompleteTextView)view.findViewById(R.id.search_button);
@@ -164,45 +219,104 @@ public class F_Search extends Fragment {
         imgbtn1.setOnClickListener(new View.OnClickListener() { //영화관 종아요
             @Override
             public void onClick(View v) {
-
-                    F_FavoriteTheater.isfav_1=true;
-                   imgbtn1_fill.setVisibility(View.VISIBLE);
-                   imgbtn1.setVisibility(View.GONE);
-
-
-
+                    if(MainActivity.isLogin){
+                        Response.Listener rListener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    Toast.makeText(getActivity(),"좋아요한 극장에 추가하였습니다.",Toast.LENGTH_SHORT).show();
+                                    F_FavoriteTheater.isfav_1=true;
+                                    imgbtn1_fill.setVisibility(View.VISIBLE);
+                                    imgbtn1.setVisibility(View.GONE);
+                                } catch (Exception e) {
+                                    Log.d("mytest", e.toString());
+                                }
+                            }
+                        };
+                        LikeRequest vRequest = new LikeRequest(MainActivity.user_email,"1", rListener);
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        queue.add(vRequest);
+                    }
+                    else {
+                        Toast.makeText(getActivity(),"먼저 로그인을 해 주세요.",Toast.LENGTH_SHORT).show();
+                    }
             }
         });
         imgbtn1_fill.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-
-                    F_FavoriteTheater.isfav_1=false;
-                    imgbtn1.setVisibility(View.VISIBLE);
-                    imgbtn1_fill.setVisibility(View.GONE);
-
+                if(MainActivity.isLogin){
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                Toast.makeText(getActivity(),"좋아요한 극장에서 삭제하였습니다.",Toast.LENGTH_SHORT).show();
+                                F_FavoriteTheater.isfav_1=false;
+                                imgbtn1.setVisibility(View.VISIBLE);
+                                imgbtn1_fill.setVisibility(View.GONE);
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
+                            }
+                        }
+                    };
+                    DislikeRequest vRequest = new DislikeRequest(MainActivity.user_email,"1", rListener);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                    queue.add(vRequest);
+                }
+                else {
+                    Toast.makeText(getActivity(),"먼저 로그인을 해 주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgbtn2.setOnClickListener(new View.OnClickListener() { //영화관 종아요
             @Override
             public void onClick(View v) {
-
-                F_FavoriteTheater.isfav_2=true;
-                imgbtn2_fill.setVisibility(View.VISIBLE);
-                imgbtn2.setVisibility(View.GONE);
-
-
-
+                if(MainActivity.isLogin){
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                Toast.makeText(getActivity(),"좋아요한 극장에 추가하였습니다.",Toast.LENGTH_SHORT).show();
+                                F_FavoriteTheater.isfav_2=true;
+                                imgbtn2_fill.setVisibility(View.VISIBLE);
+                                imgbtn2.setVisibility(View.GONE);
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
+                            }
+                        }
+                    };
+                    LikeRequest vRequest = new LikeRequest(MainActivity.user_email,"2", rListener);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                    queue.add(vRequest);
+                }
+                else {
+                    Toast.makeText(getActivity(),"먼저 로그인을 해 주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         imgbtn2_fill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                F_FavoriteTheater.isfav_2=false;
-                imgbtn2.setVisibility(View.VISIBLE);
-                imgbtn2_fill.setVisibility(View.GONE);
-
+                if(MainActivity.isLogin){
+                    Response.Listener rListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                Toast.makeText(getActivity(),"좋아요한 극장에서 삭제하였습니다.",Toast.LENGTH_SHORT).show();
+                                F_FavoriteTheater.isfav_2=false;
+                                imgbtn2.setVisibility(View.VISIBLE);
+                                imgbtn2_fill.setVisibility(View.GONE);
+                            } catch (Exception e) {
+                                Log.d("mytest", e.toString());
+                            }
+                        }
+                    };
+                    DislikeRequest vRequest = new DislikeRequest(MainActivity.user_email,"2", rListener);
+                    RequestQueue queue = Volley.newRequestQueue(getActivity());
+                    queue.add(vRequest);
+                }
+                else {
+                    Toast.makeText(getActivity(),"먼저 로그인을 해 주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
