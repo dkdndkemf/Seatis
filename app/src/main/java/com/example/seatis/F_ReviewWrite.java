@@ -37,6 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
@@ -91,6 +92,8 @@ public class F_ReviewWrite extends Fragment {
     private String mParam2;
 
     private File photoFile;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
 
     public F_ReviewWrite() {
         // Required empty public constructor

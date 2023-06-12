@@ -255,7 +255,7 @@
     <ImageView
         android:id="@+id/photoImageView"
         android:layout_width="300dp"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/no_img"
         android:scaleType = "centerCrop"
         ></ImageView>
