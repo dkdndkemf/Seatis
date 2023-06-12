@@ -69,13 +69,14 @@ public class F_Account extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final int REQUEST_IMAGE_PICK = 1;
 
-    private String mCurrentPhotoPath;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     CircleImageView picture;
     private File photoFile; //사진 파일 부분
+    private String mCurrentPhotoPath;//임시 이미지 저장 경로
     String user_email = "";
     String platform_type = "";
     String nick = "";
@@ -149,7 +150,7 @@ public class F_Account extends Fragment {
                     }
                 }
 
-                Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Image");
+                Intent chooserIntent = Intent.createChooser(galleryIntent, "이미지 선택");
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraIntent });
 
                 startActivityForResult(chooserIntent, 1);
@@ -358,41 +359,6 @@ public class F_Account extends Fragment {
         }
     }
 
-
-
-    private void selectImage() {
-        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add Photo!");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        try {
-                            photoFile = createImageFile();
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                        if (photoFile != null) {
-                            Uri photoURI = FileProvider.getUriForFile(getActivity(),
-                                    "com.example.seatis.fileprovider",
-                                    photoFile);
-                            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                            startActivityForResult(takePictureIntent, 1);
-                        }
-                    }
-                } else if (options[item].equals("Choose from Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 1);
-                } else if (options[item].equals("Cancel")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
 
     private File createImageFile() throws IOException {
         // 이미지 파일 이름

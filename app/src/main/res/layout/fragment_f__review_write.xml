@@ -254,9 +254,10 @@
 
     <ImageView
         android:id="@+id/photoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/back_icon"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/no_img"
+        android:scaleType = "centerCrop"
         ></ImageView>
 </LinearLayout>
 

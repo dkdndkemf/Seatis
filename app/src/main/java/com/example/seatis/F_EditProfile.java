@@ -15,6 +15,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,7 +41,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -63,6 +70,9 @@ public class F_EditProfile extends Fragment {
     private String mParam1;
     private String mParam2;
     CircleImageView picture;
+
+    private File photoFile; //사진 파일 부분
+    private String mCurrentPhotoPath; //임시 이미지 저장 경로
     String user_email = "";
     String platform_type = "";
     String nick = "";
@@ -119,7 +129,7 @@ public class F_EditProfile extends Fragment {
                 try {
                     JSONObject jResponse = new JSONObject(response);
                     nick = jResponse.getString("nickname");
-                    StorageReference imageRef = storageRef.child(MainActivity.user_email+".jpg");
+                    StorageReference imageRef = storageRef.child(MainActivity.user_email + ".jpg");
 
                     File localFile = File.createTempFile("temp", "jpg");
                     imageRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {
@@ -132,7 +142,7 @@ public class F_EditProfile extends Fragment {
                         // 이미지 다운로드 실패 시 처리
                     });
                     nickname.setText(nick);
-                    first_nick=nick;
+                    first_nick = nick;
                 } catch (Exception e) {
                     Log.d("mytest", e.toString());
                 }
@@ -146,7 +156,26 @@ public class F_EditProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, REQUEST_IMAGE_PICK);
+                galleryIntent.setType("image/*");
+
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    if (photoFile != null) {
+                        Uri photoUri = FileProvider.getUriForFile(getActivity(), "com.example.seatis.fileprovider", photoFile);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    }
+                }
+
+                Intent chooserIntent = Intent.createChooser(galleryIntent, "이미지 선택");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
+
+                startActivityForResult(chooserIntent, 1);
             }
         });
 
@@ -203,7 +232,7 @@ public class F_EditProfile extends Fragment {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("회원정보 수정");
                 dlg.setMessage("수정하시겠습니까?");
-                dlg.setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                dlg.setNegativeButton("취소", null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         nick = nickname.getText().toString();
@@ -313,7 +342,7 @@ public class F_EditProfile extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
                 dlg.setTitle("계정탈퇴");
-                dlg.setMessage("정말 탈퇴하시겠습니까?").setNegativeButton("취소",null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                dlg.setMessage("정말 탈퇴하시겠습니까?").setNegativeButton("취소", null).setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Response.Listener rListener = new Response.Listener<String>() {
@@ -321,14 +350,14 @@ public class F_EditProfile extends Fragment {
                             public void onResponse(String response) {
                                 FirebaseStorage storage = FirebaseStorage.getInstance();
                                 StorageReference storageRef = storage.getReference();
-                                StorageReference imageRef = storageRef.child(MainActivity.user_email+".jpg");
+                                StorageReference imageRef = storageRef.child(MainActivity.user_email + ".jpg");
 
                                 imageRef.delete().addOnSuccessListener(aVoid -> {
                                     // 이미지 삭제 성공 시 처리
                                 }).addOnFailureListener(exception -> {
                                     // 이미지 삭제 실패 시 처리
                                 });
-                                MainActivity.user_email="";
+                                MainActivity.user_email = "";
                                 MainActivity.isLogin = false;
                                 ((MainActivity) context_main).main_login_textview.setVisibility(View.GONE);
                                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
@@ -361,14 +390,41 @@ public class F_EditProfile extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            // 이미지 URI를 사용하여 picture 이미지뷰에 설정
-                picture.setImageURI(imageUri);
 
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (photoFile != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Glide.with(this).load(photoFile).into(picture);
+            }
 
+            // 이미지뷰에 갤러리에서 선택한 이미지 세팅
+            if (data != null) {
+                Uri selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    try {
+                        InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        if (bitmap != null) {
+                            Glide.with(this).load(selectedImageUri).into(picture);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
+    }
+    private File createImageFile() throws IOException {
+        // 이미지 파일 이름
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        // 이미지가 저장될 폴더 이름
+        File storageDir = getActivity().getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES);
+        // 이미지 파일 생성
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = imageFile.getAbsolutePath();
+        return imageFile;
     }
 }

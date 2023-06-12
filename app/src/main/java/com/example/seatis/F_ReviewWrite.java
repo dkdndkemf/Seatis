@@ -28,6 +28,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -167,7 +169,7 @@ public class F_ReviewWrite extends Fragment {
                     }
                 }
 
-                Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Image");
+                Intent chooserIntent = Intent.createChooser(galleryIntent, "이미지 선택");
                 chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraIntent });
 
                 startActivityForResult(chooserIntent, 1);
@@ -184,7 +186,7 @@ public class F_ReviewWrite extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (photoFile != null) {
                 Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                photoImageView.setImageBitmap(bitmap);
+                Glide.with(this).load(photoFile).into(photoImageView);
             }
 
             // 이미지뷰에 갤러리에서 선택한 이미지 세팅
@@ -195,7 +197,7 @@ public class F_ReviewWrite extends Fragment {
                         InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         if (bitmap != null) {
-                            photoImageView.setImageBitmap(bitmap);
+                            Glide.with(this).load(selectedImageUri).into(photoImageView);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
