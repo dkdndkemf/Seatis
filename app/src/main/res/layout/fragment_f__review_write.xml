@@ -241,6 +241,26 @@
             android:text="사진 선택"
             android:textColor="@color/black"></Button>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/photozone"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bottom_border"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/photo_rivew">
+
+    <ImageView
+        android:id="@+id/photoImageView"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/no_img"
+        android:scaleType = "centerCrop"
+        ></ImageView>
+</LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

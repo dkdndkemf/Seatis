@@ -96,7 +96,7 @@ public class Detailed_Review_Adapter extends BaseAdapter {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
         return view;

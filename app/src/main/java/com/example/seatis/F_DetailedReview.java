@@ -143,10 +143,10 @@ public class F_DetailedReview extends Fragment {
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if(FReviewWrite != null) {
-                       FReviewWrite = new F_ReviewWrite();
-                    }
-                    fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
+                if(FReviewWrite != null) {
+                    FReviewWrite = new F_ReviewWrite();
+                }
+                fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
             }
         });
 

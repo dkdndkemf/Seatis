@@ -143,6 +143,12 @@ public class F_Login extends Fragment {
                                             try {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
+
+                                                F_Account fragmentReview = new F_Account();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString("user_email", user_email);
+                                                fragmentReview.setArguments(bundle);
+
                                                 if (new_email) {
                                                     F_Account fragment = F_Account.newInstance(user_email, platform_type);
                                                     fragmentManager.beginTransaction().remove(F_Login.this)
@@ -207,6 +213,12 @@ public class F_Login extends Fragment {
                                                 JSONObject jResponse = new JSONObject(response);
                                                 boolean new_email = jResponse.getBoolean("new_email");
                                                 String platform_type = "kakao";
+
+                                                F_Account fragmentReview = new F_Account();
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString("user_email", user_email);
+                                                fragmentReview.setArguments(bundle);
+
                                                 if (new_email) {
                                                     F_Account fragment = F_Account.newInstance(user_email, platform_type);
                                                     fragmentManager.beginTransaction().remove(F_Login.this)
@@ -358,6 +370,12 @@ public class F_Login extends Fragment {
                                 ((MainActivity) context_main).main_logout_textview.setVisibility(View.VISIBLE);
                                 MainActivity.user_email=personEmail;
                                 MainActivity.isLogin = true;
+
+                                F_Account fragmentReview = new F_Account();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("user_email", personEmail);
+                                fragmentReview.setArguments(bundle);
+
                                 if (detailedReview != null) {
                                     fragmentManager.beginTransaction().remove(F_Login.this);
                                     fragmentManager.popBackStack();

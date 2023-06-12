@@ -160,6 +160,10 @@ public class F_Theater extends Fragment {
                         seat_string = "1관 " + row_char + "열 " + (col_num + 1) + "번";
                         seat_name.setText(seat_string);
 
+                        bundle.putString("theaterName", "1");
+                        bundle.putString("seat_col", String.valueOf(row_char));
+                        bundle.putString("seat_num", String.valueOf(col_num+1));
+
                         //theater_activity_to_review.putExtra("seat_name", seat_string);
                         Response.Listener rListeners = new Response.Listener<String>() {
                             public void onResponse(String response) {
@@ -202,7 +206,6 @@ public class F_Theater extends Fragment {
                 //bundle.putFloat("avg_rating", get_avg_score);
                 bundle.putString("seat_name", seat_string);
                 bundle.putString("theater_name",theater_name_tv.getText().toString());
-
 
                 bundle.putString("avg_score",avg_score.getText().toString());
                 bundle.putFloat("avg_rating",avg_rating.getRating());

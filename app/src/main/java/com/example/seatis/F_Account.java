@@ -8,13 +8,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -34,6 +38,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,8 +47,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,10 +70,13 @@ public class F_Account extends Fragment {
     private static final int REQUEST_IMAGE_PICK = 1;
 
 
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     CircleImageView picture;
+    private File photoFile; //사진 파일 부분
+    private String mCurrentPhotoPath;//임시 이미지 저장 경로
     String user_email = "";
     String platform_type = "";
     String nick = "";
@@ -122,7 +134,26 @@ public class F_Account extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent, REQUEST_IMAGE_PICK);
+                galleryIntent.setType("image/*");
+
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    try {
+                        photoFile = createImageFile();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
+                    if (photoFile != null) {
+                        Uri photoUri = FileProvider.getUriForFile(getActivity(), "com.example.seatis.fileprovider", photoFile);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                    }
+                }
+
+                Intent chooserIntent = Intent.createChooser(galleryIntent, "이미지 선택");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraIntent });
+
+                startActivityForResult(chooserIntent, 1);
             }
         });
 
@@ -216,7 +247,7 @@ public class F_Account extends Fragment {
                                                                 Bitmap bitmap = drawable.getBitmap();
 
                                                                 // 이미지 크기 최적화
-                                                                int maxWidth = 180; // 원하는 최대 너비 설정
+                                                                int maxWidth = 182; // 원하는 최대 너비 설정
                                                                 int maxHeight = 180; // 원하는 최대 높이 설정
                                                                 int originalWidth = bitmap.getWidth();
                                                                 int originalHeight = bitmap.getHeight();
@@ -301,26 +332,44 @@ public class F_Account extends Fragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
-            // 이미지 URI를 사용하여 picture 이미지뷰에 설정
-            picture.setImageURI(imageUri);
-            changedDrawable = getDrawableFromUri(imageUri);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (photoFile != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
+                Glide.with(this).load(photoFile).into(picture);
+            }
+
+            // 이미지뷰에 갤러리에서 선택한 이미지 세팅
+            if (data != null) {
+                Uri selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    try {
+                        InputStream inputStream = getActivity().getContentResolver().openInputStream(selectedImageUri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        if (bitmap != null) {
+                            Glide.with(this).load(selectedImageUri).into(picture);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 
-    public Drawable getDrawableFromUri(Uri uri) {
-        try {
-            InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-            return Drawable.createFromStream(inputStream, uri.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
+    private File createImageFile() throws IOException {
+        // 이미지 파일 이름
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        // 이미지가 저장될 폴더 이름
+        File storageDir = getActivity().getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES);
+        // 이미지 파일 생성
+        File imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
+        mCurrentPhotoPath = imageFile.getAbsolutePath();
+        return imageFile;
+    }
 
 }
