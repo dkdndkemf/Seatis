@@ -194,7 +194,8 @@ public class F_ReviewWrite extends Fragment {
                 System.out.println("버튼");
                 Log.e("response", "진입전");
                 float sum = (see_score.getRating() + listen_score.getRating() + etc_score.getRating()) / 3;
-                float avg_score = Math.round((sum * 10) / 10.0);
+                //String _sum=String.valueOf(sum);
+                float avg_score = Float.parseFloat(String.format("%.1f",sum));//Math.round((sum * 100) / 100.0);
                 detail_review = write_review.getText().toString();
                 //Toast.makeText(getActivity(), String.valueOf(MainActivity.theaterId) + MainActivity.seatCol, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(), String.valueOf(seatId), Toast.LENGTH_SHORT).show();
