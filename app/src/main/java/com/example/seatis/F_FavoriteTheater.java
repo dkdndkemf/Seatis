@@ -136,6 +136,7 @@ public class F_FavoriteTheater extends Fragment {
                     System.out.println("처음 누름");
                 }
                 //startActivity(favoriteTheater_to_theater);
+                MainActivity.theaterId = 1;
                 fragmentManager.beginTransaction().add(R.id.containers, FTheater, "FT").commit();
             }
         });
@@ -153,6 +154,7 @@ public class F_FavoriteTheater extends Fragment {
                     System.out.println("처음 누름");
                 }
                 //startActivity(favoriteTheater_to_theater);
+                MainActivity.theaterId = 2;
                 fragmentManager.beginTransaction().add(R.id.containers, FSTheater, "FST").commit();
             }
         });

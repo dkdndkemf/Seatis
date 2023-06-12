@@ -2,6 +2,8 @@ package com.example.seatis;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,10 +24,26 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.Inflater;
 
 /**
@@ -34,6 +53,11 @@ import java.util.zip.Inflater;
  */
 public class F_ReviewWrite extends Fragment {
 
+    String nick = "테스트";
+    int seatId;
+    int user_id;
+    int theater_id = 10;
+    String detail_review;
     ListView listView;
     ArrayList<Review> data;
     Detailed_Review_Adapter F_DetailedReview_adapter;
@@ -137,11 +161,61 @@ public class F_ReviewWrite extends Fragment {
             }
         });
 
+
+        // ---------------------------------강현 현재 로그인 유저 이름 가져오기
+
+        Response.Listener rListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jResponse = new JSONObject(response);
+                    nick = jResponse.getString("nickname");
+                    seatId = jResponse.getInt("seat_id");
+                    user_id = jResponse.getInt("user_id");
+                } catch (Exception e) {
+                    Log.d("mytest", e.toString());
+                }
+            }
+        };
+        GetSeatId vRequest = new GetSeatId(MainActivity.user_email, MainActivity.theaterId, MainActivity.seatCol, MainActivity.seatNum, rListener);
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        queue.add(vRequest);
+
+
+        // ----------------------------------------
+
         // 리뷰등록
         write_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                data.add(new Review("테스트","2023.04.21",see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
+                System.out.println("버튼");
+                Log.e("response", "진입전");
+                float sum = (see_score.getRating() + listen_score.getRating() + etc_score.getRating()) / 3;
+                float avg_score = Math.round((sum * 10) / 10.0);
+                detail_review = write_review.getText().toString();
+                //Toast.makeText(getActivity(), String.valueOf(MainActivity.theaterId) + MainActivity.seatCol, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), String.valueOf(seatId), Toast.LENGTH_SHORT).show();
+                Response.Listener rListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println("onResponse");
+                        Log.e("response", "진입");
+                        try {
+                            JSONObject jResponse = new JSONObject(response);
+                            theater_id = jResponse.getInt("theater_id");
+
+                        } catch (Exception e) {
+                            Log.d("mytest", e.toString());
+                        }
+                    }
+                };
+                WriteReview vRequest = new WriteReview(seatId, user_id, detail_review, see_score.getRating(), listen_score.getRating(), etc_score.getRating(), avg_score, rListener);
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(vRequest);
+
+                //Toast.makeText(getActivity(), String.valueOf(seatId) + String.valueOf(user_id) + write_review.getText().toString() + String.valueOf(theater_id), Toast.LENGTH_SHORT).show();
+
+                data.add(new Review(nick,getTime(),see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
                 if(data.isEmpty())
                 {
                     listView.setVisibility(View.INVISIBLE);
@@ -160,5 +234,13 @@ public class F_ReviewWrite extends Fragment {
             }
         });
         return view;
+    }
+    private String getTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String getTime = dateFormat.format(date);
+
+        return getTime;
     }
 }

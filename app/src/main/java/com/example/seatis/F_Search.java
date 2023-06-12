@@ -183,6 +183,7 @@ public class F_Search extends Fragment {
                 }
                 //Intent search_to_theater = new Intent(getActivity(),theater_activity.class);
                 //startActivity(search_to_theater);
+                MainActivity.theaterId = 1;
                 fragmentManager.beginTransaction().add(R.id.containers, FTheater, "FT").addToBackStack(null).commit(); //프래그먼트 사용
             }
         });
@@ -201,6 +202,7 @@ public class F_Search extends Fragment {
                 }
                 //Intent search_to_small_theater = new Intent(getActivity(),small_theater_activity.class);
                 ///startActivity(search_to_small_theater);
+                MainActivity.theaterId = 2;
                 fragmentManager.beginTransaction().add(R.id.containers, FSTheater, "FST").addToBackStack(null).commit(); //프래그먼트 사용
             }
         });//드림아트센터로 이동

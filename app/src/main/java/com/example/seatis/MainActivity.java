@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isLogin = false;
     // DetailedReview에서 사용할 리뷰 배열
     //static ArrayList<Review> data = new ArrayList<>();
+    public static int theaterId;
+    public static String seatCol;
+    public static int seatNum;
     public F_Search FSearch;
     public F_MyPage FMyPage;
     public F_Login FLogin;

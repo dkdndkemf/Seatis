@@ -179,6 +179,8 @@ public class F_Theater extends Fragment {
 
                         seat_col = String.valueOf(row_char);
                         seat_num = String.valueOf(col_num+1);
+                        MainActivity.seatCol = seat_col;
+                        MainActivity.seatNum = col_num + 1;
 
                         theater_activity_Request vRequests = new theater_activity_Request(seat_col, seat_num, rListeners); //열
 
