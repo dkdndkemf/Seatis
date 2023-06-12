@@ -337,8 +337,7 @@ public class F_Account extends Fragment {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (photoFile != null) {
                 Bitmap bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                bitmap = rotateBitmap(bitmap, photoFile.getAbsolutePath());
-                picture.setImageBitmap(bitmap);
+                Glide.with(this).load(photoFile).into(picture);
             }
 
             // 이미지뷰에 갤러리에서 선택한 이미지 세팅
@@ -350,9 +349,6 @@ public class F_Account extends Fragment {
                         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         if (bitmap != null) {
                             Glide.with(this).load(selectedImageUri).into(picture);
-                           // bitmap = rotateBitmap(bitmap, getRealPathFromURI(selectedImageUri));
-                          //  picture.setImageBitmap(bitmap);
-
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -362,49 +358,6 @@ public class F_Account extends Fragment {
         }
     }
 
-    private Bitmap rotateBitmap(Bitmap bitmap, String filePath) {
-        ExifInterface exifInterface;
-        try {
-            exifInterface = new ExifInterface(filePath);
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            int rotationAngle = getRotationAngle(orientation);
-            if (rotationAngle != 0) {
-                Matrix matrix = new Matrix();
-                matrix.postRotate(rotationAngle);
-                bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-
-    private int getRotationAngle(int rotation) {
-        int rotationAngle = 0;
-        switch (rotation) {
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotationAngle = 90;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotationAngle = 180;
-                break;
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotationAngle = 270;
-                break;
-        }
-        return rotationAngle;
-    }
-
-    private String getRealPathFromURI(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
-        if (cursor == null) return null;
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        String path = cursor.getString(column_index);
-        cursor.close();
-        return path;
-    }
 
 
     private void selectImage() {
