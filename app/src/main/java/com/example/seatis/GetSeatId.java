@@ -15,8 +15,8 @@ public class GetSeatId extends StringRequest {
         parameters = new HashMap<>();
         parameters.put("user_email", user_email);
         parameters.put("theater_id", String.valueOf(theaterid));
-        parameters.put("seatCol", seatCol);
-        parameters.put("seatRow", String.valueOf(seatRow));
+        parameters.put("seat_col", seatCol);
+        parameters.put("seat_num", String.valueOf(seatRow));
     }
     protected Map<String, String> getParams() throws AuthFailureError {
         return parameters;
