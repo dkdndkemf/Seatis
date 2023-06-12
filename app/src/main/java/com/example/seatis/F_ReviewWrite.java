@@ -41,6 +41,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
 import com.bumptech.glide.Glide;
 
 import java.io.File;
@@ -63,6 +64,8 @@ public class F_ReviewWrite extends Fragment {
     int seatId;
     int user_id;
     int theater_id = 10;
+
+    int review_id;
     String detail_review;
     ListView listView;
     ArrayList<Review> data;
@@ -135,8 +138,8 @@ public class F_ReviewWrite extends Fragment {
         F_DetailedReview_adapter = F_DetailedReview.detailed_review_adapter;
         listView = (ListView) activity.findViewById(R.id.review_viewer);
         no_review = (TextView) activity.findViewById(R.id.no_review);
-        theater_tv=(TextView)view.findViewById(R.id.theater_tv);
-        seat_tv=(TextView)view.findViewById(R.id.seat_tv);
+        theater_tv = (TextView) view.findViewById(R.id.theater_tv);
+        seat_tv = (TextView) view.findViewById(R.id.seat_tv);
 
         theater_tv.setText(getArguments().getString("theater_name"));
         seat_tv.setText(getArguments().getString("seat_name"));
@@ -195,19 +198,21 @@ public class F_ReviewWrite extends Fragment {
                 Log.e("response", "진입전");
                 float sum = (see_score.getRating() + listen_score.getRating() + etc_score.getRating()) / 3;
                 //String _sum=String.valueOf(sum);
-                float avg_score = Float.parseFloat(String.format("%.1f",sum));//Math.round((sum * 100) / 100.0);
+                float avg_score = Float.parseFloat(String.format("%.1f", sum));//Math.round((sum * 100) / 100.0);
                 detail_review = write_review.getText().toString();
                 //Toast.makeText(getActivity(), String.valueOf(MainActivity.theaterId) + MainActivity.seatCol, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(), String.valueOf(seatId), Toast.LENGTH_SHORT).show();
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         System.out.println("onResponse");
                         Log.e("response", "진입");
                         try {
                             JSONObject jResponse = new JSONObject(response);
-                            theater_id = jResponse.getInt("theater_id");
-
+                            Log.d("66789",jResponse.toString());
+                            //review_id = jResponse.getInt("review_id");
+                            //theater_id = jResponse.getInt("theater_id");
                         } catch (Exception e) {
                             Log.d("mytest", e.toString());
                         }
@@ -219,9 +224,8 @@ public class F_ReviewWrite extends Fragment {
 
                 //Toast.makeText(getActivity(), String.valueOf(seatId) + String.valueOf(user_id) + write_review.getText().toString() + String.valueOf(theater_id), Toast.LENGTH_SHORT).show();
 
-                data.add(new Review(nick,getTime(),see_score.getRating(),listen_score.getRating(), etc_score.getRating(),write_review.getText().toString(),0,0 ));
-                if(data.isEmpty())
-                {
+                data.add(new Review(nick, getTime(), see_score.getRating(), listen_score.getRating(), etc_score.getRating(), write_review.getText().toString(), 0, 0));
+                if (data.isEmpty()) {
                     listView.setVisibility(View.INVISIBLE);
                     no_review.setVisibility(View.VISIBLE);
                     F_DetailedReview_adapter.notifyDataSetChanged();
@@ -257,7 +261,7 @@ public class F_ReviewWrite extends Fragment {
                 }
 
                 Intent chooserIntent = Intent.createChooser(galleryIntent, "이미지 선택");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraIntent });
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{cameraIntent});
 
                 startActivityForResult(chooserIntent, 1);
             }
@@ -265,6 +269,7 @@ public class F_ReviewWrite extends Fragment {
 
         return view;
     }
+
     private String getTime() {
         long now = System.currentTimeMillis();
         Date date = new Date(now);
