@@ -81,6 +81,9 @@ public class F_ReviewWrite extends Fragment {
 
     ConstraintLayout layout;
 
+    TextView theater_tv;
+    TextView seat_tv;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -132,9 +135,15 @@ public class F_ReviewWrite extends Fragment {
         F_DetailedReview_adapter = F_DetailedReview.detailed_review_adapter;
         listView = (ListView) activity.findViewById(R.id.review_viewer);
         no_review = (TextView) activity.findViewById(R.id.no_review);
+        theater_tv=(TextView)view.findViewById(R.id.theater_tv);
+        seat_tv=(TextView)view.findViewById(R.id.seat_tv);
+
+        theater_tv.setText(getArguments().getString("theater_name"));
+        seat_tv.setText(getArguments().getString("seat_name"));
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+
 
         layout.setOnTouchListener(new View.OnTouchListener() {
             @Override

@@ -48,6 +48,8 @@ public class F_DetailedReview extends Fragment {
 
     F_ReviewWrite FReviewWrite;
 
+    Bundle bundle;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,6 +77,7 @@ public class F_DetailedReview extends Fragment {
     public static F_DetailedReview newInstance(String param1, String param2) {
         F_DetailedReview fragment = new F_DetailedReview();
         Bundle args = new Bundle();
+
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
@@ -113,6 +116,8 @@ public class F_DetailedReview extends Fragment {
         F_Login FLogin = new F_Login();
         FReviewWrite = new F_ReviewWrite();
 
+        bundle=new Bundle();
+
         if (data.isEmpty()) { //리뷰 데이터가 비어있다면...
             listView.setVisibility(View.INVISIBLE);
             no_review.setVisibility(View.VISIBLE);
@@ -143,9 +148,12 @@ public class F_DetailedReview extends Fragment {
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                bundle.putString("seat_name",seat_name.getText().toString());
+                bundle.putString("theater_name",theater_name_tv.getText().toString());
                 if(FReviewWrite != null) {
                     FReviewWrite = new F_ReviewWrite();
                 }
+                FReviewWrite.setArguments(bundle);
                 fragmentManager.beginTransaction().add(R.id.containers, FReviewWrite).addToBackStack(null).commit();
             }
         });
