@@ -3,6 +3,7 @@ package com.example.seatis;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,9 +43,10 @@ import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONObject;
 import org.w3c.dom.Text;
-
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.io.File;
@@ -65,8 +67,6 @@ public class F_ReviewWrite extends Fragment {
     int seatId;
     int user_id;
     int theater_id = 10;
-
-    int review_id;
     String detail_review;
     ListView listView;
     ArrayList<Review> data;
@@ -82,6 +82,7 @@ public class F_ReviewWrite extends Fragment {
     RatingBar see_score;
     RatingBar listen_score;
     RatingBar etc_score;
+    String review_id;
 
     ConstraintLayout layout;
 
@@ -197,28 +198,78 @@ public class F_ReviewWrite extends Fragment {
         write_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                review_id="";
                 System.out.println("버튼");
                 Log.e("response", "진입전");
                 float sum = (see_score.getRating() + listen_score.getRating() + etc_score.getRating()) / 3;
                 //String _sum=String.valueOf(sum);
-                float avg_score = Float.parseFloat(String.format("%.1f", sum));//Math.round((sum * 100) / 100.0);
+                float avg_score = Float.parseFloat(String.format("%.1f",sum));//Math.round((sum * 100) / 100.0);
                 detail_review = write_review.getText().toString();
                 //Toast.makeText(getActivity(), String.valueOf(MainActivity.theaterId) + MainActivity.seatCol, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getActivity(), String.valueOf(seatId), Toast.LENGTH_SHORT).show();
                 Response.Listener rListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         System.out.println("onResponse");
-                        Log.e("response", "진입");
                         try {
                             JSONObject jResponse = new JSONObject(response);
-                            Log.d("66789",jResponse.toString());
-                            //review_id = jResponse.getInt("review_id");
+                            review_id = String.valueOf(jResponse.getInt("review_id"));
+                            // ImageView에서 비트맵 가져오기
+                            BitmapDrawable drawable = (BitmapDrawable) photoImageView.getDrawable();
+
+                            Bitmap bitmap = drawable.getBitmap();
+
+                            // 이미지 크기 최적화
+                            int maxWidth = 300; // 원하는 최대 너비 설정
+                            int maxHeight = 200; // 원하는 최대 높이 설정
+                            int originalWidth = bitmap.getWidth();
+                            int originalHeight = bitmap.getHeight();
+                            float scaleFactor = Math.min(((float) maxWidth / originalWidth), ((float) maxHeight / originalHeight));
+
+                            int resizedWidth = Math.round(originalWidth * scaleFactor);
+                            int resizedHeight = Math.round(originalHeight * scaleFactor);
+
+                            // 이미지 크기 조정
+                            Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, true);
+
+                            // Firebase Storage에 업로드할 파일 경로 생성
+                            String fileName = review_id + ".jpg";
+                            StorageReference imageRef = storageRef.child(fileName);
+
+                            // 조정된 크기의 비트맵을 JPEG 파일로 변환하여 Firebase Storage에 업로드
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] data = baos.toByteArray();
+
+                            UploadTask uploadTask = imageRef.putBytes(data);
+                            uploadTask.addOnFailureListener(exception -> {
+                                // 업로드 실패 시 처리
+                            }).addOnSuccessListener(taskSnapshot -> {
+                                // 업로드 성공 시 처리
+                                // 업로드된 파일의 다운로드 URL 가져오기
+                                                                    /*imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                                                        // 다운로드 URL 사용
+                                                                        String downloadUrl = uri.toString();
+                                                                        // ...
+                                                                    });*/
+                            });
                             //theater_id = jResponse.getInt("theater_id");
                         } catch (Exception e) {
                             Log.d("mytest", e.toString());
                         }
+                        data.add(new Review(nick, getTime(), see_score.getRating(), listen_score.getRating(), etc_score.getRating(), write_review.getText().toString(), 0, 0));
+                        if (data.isEmpty()) {
+                            listView.setVisibility(View.INVISIBLE);
+                            no_review.setVisibility(View.VISIBLE);
+                            F_DetailedReview_adapter.notifyDataSetChanged();
+                        } else {
+                            listView.setVisibility(View.VISIBLE);
+                            no_review.setVisibility(View.GONE);
+                            F_DetailedReview_adapter.notifyDataSetChanged();
+                        }
+                        imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+                        fragmentManager.beginTransaction().remove(F_ReviewWrite.this).commit();
+                        fragmentManager.popBackStack();
                     }
                 };
                 WriteReview vRequest = new WriteReview(seatId, user_id, detail_review, see_score.getRating(), listen_score.getRating(), etc_score.getRating(), avg_score, rListener);
@@ -226,20 +277,6 @@ public class F_ReviewWrite extends Fragment {
                 queue.add(vRequest);
 
                 //Toast.makeText(getActivity(), String.valueOf(seatId) + String.valueOf(user_id) + write_review.getText().toString() + String.valueOf(theater_id), Toast.LENGTH_SHORT).show();
-
-                data.add(new Review(nick, getTime(), see_score.getRating(), listen_score.getRating(), etc_score.getRating(), write_review.getText().toString(), 0, 0));
-                if (data.isEmpty()) {
-                    listView.setVisibility(View.INVISIBLE);
-                    no_review.setVisibility(View.VISIBLE);
-                    F_DetailedReview_adapter.notifyDataSetChanged();
-                } else {
-                    listView.setVisibility(View.VISIBLE);
-                    no_review.setVisibility(View.GONE);
-                    F_DetailedReview_adapter.notifyDataSetChanged();
-                }
-                imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
-                fragmentManager.beginTransaction().remove(F_ReviewWrite.this).commit();
-                fragmentManager.popBackStack();
             }
         });
 

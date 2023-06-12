@@ -198,8 +198,10 @@ public class F_EditProfile extends Fragment {
                     @Override
                     public void onResponse(String response) {
                         try {
+
                             JSONObject jResponse = new JSONObject(response);
                             boolean newID = jResponse.getBoolean("newNick");
+                            Log.d("mytest",response);
 
                             if ((newID && !(nick.equals(""))) || nick.equals(first_nick)) {
                                 androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
